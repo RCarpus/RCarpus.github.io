@@ -27,7 +27,8 @@ class MathProblem {
     }
 
     evaluateTrialAnswer = function() {
-        this.solved = parseFloat(this.correctAnswer) == parseFloat(this.trialAnswer) ? true : false;
+        this.solved = parseFloat(this.correctAnswer).toFixed(this.decimalPlace) == parseFloat(this.trialAnswer).toFixed(this.decimalPlace) ? true : false;
+        console.log(`comparing ${this.trialAnswer} against ${this.correctAnswer}`);
         return this.solved;
     }
 
@@ -48,7 +49,7 @@ class AddProblem extends MathProblem {
     */
 
     calculateCorrectAnswer = function() {
-        return this.args.reduce((a,b) => a+b);
+        return this.args.reduce((a,b) => a+b).toFixed(this.decimalPlaces);
     }
 
     constructor(numArgs=2, maxDigits=2, decimalPlaces=0) {
@@ -402,7 +403,7 @@ class MathPracticeApp extends React.Component {
         return (
             <div id='math-practice-app'>
                 <h1 id='title'>Welcome to my math practice app!</h1>
-                <p>In order to be marked correct, answers must be given with the same number of decimal places as given in the decimal places input, except in the case of division, where you must give the answer with one additional decimal point. If an answer is less than 1, input a 0 before the decimal point.</p>
+                <p>In order to be marked correct, answers must be given with the same number of decimal places as given in the decimal places input. If an answer is less than 1, input a 0 before the decimal point.</p>
                 <p>Some examples:</p>
                 <p className="example">5.5 + 3.5 = 9.0, not 9</p>
                 <p className="example">4.0 - 1.0 = 3.0, not 3</p>
