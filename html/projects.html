@@ -1,0 +1,81 @@
+<!-- Ryan Carpus personal website projects page -->
+<!DOCTYPE html>
+<!--Makes text scale properly on mobile-->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <head>
+    <!--TODO Add fonts here-->
+    <link href="" rel="stylesheet">
+    <link href="../css/style.css" type="text/css" rel="stylesheet">
+    <link href="../css/work-experience.css" type="text/css" rel="stylesheet">
+    <title>Ryan Carpus</title>
+    <!--Create icon with http://tools.dynamicdrive.com/favicon/-->
+    <link rel="icon" href="./favicon.ico">
+    <!---Adds bootstrap-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
+    <!--Includes jQuery-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!--Includes sliding bar function-->
+    <script  src='../javascript/quick-links-toggle.js'></script>
+  </head>
+
+  <body>
+    <div class="top-banner">
+      <!--TODO Add link to banner image here-->
+      <img src="../images/stantler_in_paris.JPG" id="top-banner-image" class="img-responsive"/>
+      <div class="row">  
+        <p class="contact-info col-xs-6 text-center">Phone: 734-216-1735</p>
+        <p class="contact-info col-xs-6 text-center">email: ryancarpus@gmail.com</p>
+      </div>
+    </div>
+
+    <div class="sidebar">
+      <!--TODO link sidebar items to applicable pages-->
+      <p id="sidebar-header" class="text-center">Quick Links</p>
+      <div id="quick-links">
+        <p class="sidebar-link text-center"><a href="../index.html">Home</a></p>
+        <p class="sidebar-link text-center"><a href="./work-experience.html">Work experience</a></p>
+        <p class="sidebar-link text-center"><a href="./projects.html">Projects</a></p>
+        <p class="sidebar-link text-center"><a href="https://www.linkedin.com/in/ryan-carpus-687234141/" target=_blank>Linkedin</a></p>
+        <p class="sidebar-link text-center"><a href="./contact-me.html">Contact me</a></p>
+      </div>
+    </div>
+
+    <div class="main-page-body">
+      <h1>Programming Projects</h1>
+      <p>Download my <a href="../docs/ryan-carpus-resume.pdf" target=_blank>resume</a>, and take a look at my <a href="https://github.com/RCarpus/Personal-Projects" target=_blank>Github page</a>.</p>
+
+        <div class="work-item">
+            <h2><a href="../math-practice/html/math-practice-app.html" target=_blank >Math Practice App</a></h2>
+            <h3>Languages/libraries: JavaScript, React</h3> 
+            <p>
+                My Math Practice App is a single-page web application built using JavaScript with React, and Bootstrap to help with format and styling. The application allows the user to generate a random problem set of basic arithmetic problems using various parameters to customize the difficulty level. After generating the problem set, the user submits their answers and receives a percentage grade, with each problem indicated as correct or incorrect. </p>   
+        </div>
+
+        <div class="work-item">
+          <h2><a href="../betrayal-at-house-on-the-hill/betrayal-at-house-on-the-hill.html" target=_blank>Betrayal at House on the Hill: Game State Tracker</a></h2>
+          <h3>Languages/libraries: JavaScript, jQuery</h3>
+          <p>My Betrayal at House on the Hill project is built using JavaScript with JQuery, aiming to create a better user experience for the board game Betrayal at House on the Hill. While the game itself is very fun, the player cards that come with the game to track stats using slider bars with plastic clips are poorly designed and difficult to work with. This project mitigates the issue by tracking everybody’s states simultaneously on one screen, without small pieces of plastic that fall off or slide to the wrong value when looked at the wrong way. The app also tracks a few other game state elements and rolls dice for the players.</p>
+        </div>
+
+        <div class="work-item">
+            <h2><a href="https://github.com/RCarpus/Personal-Projects/tree/master/geopy-library%20-%20Python" target=_blank>geo-py library</a></h2>
+            <h3>Languages/libraries: Python, Jupyter Notebook</h3>
+            <p>geo-py is a collection of Python classes representing design charts and/or design processes from the Naval Facilities Engineering Command geotechnical manuals, automating tasks that would otherwise yield subjective results or take a long time to do by hand.  The most exciting piece of this project is the deep foundations design implementation. With some notable exceptions, the Drilled_Shaft_Design class can analyze a wide range of types and sizes of deep foundations and present the results immediately, allowing for tweaking of design parameters with no additional work and without introducing human calculation errors. Like any model, the output is only as good as the input, so it is imperative that the user deeply understands the design process and the input parameters used to obtain the results. The project is usable as a collection of classes that can be imported into another script or used in the terminal, and is also available as a Jupyter Notebook.</p>
+          </div>
+      
+          <div class="work-item">
+            <h2><a href="https://github.com/RCarpus/Personal-Projects/tree/master/QC%20Proposal%20Builder" target=_blank>QC Proposal Builder</a></h2>
+            <h3>Languages/libraries: Python, docx, openpyxl</h3>
+            <p>My QC Proposal Builder is an example of a practical tool that I use in my engineering practice. The end result is a faster and less error-prone method of creating routine documents at work. The build_qc_proposal.py script pulls data from the config.py file to create a proposal for quality control engineering services tailored to a specific job, built using standardized text blocks.  The user modifies the client and project information in the config.py file and builds the budget using the estimate_sheet.xlsx file. The build_qc_proposal.py script uses the qc_propsal_template.docx file as a starting point containing the company logo and page formatting, adding in the standard text blocks, budget information, and unique client and project information to build the document and send to a new output file. </p>
+          </div>
+
+    </div>
+
+    <div class="footer text-center">
+      <p>Copyright 2021 Ryan Carpus</p>
+    </div>
+
+  </body>
+</html>

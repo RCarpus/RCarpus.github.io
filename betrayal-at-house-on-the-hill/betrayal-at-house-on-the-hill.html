@@ -1,0 +1,297 @@
+<!-- Betrayal at House on the Hill character manipulator -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href="https://fonts.googleapis.com/css?family=Nothing+You+Could+Do|Rock+Salt|Shrikhand" rel="stylesheet">
+    <link href="./style.css" type="text/css" rel="stylesheet">
+    <title>Betrayal at House on the Hill</title>
+  </head>
+
+  <body>
+    <div class="topbar">
+      <img src="./dieRollNull.jpg" id="die1" class="die"/><img src="./dieRollNull.jpg" id="die2" class="die"/>
+      <img src="./dieRollNull.jpg" id="die3" class="die"/><img src="./dieRollNull.jpg" id="die4" class="die"/>
+      <img src="./dieRollNull.jpg" id="die5" class="die"/><img src="./dieRollNull.jpg" id="die6" class="die"/>
+      <img src="./dieRollNull.jpg" id="die7" class="die"/><img src="./dieRollNull.jpg" id="die8" class="die"/>
+    </div>
+
+    <div class="haunt-status pre-haunt">
+      <div id="haunt-roll"><span id="haunt-text">Make a haunt roll</span></br><span id="omens">omens</span><span id="omen-count">0</span></div>
+    </div>
+
+
+    <div class="sidebar">
+      <p class="sidebar-heading" id="toggle-characters">Show/Hide Characters</p>
+      <div class="character-list">
+        <p class="name toggle-brandon">Brandon Jaspers</p>
+        <p class="name toggle-peter">Peter Akimoto</p>
+        <p class="name toggle-jenny">Jenny Leclerc</p>
+        <p class="name toggle-heather">Heather Granville</p>
+        <p class="name toggle-darrin">Darrin "Flash" Williams</p>
+        <p class="name toggle-ox">Ox Bellows</p>
+        <p class="name toggle-madame">Madame Zostra</p>
+        <p class="name toggle-vivian">Vivian Lopez</p>
+        <p class="name toggle-zoe">Zoe Ingstrom</p>
+        <p class="name toggle-missy">Missy Dubourde</p>
+        <p class="name toggle-father">Father Rhinehardt</p>
+        <p class="name toggle-professor">Professor Longfellow</p>
+      </div>
+      <p class="sidebar-heading" id="roll-dice">Roll Dice</p>
+      <div class="num-dice">
+        <p class="dice" id="1-die">Roll 1</p>
+        <p class="dice" id="2-die">Roll 2</p>
+        <p class="dice" id="3-die">Roll 3</p>
+        <p class="dice" id="4-die">Roll 4</p>
+        <p class="dice" id="5-die">Roll 5</p>
+        <p class="dice" id="6-die">Roll 6</p>
+        <p class="dice" id="7-die">Roll 7</p>
+        <p class="dice" id="8-die">Roll 8</p>
+      </div>
+      <p id="roll-dice-result"></p>
+
+    </div>
+
+<!------------------------------------------------------------------->
+    <div class="character-box-grid">
+    <div class="character-box" id="brandon">
+      <p class="character-name">Brandon Jaspers</p>
+      <img class="character-picture" src="./brandon.jpg"/>
+
+      <div class="slider-grid">
+          <div class = "bonus-button speed">*</div><div class="stat-name">speed</div><div class="s minus">-</div><div class='s1'></div><div class='s2'></div><div class='s3'></div><div class='s4'></div><div class='s5'></div><div class='s6'></div><div class='s7'></div><div class='s8'></div><div class="s plus">+</div>
+          <div class = "bonus-button might">*</div><div class="stat-name">might</div><div class="m minus">-</div><div class='m1'></div><div class='m2'></div><div class='m3'></div><div class='m4'></div><div class='m5'></div><div class='m6'></div><div class='m7'></div><div class='m8'></div><div class="m plus">+</div>      
+          <div class = "bonus-button knowledge">*</div><div class="stat-name">knowledge</div><div class="k minus">-</div><div class='k1'></div><div class='k2'></div><div class='k3'></div><div class='k4'></div><div class='k5'></div><div class='k6'></div><div class='k7'></div><div class='k8'></div><div class="k plus">+</div> 
+          <div class = "bonus-button sanity">*</div><div class="stat-name">sanity</div><div class="w minus">-</div><div class='w1'></div><div class='w2'></div><div class='w3'></div><div class='w4'></div><div class='w5'></div><div class='w6'></div><div class='w7'></div><div class='w8'></div><div class="w plus">+</div>    
+      </div>   
+
+      <div class="roll-grid">
+        <div class="s roll-button">Speed Roll</div><div class="s result"></div>  
+        <div class="m roll-button">Might Roll</div><div class="m result"></div>   
+        <div class="k roll-button">Knowledge Roll</div><div class="k result"></div>
+        <div class="w roll-button">Sanity Roll</div><div class="w result"></div>
+      </div>    
+    </div>
+<!------------------------------------------------------------------>
+    <div class="character-box" id="peter">
+      <p class="character-name">Peter Akimoto</p>
+      <img class="character-picture" src="./peter.jpg"/>
+
+      <div class="slider-grid">
+          <div class = "bonus-button speed">*</div><div class="stat-name">speed</div><div class="s minus">-</div><div class='s1'></div><div class='s2'></div><div class='s3'></div><div class='s4'></div><div class='s5'></div><div class='s6'></div><div class='s7'></div><div class='s8'></div><div class="s plus">+</div>
+          <div class = "bonus-button might">*</div><div class="stat-name">might</div><div class="m minus">-</div><div class='m1'></div><div class='m2'></div><div class='m3'></div><div class='m4'></div><div class='m5'></div><div class='m6'></div><div class='m7'></div><div class='m8'></div><div class="m plus">+</div>      
+          <div class = "bonus-button knowledge">*</div><div class="stat-name">knowledge</div><div class="k minus">-</div><div class='k1'></div><div class='k2'></div><div class='k3'></div><div class='k4'></div><div class='k5'></div><div class='k6'></div><div class='k7'></div><div class='k8'></div><div class="k plus">+</div> 
+          <div class = "bonus-button sanity">*</div><div class="stat-name">sanity</div><div class="w minus">-</div><div class='w1'></div><div class='w2'></div><div class='w3'></div><div class='w4'></div><div class='w5'></div><div class='w6'></div><div class='w7'></div><div class='w8'></div><div class="w plus">+</div>    
+      </div>    
+
+      <div class="roll-grid">
+        <div class="s roll-button">Speed Roll</div><div class="s result"></div>  
+        <div class="m roll-button">Might Roll</div><div class="m result"></div>   
+        <div class="k roll-button">Knowledge Roll</div><div class="k result"></div>
+        <div class="w roll-button">Sanity Roll</div><div class="w result"></div>
+      </div>    
+    </div>
+
+    <div class="character-box" id="jenny">
+      <p class="character-name">Jenny LeClerc</p>
+      <img class="character-picture" src="./jenny.jpg"/>
+
+      <div class="slider-grid">
+          <div class = "bonus-button speed">*</div><div class="stat-name">speed</div><div class="s minus">-</div><div class='s1'></div><div class='s2'></div><div class='s3'></div><div class='s4'></div><div class='s5'></div><div class='s6'></div><div class='s7'></div><div class='s8'></div><div class="s plus">+</div>
+          <div class = "bonus-button might">*</div><div class="stat-name">might</div><div class="m minus">-</div><div class='m1'></div><div class='m2'></div><div class='m3'></div><div class='m4'></div><div class='m5'></div><div class='m6'></div><div class='m7'></div><div class='m8'></div><div class="m plus">+</div>      
+          <div class = "bonus-button knowledge">*</div><div class="stat-name">knowledge</div><div class="k minus">-</div><div class='k1'></div><div class='k2'></div><div class='k3'></div><div class='k4'></div><div class='k5'></div><div class='k6'></div><div class='k7'></div><div class='k8'></div><div class="k plus">+</div> 
+          <div class = "bonus-button sanity">*</div><div class="stat-name">sanity</div><div class="w minus">-</div><div class='w1'></div><div class='w2'></div><div class='w3'></div><div class='w4'></div><div class='w5'></div><div class='w6'></div><div class='w7'></div><div class='w8'></div><div class="w plus">+</div>    
+      </div>    
+
+      <div class="roll-grid">
+        <div class="s roll-button">Speed Roll</div><div class="s result"></div>  
+        <div class="m roll-button">Might Roll</div><div class="m result"></div>   
+        <div class="k roll-button">Knowledge Roll</div><div class="k result"></div>
+        <div class="w roll-button">Sanity Roll</div><div class="w result"></div>
+      </div>    
+    </div>
+
+    <div class="character-box" id="heather">
+      <p class="character-name">Heather Granville</p>
+      <img class="character-picture" src="./heather.jpg"/>
+
+      <div class="slider-grid">
+          <div class = "bonus-button speed">*</div><div class="stat-name">speed</div><div class="s minus">-</div><div class='s1'></div><div class='s2'></div><div class='s3'></div><div class='s4'></div><div class='s5'></div><div class='s6'></div><div class='s7'></div><div class='s8'></div><div class="s plus">+</div>
+          <div class = "bonus-button might">*</div><div class="stat-name">might</div><div class="m minus">-</div><div class='m1'></div><div class='m2'></div><div class='m3'></div><div class='m4'></div><div class='m5'></div><div class='m6'></div><div class='m7'></div><div class='m8'></div><div class="m plus">+</div>      
+          <div class = "bonus-button knowledge">*</div><div class="stat-name">knowledge</div><div class="k minus">-</div><div class='k1'></div><div class='k2'></div><div class='k3'></div><div class='k4'></div><div class='k5'></div><div class='k6'></div><div class='k7'></div><div class='k8'></div><div class="k plus">+</div> 
+          <div class = "bonus-button sanity">*</div><div class="stat-name">sanity</div><div class="w minus">-</div><div class='w1'></div><div class='w2'></div><div class='w3'></div><div class='w4'></div><div class='w5'></div><div class='w6'></div><div class='w7'></div><div class='w8'></div><div class="w plus">+</div>    
+      </div>    
+
+      <div class="roll-grid">
+        <div class="s roll-button">Speed Roll</div><div class="s result"></div>  
+        <div class="m roll-button">Might Roll</div><div class="m result"></div>   
+        <div class="k roll-button">Knowledge Roll</div><div class="k result"></div>
+        <div class="w roll-button">Sanity Roll</div><div class="w result"></div>
+      </div>    
+    </div>
+
+    <div class="character-box" id="darrin">
+      <p class="character-name">Darrin "Flash" Williams</p>
+      <img class="character-picture" src="./darrin.jpg"/>
+
+      <div class="slider-grid">
+          <div class = "bonus-button speed">*</div><div class="stat-name">speed</div><div class="s minus">-</div><div class='s1'></div><div class='s2'></div><div class='s3'></div><div class='s4'></div><div class='s5'></div><div class='s6'></div><div class='s7'></div><div class='s8'></div><div class="s plus">+</div>
+          <div class = "bonus-button might">*</div><div class="stat-name">might</div><div class="m minus">-</div><div class='m1'></div><div class='m2'></div><div class='m3'></div><div class='m4'></div><div class='m5'></div><div class='m6'></div><div class='m7'></div><div class='m8'></div><div class="m plus">+</div>      
+          <div class = "bonus-button knowledge">*</div><div class="stat-name">knowledge</div><div class="k minus">-</div><div class='k1'></div><div class='k2'></div><div class='k3'></div><div class='k4'></div><div class='k5'></div><div class='k6'></div><div class='k7'></div><div class='k8'></div><div class="k plus">+</div> 
+          <div class = "bonus-button sanity">*</div><div class="stat-name">sanity</div><div class="w minus">-</div><div class='w1'></div><div class='w2'></div><div class='w3'></div><div class='w4'></div><div class='w5'></div><div class='w6'></div><div class='w7'></div><div class='w8'></div><div class="w plus">+</div>    
+      </div>     
+
+      <div class="roll-grid">
+        <div class="s roll-button">Speed Roll</div><div class="s result"></div>  
+        <div class="m roll-button">Might Roll</div><div class="m result"></div>   
+        <div class="k roll-button">Knowledge Roll</div><div class="k result"></div>
+        <div class="w roll-button">Sanity Roll</div><div class="w result"></div>
+      </div>    
+    </div>
+
+    <div class="character-box" id="ox">
+      <p class="character-name">Ox Bellows</p>
+      <img class="character-picture" src="./ox.jpg"/>
+
+      <div class="slider-grid">
+          <div class = "bonus-button speed">*</div><div class="stat-name">speed</div><div class="s minus">-</div><div class='s1'></div><div class='s2'></div><div class='s3'></div><div class='s4'></div><div class='s5'></div><div class='s6'></div><div class='s7'></div><div class='s8'></div><div class="s plus">+</div>
+          <div class = "bonus-button might">*</div><div class="stat-name">might</div><div class="m minus">-</div><div class='m1'></div><div class='m2'></div><div class='m3'></div><div class='m4'></div><div class='m5'></div><div class='m6'></div><div class='m7'></div><div class='m8'></div><div class="m plus">+</div>      
+          <div class = "bonus-button knowledge">*</div><div class="stat-name">knowledge</div><div class="k minus">-</div><div class='k1'></div><div class='k2'></div><div class='k3'></div><div class='k4'></div><div class='k5'></div><div class='k6'></div><div class='k7'></div><div class='k8'></div><div class="k plus">+</div> 
+          <div class = "bonus-button sanity">*</div><div class="stat-name">sanity</div><div class="w minus">-</div><div class='w1'></div><div class='w2'></div><div class='w3'></div><div class='w4'></div><div class='w5'></div><div class='w6'></div><div class='w7'></div><div class='w8'></div><div class="w plus">+</div>    
+      </div>     
+
+      <div class="roll-grid">
+        <div class="s roll-button">Speed Roll</div><div class="s result"></div>  
+        <div class="m roll-button">Might Roll</div><div class="m result"></div>   
+        <div class="k roll-button">Knowledge Roll</div><div class="k result"></div>
+        <div class="w roll-button">Sanity Roll</div><div class="w result"></div>
+      </div>    
+    </div>
+
+    <div class="character-box" id="madame">
+      <p class="character-name">Madame Zostra</p>
+      <img class="character-picture" src="./madame.jpg"/>
+
+      <div class="slider-grid">
+          <div class = "bonus-button speed">*</div><div class="stat-name">speed</div><div class="s minus">-</div><div class='s1'></div><div class='s2'></div><div class='s3'></div><div class='s4'></div><div class='s5'></div><div class='s6'></div><div class='s7'></div><div class='s8'></div><div class="s plus">+</div>
+          <div class = "bonus-button might">*</div><div class="stat-name">might</div><div class="m minus">-</div><div class='m1'></div><div class='m2'></div><div class='m3'></div><div class='m4'></div><div class='m5'></div><div class='m6'></div><div class='m7'></div><div class='m8'></div><div class="m plus">+</div>      
+          <div class = "bonus-button knowledge">*</div><div class="stat-name">knowledge</div><div class="k minus">-</div><div class='k1'></div><div class='k2'></div><div class='k3'></div><div class='k4'></div><div class='k5'></div><div class='k6'></div><div class='k7'></div><div class='k8'></div><div class="k plus">+</div> 
+          <div class = "bonus-button sanity">*</div><div class="stat-name">sanity</div><div class="w minus">-</div><div class='w1'></div><div class='w2'></div><div class='w3'></div><div class='w4'></div><div class='w5'></div><div class='w6'></div><div class='w7'></div><div class='w8'></div><div class="w plus">+</div>    
+      </div>     
+
+      <div class="roll-grid">
+        <div class="s roll-button">Speed Roll</div><div class="s result"></div>  
+        <div class="m roll-button">Might Roll</div><div class="m result"></div>   
+        <div class="k roll-button">Knowledge Roll</div><div class="k result"></div>
+        <div class="w roll-button">Sanity Roll</div><div class="w result"></div>
+      </div>    
+    </div>
+
+    <div class="character-box" id="vivian">
+      <p class="character-name">Vivian Lopez</p>
+      <img class="character-picture" src="./vivian.jpg"/>
+
+      <div class="slider-grid">
+          <div class = "bonus-button speed">*</div><div class="stat-name">speed</div><div class="s minus">-</div><div class='s1'></div><div class='s2'></div><div class='s3'></div><div class='s4'></div><div class='s5'></div><div class='s6'></div><div class='s7'></div><div class='s8'></div><div class="s plus">+</div>
+          <div class = "bonus-button might">*</div><div class="stat-name">might</div><div class="m minus">-</div><div class='m1'></div><div class='m2'></div><div class='m3'></div><div class='m4'></div><div class='m5'></div><div class='m6'></div><div class='m7'></div><div class='m8'></div><div class="m plus">+</div>      
+          <div class = "bonus-button knowledge">*</div><div class="stat-name">knowledge</div><div class="k minus">-</div><div class='k1'></div><div class='k2'></div><div class='k3'></div><div class='k4'></div><div class='k5'></div><div class='k6'></div><div class='k7'></div><div class='k8'></div><div class="k plus">+</div> 
+          <div class = "bonus-button sanity">*</div><div class="stat-name">sanity</div><div class="w minus">-</div><div class='w1'></div><div class='w2'></div><div class='w3'></div><div class='w4'></div><div class='w5'></div><div class='w6'></div><div class='w7'></div><div class='w8'></div><div class="w plus">+</div>    
+      </div>    
+
+      <div class="roll-grid">
+        <div class="s roll-button">Speed Roll</div><div class="s result"></div>  
+        <div class="m roll-button">Might Roll</div><div class="m result"></div>   
+        <div class="k roll-button">Knowledge Roll</div><div class="k result"></div>
+        <div class="w roll-button">Sanity Roll</div><div class="w result"></div>
+      </div>    
+    </div>
+
+    <div class="character-box" id="zoe">
+      <p class="character-name">Zoe Ingstrom</p>
+      <img class="character-picture" src="./zoe.jpg"/>
+
+      <div class="slider-grid">
+          <div class = "bonus-button speed">*</div><div class="stat-name">speed</div><div class="s minus">-</div><div class='s1'></div><div class='s2'></div><div class='s3'></div><div class='s4'></div><div class='s5'></div><div class='s6'></div><div class='s7'></div><div class='s8'></div><div class="s plus">+</div>
+          <div class = "bonus-button might">*</div><div class="stat-name">might</div><div class="m minus">-</div><div class='m1'></div><div class='m2'></div><div class='m3'></div><div class='m4'></div><div class='m5'></div><div class='m6'></div><div class='m7'></div><div class='m8'></div><div class="m plus">+</div>      
+          <div class = "bonus-button knowledge">*</div><div class="stat-name">knowledge</div><div class="k minus">-</div><div class='k1'></div><div class='k2'></div><div class='k3'></div><div class='k4'></div><div class='k5'></div><div class='k6'></div><div class='k7'></div><div class='k8'></div><div class="k plus">+</div> 
+          <div class = "bonus-button sanity">*</div><div class="stat-name">sanity</div><div class="w minus">-</div><div class='w1'></div><div class='w2'></div><div class='w3'></div><div class='w4'></div><div class='w5'></div><div class='w6'></div><div class='w7'></div><div class='w8'></div><div class="w plus">+</div>    
+      </div>    
+
+      <div class="roll-grid">
+        <div class="s roll-button">Speed Roll</div><div class="s result"></div>  
+        <div class="m roll-button">Might Roll</div><div class="m result"></div>   
+        <div class="k roll-button">Knowledge Roll</div><div class="k result"></div>
+        <div class="w roll-button">Sanity Roll</div><div class="w result"></div>
+      </div>    
+    </div>
+
+    <div class="character-box" id="missy">
+      <p class="character-name">Missy Dubourde</p>
+      <img class="character-picture" src="./missy.jpg"/>
+
+      <div class="slider-grid">
+          <div class = "bonus-button speed">*</div><div class="stat-name">speed</div><div class="s minus">-</div><div class='s1'></div><div class='s2'></div><div class='s3'></div><div class='s4'></div><div class='s5'></div><div class='s6'></div><div class='s7'></div><div class='s8'></div><div class="s plus">+</div>
+          <div class = "bonus-button might">*</div><div class="stat-name">might</div><div class="m minus">-</div><div class='m1'></div><div class='m2'></div><div class='m3'></div><div class='m4'></div><div class='m5'></div><div class='m6'></div><div class='m7'></div><div class='m8'></div><div class="m plus">+</div>      
+          <div class = "bonus-button knowledge">*</div><div class="stat-name">knowledge</div><div class="k minus">-</div><div class='k1'></div><div class='k2'></div><div class='k3'></div><div class='k4'></div><div class='k5'></div><div class='k6'></div><div class='k7'></div><div class='k8'></div><div class="k plus">+</div> 
+          <div class = "bonus-button sanity">*</div><div class="stat-name">sanity</div><div class="w minus">-</div><div class='w1'></div><div class='w2'></div><div class='w3'></div><div class='w4'></div><div class='w5'></div><div class='w6'></div><div class='w7'></div><div class='w8'></div><div class="w plus">+</div>    
+      </div>    
+
+      <div class="roll-grid">
+        <div class="s roll-button">Speed Roll</div><div class="s result"></div>  
+        <div class="m roll-button">Might Roll</div><div class="m result"></div>   
+        <div class="k roll-button">Knowledge Roll</div><div class="k result"></div>
+        <div class="w roll-button">Sanity Roll</div><div class="w result"></div>
+      </div>    
+    </div>
+
+    <div class="character-box" id="father">
+      <p class="character-name">Father Rhinehardt</p>
+      <img class="character-picture" src="./father.jpg"/>
+
+      <div class="slider-grid">
+          <div class = "bonus-button speed">*</div><div class="stat-name">speed</div><div class="s minus">-</div><div class='s1'></div><div class='s2'></div><div class='s3'></div><div class='s4'></div><div class='s5'></div><div class='s6'></div><div class='s7'></div><div class='s8'></div><div class="s plus">+</div>
+          <div class = "bonus-button might">*</div><div class="stat-name">might</div><div class="m minus">-</div><div class='m1'></div><div class='m2'></div><div class='m3'></div><div class='m4'></div><div class='m5'></div><div class='m6'></div><div class='m7'></div><div class='m8'></div><div class="m plus">+</div>      
+          <div class = "bonus-button knowledge">*</div><div class="stat-name">knowledge</div><div class="k minus">-</div><div class='k1'></div><div class='k2'></div><div class='k3'></div><div class='k4'></div><div class='k5'></div><div class='k6'></div><div class='k7'></div><div class='k8'></div><div class="k plus">+</div> 
+          <div class = "bonus-button sanity">*</div><div class="stat-name">sanity</div><div class="w minus">-</div><div class='w1'></div><div class='w2'></div><div class='w3'></div><div class='w4'></div><div class='w5'></div><div class='w6'></div><div class='w7'></div><div class='w8'></div><div class="w plus">+</div>    
+      </div>    
+
+      <div class="roll-grid">
+        <div class="s roll-button">Speed Roll</div><div class="s result"></div>  
+        <div class="m roll-button">Might Roll</div><div class="m result"></div>   
+        <div class="k roll-button">Knowledge Roll</div><div class="k result"></div>
+        <div class="w roll-button">Sanity Roll</div><div class="w result"></div>
+      </div>    
+    </div>
+
+    <div class="character-box" id="professor">
+      <p class="character-name">Professor Longfellow</p>
+      <img class="character-picture" src="./professor.jpg	"/>
+
+      <div class="slider-grid">
+          <div class = "bonus-button speed">*</div><div class="stat-name">speed</div><div class="s minus">-</div><div class='s1'></div><div class='s2'></div><div class='s3'></div><div class='s4'></div><div class='s5'></div><div class='s6'></div><div class='s7'></div><div class='s8'></div><div class="s plus">+</div>
+          <div class = "bonus-button might">*</div><div class="stat-name">might</div><div class="m minus">-</div><div class='m1'></div><div class='m2'></div><div class='m3'></div><div class='m4'></div><div class='m5'></div><div class='m6'></div><div class='m7'></div><div class='m8'></div><div class="m plus">+</div>      
+          <div class = "bonus-button knowledge">*</div><div class="stat-name">knowledge</div><div class="k minus">-</div><div class='k1'></div><div class='k2'></div><div class='k3'></div><div class='k4'></div><div class='k5'></div><div class='k6'></div><div class='k7'></div><div class='k8'></div><div class="k plus">+</div> 
+          <div class = "bonus-button sanity">*</div><div class="stat-name">sanity</div><div class="w minus">-</div><div class='w1'></div><div class='w2'></div><div class='w3'></div><div class='w4'></div><div class='w5'></div><div class='w6'></div><div class='w7'></div><div class='w8'></div><div class="w plus">+</div>    
+      </div>    
+
+      <div class="roll-grid">
+        <div class="s roll-button">Speed Roll</div><div class="s result"></div>  
+        <div class="m roll-button">Might Roll</div><div class="m result"></div>   
+        <div class="k roll-button">Knowledge Roll</div><div class="k result"></div>
+        <div class="w roll-button">Sanity Roll</div><div class="w result"></div>
+      </div>    
+    </div>
+
+
+
+
+    </div> <!--closes character box grid-->
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+      integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+      crossorigin="anonymous"></script>
+	<script type='text/javascript' src='./betrayalScript.js'></script>
+  </body>
+
+
+
+</html>
