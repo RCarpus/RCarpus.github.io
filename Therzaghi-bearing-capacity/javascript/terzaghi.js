@@ -148,10 +148,10 @@ class TerzaghiBearingCapacity {
         }
 
         //calculate bearing capacity
-        this.bearingCapacity = (this.coef1 * this.cohesion * this.Nc)+ (this.coef2 * this.effectiveStress * this.Nq) + (this.coef3 * this.effectiveUnitWeight * this.width * this.Ng);
+        this.bearingCapacity = Math.round((this.coef1 * this.cohesion * this.Nc)+ (this.coef2 * this.effectiveStress * this.Nq) + (this.coef3 * this.effectiveUnitWeight * this.width * this.Ng));
         //calculate allowable capacity
-        this.allowableCapacity = this.bearingCapacity / this.FS;
-        this.calculation = `(${this.coef1} x ${this.cohesion} x ${this.Nc}) + (${this.coef2} x ${this.effectiveStress} x ${this.Nq}) + (${this.coef3} x ${this.effectiveUnitWeight} x ${this.width} x ${this.Ng}) = ${this.bearingCapacity}`;
+        this.allowableCapacity = Math.round(this.bearingCapacity / this.FS);
+        this.calculation = `(${this.coef1} x ${this.cohesion} x ${this.Nc}) + (${this.coef2} x ${Math.round(this.effectiveStress)} x ${this.Nq}) + (${this.coef3} x ${Math.round(this.effectiveUnitWeight)} x ${this.width} x ${this.Ng}) = ${this.bearingCapacity}`;
     }
 }
 
