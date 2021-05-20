@@ -509,6 +509,32 @@ const WelcomeScreen = function() {
 
 let TEXT_BOX_SIZE = 10;
 
+function getMaterialRadioValue() {
+    /*
+    reads material type radio button. Defaults to concrete
+    */
+    let element = document.getElementsByName('material-type');
+    for(let i=0; i<element.length; i++) {
+        if (element[i].checked) {
+            return element[i].value;
+        }
+    }
+    return 'Concrete';
+}
+
+function getPileTypeRadioValue() {
+    /*
+    reads pile type radio button. Defaults to drilled pier
+    */
+    let element = document.getElementsByName('pile-type');
+    for(let i=0; i<element.length; i++) {
+        if (element[i].checked) {
+            return element[i].value;
+        }
+    }
+    return 'Drilled Pier';
+}
+
 class DataEntryForm extends React.Component {
     constructor(props) {
         super(props);
@@ -516,14 +542,159 @@ class DataEntryForm extends React.Component {
             analyzed: false
         };
         this.handleAnalyze = this.handleAnalyze.bind(this);
+        this.handleLayerNames = this.handleLayerNames.bind(this);
+        this.handleLayerBottoms = this.handleLayerBottoms.bind(this);
+        this.handleUnitWeights = this.handleUnitWeights.bind(this);
+        this.handleFrictionAngles = this.handleFrictionAngles.bind(this);
+        this.handleCohesions = this.handleCohesions.bind(this);
+        this.handleGroundwaterDepth = this.handleGroundwaterDepth.bind(this);
+        this.handleIncrement = this.handleIncrement.bind(this);
+        this.handleIgnoredDepth = this.handleIgnoredDepth.bind(this);
+        this.handleAnalysisDepths = this.handleAnalysisDepths.bind(this);
+        this.handleAnalysisWidths = this.handleAnalysisWidths.bind(this);
+        this.handleFSCompression = this.handleFSCompression.bind(this);
+        this.handleFSTension = this.handleFSTension.bind(this);
+        this.handleMaterial = this.handleMaterial.bind(this);
+        this.handlePileType = this.handlePileType.bind(this);
     }
 
+    /*
+    The handle functions continuously update the state of the DataEntryForm to contain the contents of the input boxes. 
+    Validation is not yet implemented
+    */
+    
     handleAnalyze() {
         this.setState(state => ({
             ...state,
             analyzed: true
         }));
     };
+
+    handleLayerNames(event) {
+        this.setState(state => ({
+            ...state,
+            layerNames: event.target.value
+        }), () => {
+            console.log(`layerNames: ${this.state.layerNames}`);
+        });
+    };
+
+    handleLayerBottoms(event) {
+        this.setState(state => ({
+            ...state,
+            layerBottoms: event.target.value
+        }), () => {
+            console.log(`layerBottoms: ${this.state.layerBottoms}`);
+        });
+    };
+
+    handleUnitWeights(event) {
+        this.setState(state => ({
+            ...state,
+            unitWeights: event.target.value
+        }), () => {
+            console.log(`unitWeights: ${this.state.unitWeights}`);
+        });
+    };
+
+    handleFrictionAngles(event) {
+        this.setState(state => ({
+            ...state,
+            frictionAngles: event.target.value
+        }), () => {
+            console.log(`frictionAngles: ${this.state.frictionAngles}`);
+        });
+    };
+
+    handleCohesions(event) {
+        this.setState(state => ({
+            ...state,
+            cohesions: event.target.value
+        }), () => {
+            console.log(`cohesions: ${this.state.cohesions}`);
+        });
+    };
+
+    handleGroundwaterDepth(event) {
+        this.setState(state => ({
+            ...state,
+            groundwaterDepth: event.target.value
+        }), () => {
+            console.log(`groundwaterDepth: ${this.state.groundwaterDepth}`);
+        });
+    };
+
+    handleIncrement(event) {
+        this.setState(state => ({
+            ...state,
+            increment: event.target.value
+        }), () => {
+            console.log(`increment: ${this.state.increment}`);
+        });
+    };
+
+    handleIgnoredDepth(event) {
+        this.setState(state => ({
+            ...state,
+            ignoredDepth: event.target.value
+        }), () => {
+            console.log(`ignoredDepth: ${this.state.ignoredDepth}`);
+        });
+    };
+
+    handleAnalysisDepths(event) {
+        this.setState(state => ({
+            ...state,
+            analysisDepths: event.target.value
+        }), () => {
+            console.log(`analysisDepths: ${this.state.analysisDepths}`);
+        });
+    };
+
+    handleAnalysisWidths(event) {
+        this.setState(state => ({
+            ...state,
+            analysisWidths: event.target.value
+        }), () => {
+            console.log(`analysisWidths: ${this.state.analysisWidths}`);
+        });
+    };
+
+    handleFSCompression(event) {
+        this.setState(state => ({
+            ...state,
+            fsCompression: event.target.value
+        }), () => {
+            console.log(`fsCompression: ${this.state.fsCompression}`);
+        });
+    };
+
+    handleFSTension(event) {
+        this.setState(state => ({
+            ...state,
+            fsTension: event.target.value
+        }), () => {
+            console.log(`fsTension: ${this.state.fsTension}`);
+        });
+    };
+
+    handleMaterial() {
+        this.setState(state => ({
+            ...state,
+            material: getMaterialRadioValue()
+        }), () => {
+            console.log(`material: ${this.state.material}`);
+        })
+    }
+
+    handlePileType() {
+        this.setState(state => ({
+            ...state,
+            pileType: getPileTypeRadioValue()
+        }), () => {
+            console.log(`pileType: ${this.state.pileType}`);
+        })
+    }
 
     render() {
         return(
@@ -536,7 +707,7 @@ class DataEntryForm extends React.Component {
                         <span><b>Layer name</b> (Put each layer name in double quotes, separated by a comma and a space. Ex: "loose sand", "stiff clay")</span>
                     </div>
                     <div class="col-md-3 input-box">
-                        <input id='xxx' autoComplete='off' size={TEXT_BOX_SIZE}></input>
+                        <input id='xxx' onChange={this.handleLayerNames} autoComplete='off' size={TEXT_BOX_SIZE}></input>
                     </div>
                 </div>
 
@@ -545,7 +716,7 @@ class DataEntryForm extends React.Component {
                         <span><b>Depth</b> to bottom of layer in feet (numbers separated by commas, Ex: 5, 8)</span>
                     </div>
                     <div class="col-md-3 input-box">
-                        <input id='xxx' autoComplete='off' size={TEXT_BOX_SIZE}></input>
+                        <input id='xxx' onChange={this.handleLayerBottoms} autoComplete='off' size={TEXT_BOX_SIZE}></input>
                     </div>
                 </div>
 
@@ -554,7 +725,7 @@ class DataEntryForm extends React.Component {
                         <span><b>Unit Weight</b> (pcf)</span>
                     </div>
                     <div class="col-md-3 input-box">
-                        <input id='xxx' autoComplete='off' size={TEXT_BOX_SIZE}></input>
+                        <input id='xxx' onChange={this.handleUnitWeights} autoComplete='off' size={TEXT_BOX_SIZE}></input>
                     </div>
                 </div>
 
@@ -563,7 +734,7 @@ class DataEntryForm extends React.Component {
                         <span><b>Friction Angle</b> (degrees)</span>
                     </div>
                     <div class="col-md-3 input-box">
-                        <input id='xxx' autoComplete='off' size={TEXT_BOX_SIZE}></input>
+                        <input id='xxx' onChange={this.handleFrictionAngles} autoComplete='off' size={TEXT_BOX_SIZE}></input>
                     </div>
                 </div>
 
@@ -572,7 +743,7 @@ class DataEntryForm extends React.Component {
                         <span><b>Cohesion</b> (psf)</span>
                     </div>
                     <div class="col-md-3 input-box">
-                        <input id='xxx' autoComplete='off' size={TEXT_BOX_SIZE}></input>
+                        <input id='xxx' onChange={this.handleCohesions} autoComplete='off' size={TEXT_BOX_SIZE}></input>
                     </div>
                 </div>
 
@@ -581,7 +752,7 @@ class DataEntryForm extends React.Component {
                         <span><b>Depth to groundwater</b> (ft)</span>
                     </div>
                     <div class="col-md-3 input-box">
-                        <input id='xxx' autoComplete='off' size={TEXT_BOX_SIZE}></input>
+                        <input id='xxx' onChange={this.handleGroundwaterDepth} autoComplete='off' size={TEXT_BOX_SIZE}></input>
                     </div>
                 </div>
 
@@ -590,7 +761,7 @@ class DataEntryForm extends React.Component {
                         <span><b>Sublayer Increment</b> (ft)</span>
                     </div>
                     <div class="col-md-3 input-box">
-                        <input id='xxx' autoComplete='off' size={TEXT_BOX_SIZE}></input>
+                        <input id='xxx' onChange={this.handleIncrement} autoComplete='off' size={TEXT_BOX_SIZE}></input>
                     </div>
                 </div>
 
@@ -599,37 +770,37 @@ class DataEntryForm extends React.Component {
                         <span><b>Ignored Depth</b> (ft)</span>
                     </div>
                     <div class="col-md-3 input-box">
-                        <input id='xxx' autoComplete='off' size={TEXT_BOX_SIZE}></input>
+                        <input id='xxx' onChange={this.handleIgnoredDepth} autoComplete='off' size={TEXT_BOX_SIZE}></input>
                     </div>
                 </div>              
 
                 <h2>Material and Pile Type</h2>
                 {/*Radio buttons for material type selection */}
                 <p>Material</p>
-                <input type='radio' id='concrete-radio-button' name='material-type' value='Concrete'></input>
+                <input type='radio' id='concrete-radio-button' onClick={this.handleMaterial} name='material-type' value='Concrete'></input>
                 <label for='Concrete'>Concrete</label>
 
-                <input type='radio' id='timber-radio-button' name='material-type' value='Timber'></input>
+                <input type='radio' id='timber-radio-button' onClick={this.handleMaterial} name='material-type' value='Timber'></input>
                 <label for='Timber'>Timber</label>
 
-                <input type='radio' id='steel-radio-button' name='material-type' value='Steel'></input>
+                <input type='radio' id='steel-radio-button' onClick={this.handleMaterial} name='material-type' value='Steel'></input>
                 <label for='Steel'>Steel</label>
 
                 {/*Radio buttons for pile type selection */}
                 <p>Material</p>
-                <input type='radio' id='driven-single-h-pile' name='pile-type' value='Driven Single H-Pile'></input>
+                <input type='radio' id='driven-single-h-pile' onClick={this.handlePileType} name='pile-type' value='Driven Single H-Pile'></input>
                 <label for='Driven Single H-Pile'>Driven Single H-Pile</label>
 
-                <input type='radio' id='driven-single-displacement-pile' name='pile-type' value='Driven Single Displacement Pile'></input>
+                <input type='radio' id='driven-single-displacement-pile' onClick={this.handlePileType} name='pile-type' value='Driven Single Displacement Pile'></input>
                 <label for='Driven Single Displacement Pile'>Driven Single Displacement Pile</label>
 
-                <input type='radio' id='driven-single-displacement-tapered-pile' name='pile-type' value='Driven Single Displacement Tapered Pile'></input>
+                <input type='radio' id='driven-single-displacement-tapered-pile' onClick={this.handlePileType} name='pile-type' value='Driven Single Displacement Tapered Pile'></input>
                 <label for='Driven Single Displacement Tapered Pile'>Driven Single Displacement Tapered Pile</label>
 
-                <input type='radio' id='driven-jetted-pile' name='pile-type' value='Driven Jetted Pile'></input>
+                <input type='radio' id='driven-jetted-pile' onClick={this.handlePileType} name='pile-type' value='Driven Jetted Pile'></input>
                 <label for='Driven Jetted Pile'>Driven Jetted Pile</label>
 
-                <input type='radio' id='drilled-pier' name='pile-type' value='Drilled Pier'></input>
+                <input type='radio' id='drilled-pier' onClick={this.handlePileType} name='pile-type' value='Drilled Pier'></input>
                 <label for='Drilled Pier'>Drilled Pier</label>
 
                 {/* Input fields for analysis depths and widths */}
@@ -638,7 +809,7 @@ class DataEntryForm extends React.Component {
                         <span><b>Analysis Depths</b> (ft)</span>
                     </div>
                     <div class="col-md-3 input-box">
-                        <input id='xxx' autoComplete='off' size={TEXT_BOX_SIZE}></input>
+                        <input id='xxx' onChange={this.handleAnalysisDepths} autoComplete='off' size={TEXT_BOX_SIZE}></input>
                     </div>
                 </div>       
 
@@ -647,7 +818,7 @@ class DataEntryForm extends React.Component {
                         <span><b>Analysis Widths</b> (ft)</span>
                     </div>
                     <div class="col-md-3 input-box">
-                        <input id='xxx' autoComplete='off' size={TEXT_BOX_SIZE}></input>
+                        <input id='xxx' onChange={this.handleAnalysisWidths} autoComplete='off' size={TEXT_BOX_SIZE}></input>
                     </div>
                 </div>
                 <p><i>Note: If using an H pile, widths must be entered as tuples corresponding to the width and depth of the H pile. This analysis assumes a full plugged condition. Ex: (6,7), (6,7.5), (7,8)</i></p>
@@ -657,7 +828,7 @@ class DataEntryForm extends React.Component {
                         <span><b>Factor of Safety in Compression</b> (Recommended 2)</span>
                     </div>
                     <div class="col-md-3 input-box">
-                        <input id='xxx' autoComplete='off' size={TEXT_BOX_SIZE}></input>
+                        <input id='xxx' onChange={this.handleFSCompression} autoComplete='off' size={TEXT_BOX_SIZE}></input>
                     </div>
                 </div>
 
@@ -666,7 +837,7 @@ class DataEntryForm extends React.Component {
                         <span><b>Factor of Safety in Tension</b> (Recommended 3)</span>
                     </div>
                     <div class="col-md-3 input-box">
-                        <input id='xxx' autoComplete='off' size={TEXT_BOX_SIZE}></input>
+                        <input id='xxx' onChange={this.handleFSTension} autoComplete='off' size={TEXT_BOX_SIZE}></input>
                     </div>
                 </div>
          
