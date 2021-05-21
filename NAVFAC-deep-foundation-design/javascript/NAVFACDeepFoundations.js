@@ -301,7 +301,7 @@ class DeepFoundation {
                                 limitedEffStress[i-1] :
                                 effStress[i];
         }
-        console.log(`limitEffStressTo20B went to a depth of ${currentDepth} with a limiting depth of ${limitingDepth} and width of ${width}`);
+        //console.log(`limitEffStressTo20B went to a depth of ${currentDepth} with a limiting depth of ${limitingDepth} and width of ${width}`);
         if (currentDepth > limitingDepth) isLimited = true;
         return {limitedEffStress: limitedEffStress, isLimited: isLimited};
     }
@@ -432,10 +432,10 @@ class DeepFoundation {
         let skinFrictionProfile = this.skinFrictionProfile(width, depth, compression);
         //Get the index for the sublayer the pile bears on
         let endBearingIndex = (depth / this.increment - 1).toFixed();
-        console.log(`endBearingIndex: ${endBearingIndex}`);
+        //console.log(`endBearingIndex: ${endBearingIndex}`);
         let endBearing;
-        console.log(`granEndBearing params: ${limitedEffStressBottom[endBearingIndex]} ${this.detailedSoilProfile[9][parseInt(endBearingIndex)+1]} ${width}`);
-        console.log(this.detailedSoilProfile[9][parseInt(endBearingIndex)+1]);
+        //console.log(`granEndBearing params: ${limitedEffStressBottom[endBearingIndex]} ${this.detailedSoilProfile[9][parseInt(endBearingIndex)+1]} ${width}`);
+        //console.log(this.detailedSoilProfile[9][parseInt(endBearingIndex)+1]);
         //Calculate the end bearing if compression pile, treats with either cohesive or granular formulation, end bearing is 0 in tension
         if (compression) {
             endBearing = (this.detailedSoilProfile[3][parseInt(endBearingIndex)+1] == 0) ?
@@ -449,6 +449,9 @@ class DeepFoundation {
         let ultimateCapacity = totalSkinFriction + endBearing;
         let allowableCapacity = ultimateCapacity / this.FS;
         return {
+            width: width,
+            depth: depth,
+            compression: compression,
             depths: depths,
             limitedEffStressMid: limitedEffStressMid,
             limitedEffStressBottom: limitedEffStressBottom,
@@ -466,6 +469,24 @@ class DeepFoundation {
        }
     }
 
+    analyzePileGroup = (widths, depths) => {
+        /* Call AnalyzePile for a set of widths and depths in tension and compression
+        Pass in a list of valid widths and a list of valid depths
+        Returns a list of analyzed pile objects
+        */
+        let analyzedPilesCompression = [];
+        let analyzedPilesTension = [];
+        for (let i=0; i<widths.length; i++) {
+            for (let j=0; j<depths.length; j++) {
+                analyzedPilesCompression.push(this.analyzePile(widths[i], depths[j], true));
+                analyzedPilesTension.push(this.analyzePile(widths[i], depths[j], false));
+            }
+        }
+        return analyzedPilesCompression.concat(analyzedPilesTension);
+    }
+
+
+
 
 
     constructor(generalSoilProfile, groundwaterDepth, increment=0.5, ignoredDepth=3, material, pileType, FS=3) {
@@ -481,8 +502,87 @@ class DeepFoundation {
         this.createSoilProfile(); //determines this.detailedSoilProfile
     }
 }
+
+function ultimateCapacityArray(analyzedPileGroup, widths, depths) {
+    /* Collects the ultimate capacities from an analyzed pile group and returns an array for compression and for tension.
+    Widths and depths could be extracted from the analyzedPileGroup,
+    but it was easier to implement if we just pass them along here.
+    Each array contains the information needed for the report to build a table.
+    For example: [[widths], [depths], [ultCapWidth1], [ultCapWidth2]], [[widths], [depths], [ultCapWidth1], [ultCapWidth2]]
+    In addition to a list of widths and a list of depths,
+    There will be x lists of capacities, where x = number of widths.
+    There will be y entries per list, where y = numer of depths.
+    Returns a list of 2 2D arrays: [ultCompTable, ultTenTable]
+    */
+
+    //Begin with list of widths and list of depths
+    let ultCompTable = [widths, depths];
+    //Start looking at beginning of analyzedPileGroup
+    let pileGroupIndex = 0;
+    //Iterate over number of widths offset by 2
+    for (let i=2; i<widths.length+2; i++) {
+        //start a new array for that width
+        ultCompTable.push([]);
+        for (let j=0; j<depths.length; j++) {
+            //add the next ultimate capacity to the list for this width
+            ultCompTable[i].push(analyzedPileGroup[pileGroupIndex].ultimateCapacity);
+            //go to the next analyzed pile
+            pileGroupIndex++;
+        }
+    }
+    //We have finished the compression piles and are now looking at the tension piles
+    let ultTenTable = [widths, depths];
+    for (let i=2; i<widths.length+2; i++) {
+        ultTenTable.push([]);
+        for (let j=0; j<depths.length; j++) {
+            ultTenTable[i].push(analyzedPileGroup[pileGroupIndex].ultimateCapacity);
+            pileGroupIndex++;
+        }
+    }
+    return [ultCompTable, ultTenTable];
+}
+
+function allowableCapacityArray(analyzedPileGroup, widths, depths) {
+    /* Collects the allowable capacities from an analyzed pile group and returns an array for compression and for tension.
+    Widths and depths could be extracted from the analyzedPileGroup,
+    but it was easier to implement if we just pass them along here.
+    Each array contains the information needed for the report to build a table.
+    For example: [[widths], [depths], [ultCapWidth1], [ultCapWidth2]], [[widths], [depths], [ultCapWidth1], [ultCapWidth2]]
+    In addition to a list of widths and a list of depths,
+    There will be x lists of capacities, where x = number of widths.
+    There will be y entries per list, where y = numer of depths.
+    Returns a list of 2 2D arrays: [allCompTable, allTenTable]
+    */
+
+    //Begin with list of widths and list of depths
+    let allCompTable = [widths, depths];
+    //Start looking at beginning of analyzedPileGroup
+    let pileGroupIndex = 0;
+    //Iterate over number of widths offset by 2
+    for (let i=2; i<widths.length+2; i++) {
+        //start a new array for that width
+        allCompTable.push([]);
+        for (let j=0; j<depths.length; j++) {
+            //add the next ultimate capacity to the list for this width
+            allCompTable[i].push(analyzedPileGroup[pileGroupIndex].allowableCapacity);
+            //go to the next analyzed pile
+            pileGroupIndex++;
+        }
+    }
+    //We have finished the compression piles and are now looking at the tension piles
+    let allTenTable = [widths, depths];
+    for (let i=2; i<widths.length+2; i++) {
+        allTenTable.push([]);
+        for (let j=0; j<depths.length; j++) {
+            allTenTable[i].push(analyzedPileGroup[pileGroupIndex].allowableCapacity);
+            pileGroupIndex++;
+        }
+    }
+    return [allCompTable, allTenTable];
+}
+
 /////TEST DATA INPUT/////
-/*
+
 let myTest = new DeepFoundation([[5, "Loose Sand", 115, 30, 0],
                                 [25, "Medium Compact Sand", 122, 35, 0]],
                                 50,
@@ -493,7 +593,16 @@ let myTest = new DeepFoundation([[5, "Loose Sand", 115, 30, 0],
                                 );
 
 console.log(myTest.analyzePile(0.5, 8.5, false));
-*/
+console.log("Testing pile groups function");
+let pileGroupsTest = myTest.analyzePileGroup([0.5, 1, 1.5], [8, 8.5, 9]);
+console.log(pileGroupsTest);
+console.log(pileGroupsTest[0].endBearing);
+let ultCapTables = ultimateCapacityArray(pileGroupsTest, [0.5, 1, 1.5], [8, 8.5, 9]);
+console.log("Ultimate Capacity array");
+console.log(ultCapTables);
+let allCapTables = allowableCapacityArray(pileGroupsTest, [0.5, 1, 1.5], [8, 8.5, 9]);
+console.log("Allowable Capacity array");
+console.log(allCapTables);
 
 ///REACT COMPONENTS START HERE/////
 
