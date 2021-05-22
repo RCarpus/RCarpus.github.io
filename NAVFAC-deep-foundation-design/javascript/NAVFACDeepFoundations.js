@@ -229,6 +229,7 @@ class DeepFoundation {
                                 Khc, Kht, Nq, effStressBottom, effStressMid];
         console.log(detailedSoilProfile);
         this.detailedSoilProfile = [...detailedSoilProfile];
+        console.log(this.detailedSoilProfile);
         return;
        })
 
@@ -329,7 +330,9 @@ class DeepFoundation {
     perimeter (or circumference) (ft)
     unit length (ft) (use this.increment)
     */
-    granSkinFriction = (Kh, P0, delta, width) => Kh * P0 * Math.tan(delta * Math.PI / 180) * this.perimeter(width) * this.increment;
+    granSkinFriction = (Kh, P0, delta, width) => {
+        return Kh * P0 * Math.tan(delta * Math.PI / 180) * this.perimeter(width) * this.increment
+    };
 
     /*
     cohesion Skin Friction
@@ -581,28 +584,7 @@ function allowableCapacityArray(analyzedPileGroup, widths, depths) {
     return [allCompTable, allTenTable];
 }
 
-/////TEST DATA INPUT/////
 
-let myTest = new DeepFoundation([[5, "Loose Sand", 115, 30, 0],
-                                [25, "Medium Compact Sand", 122, 35, 0]],
-                                50,
-                                0.5,
-                                3,
-                                "Concrete",
-                                "Driven Jetted Pile"
-                                );
-
-console.log(myTest.analyzePile(0.5, 8.5, false));
-console.log("Testing pile groups function");
-let pileGroupsTest = myTest.analyzePileGroup([0.5, 1, 1.5], [8, 8.5, 9]);
-console.log(pileGroupsTest);
-console.log(pileGroupsTest[0].endBearing);
-let ultCapTables = ultimateCapacityArray(pileGroupsTest, [0.5, 1, 1.5], [8, 8.5, 9]);
-console.log("Ultimate Capacity array");
-console.log(ultCapTables);
-let allCapTables = allowableCapacityArray(pileGroupsTest, [0.5, 1, 1.5], [8, 8.5, 9]);
-console.log("Allowable Capacity array");
-console.log(allCapTables);
 
 ///REACT COMPONENTS START HERE/////
 
@@ -615,6 +597,65 @@ const WelcomeScreen = function() {
         </div>
     );
 };
+
+class ResultsSummaryTable extends React.Component {
+    /*
+    Pass the summary tables into the constructor.
+    This should be modified to take in one table at a time and be called 4 times
+    This works and I hate every line of it! - change language to be general
+    */
+    constructor(props) {
+        super(props);
+        this.state = {
+            resultsTable: props.resultsTable,
+            tableLabel: props.tableLabel
+        };
+        //console.log(this.state.ultCompTable);
+    }
+
+    render() {
+         
+        let widths = this.state.resultsTable[0]; //used for leftmost column
+        let depths = this.state.resultsTable[1]; //used for top row
+        //generates top row separately from other rows
+        let headerRow = 
+            <tr>
+                <td></td>
+                {depths.map(d => (<td>{d}</td>))}
+            </tr>
+        //console.log(widths);
+        //console.log(depths);
+        //pull results out of array
+        let resultsRows = this.state.resultsTable.slice(2);
+        console.log(resultsRows);
+        //Create table rows from the results data, putting the width for that row 
+        //in the first column
+        let resultsTable = resultsRows.map((row, index) => (
+            <tr>
+                <td>
+                    {widths[index]}
+                </td>
+                {row.map(item => (
+                    <td>{poundsToKips(item).toFixed(1)}</td>
+                ))}
+            </tr>
+        ));
+
+        return (
+            <div>
+                <h3>{this.state.tableLabel} (kips)</h3>
+                <h5>Embedment Depth (ft)</h5>
+                <table> {/* This external table lets me put a label to the left of the widths column */}
+                    <td>width (ft)
+                    </td>
+                    <td>
+                        <table>{headerRow}{resultsTable}</table>
+                    </td>
+                </table>            
+            </div>
+        )
+    }
+}
 
 let TEXT_BOX_SIZE = 10;
 
@@ -641,14 +682,17 @@ function getPileTypeRadioValue() {
             return element[i].value;
         }
     }
-    return 'Drilled Pier';
+    return 'Drilled Pile';
 }
 
 class DataEntryForm extends React.Component {
     constructor(props) {
         super(props);
+        if (DEBUG) this.state = DEBUG_DataEntry_STATE;
+        else {
         this.state = {
             analyzed: false
+        };
         };
         this.handleAnalyze = this.handleAnalyze.bind(this);
         this.handleLayerNames = this.handleLayerNames.bind(this);
@@ -909,8 +953,8 @@ class DataEntryForm extends React.Component {
                 <input type='radio' id='driven-jetted-pile' onClick={this.handlePileType} name='pile-type' value='Driven Jetted Pile'></input>
                 <label for='Driven Jetted Pile'>Driven Jetted Pile</label>
 
-                <input type='radio' id='drilled-pier' onClick={this.handlePileType} name='pile-type' value='Drilled Pier'></input>
-                <label for='Drilled Pier'>Drilled Pier</label>
+                <input type='radio' id='drilled-pile' onClick={this.handlePileType} name='pile-type' value='Drilled Pile'></input>
+                <label for='Drilled Pile'>Drilled Pile</label>
 
                 {/* Input fields for analysis depths and widths */}
                 <div class="row">
@@ -949,10 +993,28 @@ class DataEntryForm extends React.Component {
                         <input id='xxx' onChange={this.handleFSTension} autoComplete='off' size={TEXT_BOX_SIZE}></input>
                     </div>
                 </div>
-         
-                <button class='btn btn-primary' id='analyze' onClick={this.handleAnalyze}>Analyze pile set</button>
 
+                {/* I spent a million years figuring this out. Need to use an arrow function
+                to pass parameters back to the parent element.  */}
+                <button class='btn btn-primary' id='analyze' 
+                    onClick={()=>this.props.sendResults(
+                        this.state.layerNames,
+                        this.state.layerBottoms,
+                        this.state.unitWeights,
+                        this.state.frictionAngles,
+                        this.state.cohesions,
+                        this.state.groundwaterDepth,
+                        this.state.increment,
+                        this.state.ignoredDepth,
+                        this.state.material,
+                        this.state.pileType,
+                        this.state.analysisDepths,
+                        this.state.analysisWidths,
+                        this.state.fsCompression,
+                        this.state.fsTension)}>Analyze pile set</button>
+                {/*
                 {this.state.analyzed && <h1>The pile is pretend analyzed.</h1>}
+                */}
 
             </div>
         )
@@ -964,8 +1026,38 @@ class DataEntryForm extends React.Component {
 let DEBUG = true;
 let DEBUG_DeepFoundationsApp_STATE = {
     welcome: false,
-    dataEntryForm: true
+    dataEntryForm: true,
+    resultsSummary: true
 };
+
+let DEBUG_DataEntry_STATE = {
+    layerNames: '"loose sand", "stiff clay"',
+    layerBottoms: [5, 10],
+    unitWeights: [120, 110],
+    frictionAngles: [29, 0],
+    cohesions: [0, 1700],
+    groundwaterDepth: 50,
+    increment: 0.5,
+    ignoredDepth: 3,
+    material: "Concrete",
+    pileType: "Drilled Pile",
+    analysisDepths: [8, 8.5, 9],
+    analysisWidths: [1, 1.5, 2],
+    fsCompression: 2,
+    fsTension: 3
+}
+
+function convertParamListsToSoilProfile (depths, descriptions, unitWeights, phis, cohesions) {
+    /*
+    converts 5 lists of soil profile parameters from DeepFoundationsApp state to a soil profile understandable to the DeepFoundation class
+    */
+    let parsedDescriptions = descriptions.split(', ');
+    let soilProfile = [];
+    for (let i=0; i<depths.length; i++) {
+        soilProfile.push([depths[i], parsedDescriptions[i], unitWeights[i], phis[i], cohesions[i]]);
+    }
+    return soilProfile;
+}
 
 
 class DeepFoundationsApp extends React.Component {
@@ -976,10 +1068,13 @@ class DeepFoundationsApp extends React.Component {
         else 
         //debug lines above
         this.state = {
-            welcome: true, //currently debugging, set to true when done
-            dataEntryForm: false //currently debugging, set to false when done
+            welcome: true, 
+            dataEntryForm: false, 
+            resultsSummary: false
         };
         this.handleStart = this.handleStart.bind(this);
+        this.acceptInput = this.acceptInput.bind(this);
+        
     }
 
     handleStart() {
@@ -990,18 +1085,100 @@ class DeepFoundationsApp extends React.Component {
         }));
     };
 
+    acceptInput(layerNames, layerDepths, unitWeights,
+                frictionAngles, cohesions, groundwaterDepth,
+                sublayerIncrement, ignoredDepth,
+                material, pileType,
+                analysisDepths, analysisWidths,
+                fsComp, fsTen) {
+        console.log("Accepting input parameters from the data entry sheet and adding them to parent state");
+        this.setState(state => ({
+            ...state,
+            layerNames: layerNames,
+            layerDepths: layerDepths,
+            unitWeights: unitWeights,
+            frictionAngles: frictionAngles,
+            cohesions: cohesions,
+            groundwaterDepth: groundwaterDepth,
+            sublayerIncrement: sublayerIncrement,
+            ignoredDepth: ignoredDepth,
+            material: material,
+            pileType: pileType,
+            analysisDepths: analysisDepths,
+            analysisWidths: analysisWidths,
+            fsComp: fsComp,
+            fsTen: fsTen
+        }), () => {
+            console.log("accepted input. Updated State:");
+            console.log(this.state);
+            let generalSoilProfile = convertParamListsToSoilProfile(this.state.layerDepths,
+                                                                    this.state.layerNames,
+                                                                    this.state.unitWeights,
+                                                                    this.state.frictionAngles,
+                                                                    this.state.cohesions);
+            console.log("generated general soil profile");
+            console.log(generalSoilProfile);
+            let foundation = new DeepFoundation(generalSoilProfile,
+                                                this.state.groundwaterDepth,
+                                                this.state.sublayerIncrement,
+                                                this.state.ignoredDepth,
+                                                this.state.material,
+                                                this.state.pileType,
+                                                this.state.fsComp);
+            let pileAnalyses = foundation.analyzePileGroup(this.state.analysisWidths, this.state.analysisDepths);
+            console.log("Completed analysis of all piles");
+            console.log(pileAnalyses);
+        })
+    }
+
     render() {
         return (
             <div>
                 {/* Welcome message that explains how to use the app */}
                 {this.state.welcome && <div><WelcomeScreen/>
-                <button class='btn btn-primary' id='start' onClick={this.handleStart}>Start</button></div>}
+                <button class='btn btn-primary' id='start' onClick={this.handleStart} onClick={this.acceptInput}>Start</button></div>}
 
-                {this.state.dataEntryForm && <DataEntryForm/>}
+                {this.state.dataEntryForm && <DataEntryForm sendResults={this.acceptInput}/>}
                 
             </div>
         );
     }
 }
 
+/////TEST DATA INPUT/////
+/*
+let myTest = new DeepFoundation([[5, "Loose Sand", 115, 30, 0],
+                                [25, "Medium Compact Sand", 122, 35, 0]],
+                                50,
+                                0.5,
+                                3,
+                                "Concrete",
+                                "Driven Jetted Pile"
+                                );
+
+console.log(myTest.analyzePile(0.5, 8.5, false));
+console.log("Testing pile groups function");
+let pileGroupsTest = myTest.analyzePileGroup([0.5, 1, 1.5], [8, 8.5, 9]);
+console.log(pileGroupsTest);
+console.log(pileGroupsTest[0].endBearing);
+let ultCapTables = ultimateCapacityArray(pileGroupsTest, [0.5, 1, 1.5], [8, 8.5, 9]);
+console.log("Ultimate Capacity array");
+console.log(ultCapTables);
+let allCapTables = allowableCapacityArray(pileGroupsTest, [0.5, 1, 1.5], [8, 8.5, 9]);
+console.log("Allowable Capacity array");
+console.log(allCapTables);
+*/
+
 ReactDOM.render(<DeepFoundationsApp/>, document.getElementById('NAVFAC-deep-foundations-app'));
+/*
+ReactDOM.render(<ResultsSummaryTable resultsTable={ultCapTables[0]} tableLabel={"Ultimate Capacity in Compression"}/>, document.getElementById('summary'));
+ReactDOM.render(<ResultsSummaryTable resultsTable={ultCapTables[1]} tableLabel={"Ultimate Capacity in Tension"}/>, document.getElementById('summary2'));
+*/
+
+
+
+/*
+DeepFoundation does not distinguish between fsComp and fsTen. This needs to be fixed
+*/
+
+//do next: App appears to be able to properly handle data and process when input correctly. Next, figure out how to display the results in a readable way.

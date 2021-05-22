@@ -1,5 +1,5 @@
 /*
-Terzaghi Bearing Capacity Style Sheet
+NAVFAC Style Sheet
 */
 
 html {
@@ -69,6 +69,16 @@ body {
 .error-message {
   color: red;
   text-align: left;
+}
+
+td {
+  border-spacing: 1000px;
+  color: red;
+}
+
+table {
+  border-spacing: 30px;
+  border-collapse: separate;
 }
 
 
