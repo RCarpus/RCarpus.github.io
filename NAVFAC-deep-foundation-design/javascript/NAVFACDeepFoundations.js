@@ -600,7 +600,7 @@ const WelcomeScreen = function() {
 
 class ResultsSummaryTable extends React.Component {
     /*
-    Pass the summary tables into the constructor.
+    Pass the summary table into the constructor.
     This should be modified to take in one table at a time and be called 4 times
     This works and I hate every line of it! - change language to be general
     */
@@ -657,6 +657,40 @@ class ResultsSummaryTable extends React.Component {
     }
 }
 
+class SummaryTablesPage extends React.Component {
+    /*
+    This element processes and displays summary tables for all widths and depths
+    for compression and tension
+    ultimate and allowable
+    */
+   constructor(props) {
+       super(props);
+       this.state = {
+           ultCompTable: props.ultCompTable,
+           ultTenTable: props.ultTenTable,
+           allCompTable: props.allCompTable,
+           allTenTable: props.allTenTable
+       };
+   }
+
+   render() {
+       return (
+        <div>
+            <h2>Summary of load capacities</h2>
+            {<ResultsSummaryTable resultsTable={this.state.ultCompTable} 
+                                    tableLabel={"Ultimate capacity in compression"}/>}
+            {<ResultsSummaryTable resultsTable={this.state.ultTenTable} 
+                                    tableLabel={"Ultimate capacity in tension"}/>}                                    
+            {<ResultsSummaryTable resultsTable={this.state.allCompTable} 
+                                    tableLabel={"Allowable capacity in compression"}/>}
+            {<ResultsSummaryTable resultsTable={this.state.allTenTable} 
+                                    tableLabel={"Allowable capacity in tension"}/>}                                    
+        </div>
+        
+       )
+   }
+}
+
 let TEXT_BOX_SIZE = 10;
 
 function getMaterialRadioValue() {
@@ -683,6 +717,92 @@ function getPileTypeRadioValue() {
         }
     }
     return 'Drilled Pile';
+}
+
+
+class ResultsGeneral extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            analysisDetails: props.analysisDetails,
+            profile: props.analysisDetails.detailedSoilProfile,
+            fsComp: props.fsComp,
+            fsTen: props.fsTen
+
+        };
+    }
+
+    render() {
+        //Generate a table containing the elements from detailedSoilProfile
+        //start by transpose profile matrix
+        let profile = this.state.profile[0].map((_, colIndex) => this.state.profile.map(row => row[colIndex]));
+
+        let profileTable = profile.map((row, index) => (
+            <tr>
+                {row.map(item => (
+                    <td>{item}</td>
+                ))}
+            </tr>
+        ));
+
+        console.log("rendering results");
+        console.log(profile);
+        console.log(this.state);
+        return (
+            <div>
+                <h3>GENERAL RESULTS</h3>
+                <h4>Inputs</h4>
+                <table>
+                    <tr>
+                        <td>Material: </td>
+                        <td>{this.state.analysisDetails.material}</td>
+                    </tr>
+                    <tr>
+                        <td>Pile type: </td>
+                        <td>{this.state.analysisDetails.pileType}</td>
+                    </tr>
+                    <tr>
+                        <td>Depth to groundwater (ft): </td>
+                        <td>{this.state.analysisDetails.groundwaterDepth}</td>
+                    </tr>
+                    <tr>
+                        <td>Ignored depth (ft): </td>
+                        <td>{this.state.analysisDetails.ignoredDepth}</td>
+                    </tr>
+                    <tr>
+                        <td>Sublayer increment (ft): </td>
+                        <td>{this.state.analysisDetails.increment}</td>
+                    </tr>
+                    <tr>
+                        <td>Factor of safety (compression): </td>
+                        <td>{this.state.fsComp}</td>
+                    </tr>
+                    <tr>
+                        <td>Factor of safety (tension): </td>
+                        <td>{this.state.fsTen}</td>
+                    </tr>
+                </table>
+                <table>
+                    <tr>
+                        <th>Depth (ft)</th>
+                        <th>Layer Name</th>
+                        <th>Unit Weight (pcf)</th>
+                        <th>Friction Angle (degrees)</th>
+                        <th>Cohesion (psf)</th>
+                        <th>Delta (degrees)</th>
+                        <th>Adhesion (psf)</th>
+                        <th>Khc</th>
+                        <th>Kht</th>
+                        <th>Nq</th>
+                        <th>Sigma-v (bottom of layer, psf)</th>
+                        <th>Sigma-v (mid-layer, psf)</th>
+                    </tr>
+
+                    {profileTable}
+                </table>
+            </div>
+        )
+    }
 }
 
 class DataEntryForm extends React.Component {
@@ -1031,18 +1151,18 @@ let DEBUG_DeepFoundationsApp_STATE = {
 };
 
 let DEBUG_DataEntry_STATE = {
-    layerNames: '"loose sand", "stiff clay"',
-    layerBottoms: [5, 10],
-    unitWeights: [120, 110],
-    frictionAngles: [29, 0],
-    cohesions: [0, 1700],
-    groundwaterDepth: 50,
+    layerNames: '"MC SP", "H CL"',
+    layerBottoms: [8, 20],
+    unitWeights: [120, 125],
+    frictionAngles: [34, 0],
+    cohesions: [0, 4300],
+    groundwaterDepth: 8,
     increment: 0.5,
     ignoredDepth: 3,
-    material: "Concrete",
-    pileType: "Drilled Pile",
-    analysisDepths: [8, 8.5, 9],
-    analysisWidths: [1, 1.5, 2],
+    material: "Timber",
+    pileType: "Driven Single Displacement Pile",
+    analysisDepths: [4,6,8,15],
+    analysisWidths: [1,1.2],
     fsCompression: 2,
     fsTension: 3
 }
@@ -1070,6 +1190,7 @@ class DeepFoundationsApp extends React.Component {
         this.state = {
             welcome: true, 
             dataEntryForm: false, 
+            diplayResultsGeneral: false,
             resultsSummary: false
         };
         this.handleStart = this.handleStart.bind(this);
@@ -1091,6 +1212,12 @@ class DeepFoundationsApp extends React.Component {
                 material, pileType,
                 analysisDepths, analysisWidths,
                 fsComp, fsTen) {
+        /*
+        This method does basically everything... This takes the input from the data entry sheet, does all the calulations, enters all of the pertinent information into the app's state, and then passes along all of that information to the various components that render the results.
+
+        ////////////////No data entry validation has been implemented at this time.////////////////
+        */
+       //adds to the state all of the data entry that was passed in by the data entry sheet
         console.log("Accepting input parameters from the data entry sheet and adding them to parent state");
         this.setState(state => ({
             ...state,
@@ -1108,9 +1235,10 @@ class DeepFoundationsApp extends React.Component {
             analysisWidths: analysisWidths,
             fsComp: fsComp,
             fsTen: fsTen
-        }), () => {
+        }), () => { //callback function executes after updating state
             console.log("accepted input. Updated State:");
             console.log(this.state);
+            //Create a generalSoilProfile for use with the DeepFoundation class by parsing the inputted data
             let generalSoilProfile = convertParamListsToSoilProfile(this.state.layerDepths,
                                                                     this.state.layerNames,
                                                                     this.state.unitWeights,
@@ -1118,6 +1246,7 @@ class DeepFoundationsApp extends React.Component {
                                                                     this.state.cohesions);
             console.log("generated general soil profile");
             console.log(generalSoilProfile);
+            //Create the DeepFoundation object 
             let foundation = new DeepFoundation(generalSoilProfile,
                                                 this.state.groundwaterDepth,
                                                 this.state.sublayerIncrement,
@@ -1125,9 +1254,29 @@ class DeepFoundationsApp extends React.Component {
                                                 this.state.material,
                                                 this.state.pileType,
                                                 this.state.fsComp);
+            //analyze all of the piles entered by the user
             let pileAnalyses = foundation.analyzePileGroup(this.state.analysisWidths, this.state.analysisDepths);
+            //parse the summary tables for use in the summary table component
+            let ultSummaryTables = ultimateCapacityArray(pileAnalyses, this.state.analysisWidths, this.state.analysisDepths);
+            let allSummaryTables = allowableCapacityArray(pileAnalyses, this.state.analysisWidths, this.state.analysisDepths);
             console.log("Completed analysis of all piles");
             console.log(pileAnalyses);
+            //update state with all of the analysis details
+            //tell app to render the results
+            this.setState(state => ({
+                ...state,
+                analysisDetails: foundation,
+                pileAnalyses: pileAnalyses,
+                ultCompTable: ultSummaryTables[0],
+                ultTenTable: ultSummaryTables[1],
+                allCompTable: allSummaryTables[0],
+                allTenTable: allSummaryTables[1],
+                displayResultsGeneral: true,
+                displaySummaryTables: true
+            }), () => {
+                console.log("Added completed analysis to state");
+                console.log(this.state);
+            })
         })
     }
 
@@ -1139,6 +1288,13 @@ class DeepFoundationsApp extends React.Component {
                 <button class='btn btn-primary' id='start' onClick={this.handleStart} onClick={this.acceptInput}>Start</button></div>}
 
                 {this.state.dataEntryForm && <DataEntryForm sendResults={this.acceptInput}/>}
+                {this.state.displayResultsGeneral && <ResultsGeneral analysisDetails={this.state.analysisDetails}
+                                                                    fsComp={this.state.fsComp}
+                                                                    fsTen={this.state.fsTen}/>}
+                {this.state.displaySummaryTables && <SummaryTablesPage ultCompTable={this.state.ultCompTable}
+                                                                        ultTenTable={this.state.ultTenTable}
+                                                                        allCompTable={this.state.allCompTable}
+                                                                        allTenTable={this.state.allTenTable}/>}
                 
             </div>
         );
