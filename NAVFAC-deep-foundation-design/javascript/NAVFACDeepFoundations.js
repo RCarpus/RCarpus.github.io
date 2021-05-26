@@ -283,20 +283,18 @@ class DeepFoundation {
 
     }
 
-    limitEffStressTo20B = (effStress, width) => {
+    limitEffStressTo20B = (effStress, width, depth) => {
         /*
         Returns an object containing new effective stress profile (works with bottom or mid)
             and the boolean isLimited to show if a change has been made
         limiting the effective stress to the effective stress at a depth of 20*B
         This function needs to be called to check each pile against the limiting effective stress.
         */
-
-        //DO NEXT: CHANGE THIS SO THAT THE isLimited IS TRIGGERED BY THE SPECIFIC EMBEDMENT DEPTH, NOT JUST BY THE CREATION OF THIS PROFILE
         let limitingDepth = width * 20;
         let limitedEffStress = [];
         let isLimited = false;
         let currentDepth  = 0;
-        for (let i=0; i<effStress.length; i++) {
+        for (let i=0; i<(Math.round(depth/this.increment)); i++) {
             currentDepth += this.increment;
             limitedEffStress[i] = (currentDepth > limitingDepth) ?
                                 limitedEffStress[i-1] :
@@ -347,7 +345,7 @@ class DeepFoundation {
         width must be a single number if this.shape is "circular"
         compression is a boolean, use true if analyzing incompression, false if in tension
         */
-        let limitedEffStress = this.limitEffStressTo20B(this.detailedSoilProfile[11], width).limitedEffStress; //11:vertical eff stress at midpoint
+        let limitedEffStress = this.limitEffStressTo20B(this.detailedSoilProfile[11], width, embedment).limitedEffStress; //11:vertical eff stress at midpoint
         let Kh = compression ? this.detailedSoilProfile[7] : this.detailedSoilProfile[8]; //7: khc 8: kht
         let currentDepth = 0;
         let skinFrictionProfile = [];
@@ -426,11 +424,14 @@ class DeepFoundation {
         //Create a list of depths corresponding to the bottom of each sublayer
         let depths = this.sublayerDepths(depth);
         //Create a list of effective stresses at the midpoint of each sublayer
-        let limitedEffStressMid = this.limitEffStressTo20B(this.detailedSoilProfile[11], width).limitedEffStress;
+        let limitedEffStressMid = this.limitEffStressTo20B(this.detailedSoilProfile[11], width, depth).limitedEffStress;
+        //Only keep what we need
+        limitedEffStressMid = limitedEffStressMid.slice(0,depths.length);
         //Create a list of effective stresses at the bottom of each sublayer
-        let limitedEffStressBottom = this.limitEffStressTo20B(this.detailedSoilProfile[10], width).limitedEffStress;
+        let limitedEffStressBottom = this.limitEffStressTo20B(this.detailedSoilProfile[10], width, depth).limitedEffStress;
+        limitedEffStressBottom = limitedEffStressBottom.slice(0,depths.length);
         //a boolean indicated if the effective stress was limited due to D>=20B
-        let effectiveStressIsLimited = this.limitEffStressTo20B(this.detailedSoilProfile[10], width).isLimited;
+        let effectiveStressIsLimited = this.limitEffStressTo20B(this.detailedSoilProfile[10], width, depth).isLimited;
         //A list of incremental skin friction values for each sublayer
         let skinFrictionProfile = this.skinFrictionProfile(width, depth, compression);
         //Get the index for the sublayer the pile bears on
@@ -675,7 +676,7 @@ class SummaryTablesPage extends React.Component {
 
    render() {
        return (
-        <div>
+        <div class="summary-tables-page"> 
             <h2>Summary of load capacities</h2>
             {<ResultsSummaryTable resultsTable={this.state.ultCompTable} 
                                     tableLabel={"Ultimate capacity in compression"}/>}
@@ -719,6 +720,124 @@ function getPileTypeRadioValue() {
     return 'Drilled Pile';
 }
 
+class ResultsAllPiles extends React.Component {
+    /*
+    iterate over each pile to display detailed results for each pile
+    */
+   constructor(props) {
+       super(props);
+       this.state = {
+           piles: props.piles
+       };
+   };
+
+   render() {
+       let allPiles = this.state.piles.map(pile => (
+           <div>
+               <ResultsPile pile={pile}/>
+               <br/>
+           </div>
+       ));
+       return allPiles;
+   }
+}
+
+class ResultsPile extends React.Component {
+    /*
+    Render the results for an individual pile
+    Iterate through each pile using this component to display all piles
+    */
+    constructor(props) {
+        super(props);
+        this.state = {
+            pile: props.pile
+        };
+
+    }
+
+    render() {
+        let results = [this.state.pile.depths, this.state.pile.limitedEffStressBottom,
+                                this.state.pile.limitedEffStressMid, this.state.pile.skinFrictionProfile];
+        console.log("Pile results table before transforming: ");
+        console.log(results);
+        let pileResultsTable = [];
+        for (let i=0; i<results[0].length; i++) {
+            let row = [];
+            row.push((<td>{this.state.pile.depths[i]}</td>));
+            row.push((<td>{this.state.pile.limitedEffStressBottom[i]}</td>));
+            row.push((<td>{this.state.pile.limitedEffStressMid[i]}</td>));
+            row.push((<td>{this.state.pile.skinFrictionProfile[i]}</td>));
+            row = (<tr>{row}</tr>);
+            pileResultsTable.push(row);
+        }
+
+        return (
+            <div class="individual-pile">
+                <h2>Individual Pile Results</h2>
+                <table>
+                    <tr>
+                        <td>Foundation width (ft): </td>
+                        <td>{this.state.pile.width}</td>
+                    </tr>
+                    <tr>
+                        <td>Bearing depth (ft): </td>
+                        <td>{this.state.pile.depth}</td>
+                    </tr>
+                    <tr>
+                        <td>Evaluated in: </td>
+                        <td>{this.state.pile.compression ? "Compression" : "Tension"}</td>
+                    </tr>
+                    <tr>
+                        <td>Material: </td>
+                        <td>{this.state.pile.material}</td>
+                    </tr>
+                    <tr>
+                        <td>Pile Type: </td>
+                        <td>{this.state.pile.pileType}</td>
+                    </tr>
+                    <tr>
+                        <td>Groundwater Depth (ft): </td>
+                        <td>{this.state.pile.groundwaterDepth}</td>
+                    </tr>
+                    <tr>
+                        <td>Ignored Depth (ft): </td>
+                        <td>{this.state.pile.ignoredDepth}</td>
+                    </tr>
+                    <tr>
+                        <td>Effective stress limited to 20B: </td>
+                        <td>{this.state.pile.effectiveStressIsLimited? "Yes" : "No"}</td>
+                    </tr>
+                    <tr>
+                        <td>End bearing (kips): </td>
+                        <td>{poundsToKips(this.state.pile.endBearing)}</td>
+                    </tr>
+                    <tr>
+                        <td>Skin Friction (kips): </td>
+                        <td>{poundsToKips(this.state.pile.totalSkinFriction)}</td>
+                    </tr>
+                    <tr>
+                        <td>Ultimate capacity (kips): </td>
+                        <td>{poundsToKips(this.state.pile.ultimateCapacity)}</td>
+                    </tr>
+                    <tr>
+                        <td>Allowable capacity (kips): </td>
+                        <td>{poundsToKips(this.state.pile.allowableCapacity)}</td>
+                    </tr>
+                </table>
+
+                <table>
+                    <tr>
+                        <th>Depth (ft)</th>
+                        <th>Eff. Stress Bottom (psf)</th>    
+                        <th>Eff. Stress Midpoint (psf)</th>
+                        <th>Incremental skin friction (psf)</th>                    
+                    </tr>
+                    {pileResultsTable}
+                </table>
+            </div>
+        );
+    }
+}
 
 class ResultsGeneral extends React.Component {
     constructor(props) {
@@ -749,7 +868,7 @@ class ResultsGeneral extends React.Component {
         console.log(profile);
         console.log(this.state);
         return (
-            <div>
+            <div class="general-results">
                 <h3>GENERAL RESULTS</h3>
                 <h4>Inputs</h4>
                 <table>
@@ -1142,30 +1261,7 @@ class DataEntryForm extends React.Component {
 
 }
 
-//debug settings
-let DEBUG = true;
-let DEBUG_DeepFoundationsApp_STATE = {
-    welcome: false,
-    dataEntryForm: true,
-    resultsSummary: true
-};
 
-let DEBUG_DataEntry_STATE = {
-    layerNames: '"MC SP", "H CL"',
-    layerBottoms: [8, 20],
-    unitWeights: [120, 125],
-    frictionAngles: [34, 0],
-    cohesions: [0, 4300],
-    groundwaterDepth: 8,
-    increment: 0.5,
-    ignoredDepth: 3,
-    material: "Timber",
-    pileType: "Driven Single Displacement Pile",
-    analysisDepths: [4,6,8,15],
-    analysisWidths: [1,1.2],
-    fsCompression: 2,
-    fsTension: 3
-}
 
 function convertParamListsToSoilProfile (depths, descriptions, unitWeights, phis, cohesions) {
     /*
@@ -1271,7 +1367,7 @@ class DeepFoundationsApp extends React.Component {
                 ultTenTable: ultSummaryTables[1],
                 allCompTable: allSummaryTables[0],
                 allTenTable: allSummaryTables[1],
-                displayResultsGeneral: true,
+                displayResultsGeneral: true, 
                 displaySummaryTables: true
             }), () => {
                 console.log("Added completed analysis to state");
@@ -1295,46 +1391,44 @@ class DeepFoundationsApp extends React.Component {
                                                                         ultTenTable={this.state.ultTenTable}
                                                                         allCompTable={this.state.allCompTable}
                                                                         allTenTable={this.state.allTenTable}/>}
+                {this.state.displaySummaryTables && <ResultsAllPiles piles={this.state.pileAnalyses}/>}
                 
             </div>
         );
     }
 }
 
-/////TEST DATA INPUT/////
-/*
-let myTest = new DeepFoundation([[5, "Loose Sand", 115, 30, 0],
-                                [25, "Medium Compact Sand", 122, 35, 0]],
-                                50,
-                                0.5,
-                                3,
-                                "Concrete",
-                                "Driven Jetted Pile"
-                                );
 
-console.log(myTest.analyzePile(0.5, 8.5, false));
-console.log("Testing pile groups function");
-let pileGroupsTest = myTest.analyzePileGroup([0.5, 1, 1.5], [8, 8.5, 9]);
-console.log(pileGroupsTest);
-console.log(pileGroupsTest[0].endBearing);
-let ultCapTables = ultimateCapacityArray(pileGroupsTest, [0.5, 1, 1.5], [8, 8.5, 9]);
-console.log("Ultimate Capacity array");
-console.log(ultCapTables);
-let allCapTables = allowableCapacityArray(pileGroupsTest, [0.5, 1, 1.5], [8, 8.5, 9]);
-console.log("Allowable Capacity array");
-console.log(allCapTables);
-*/
+
+//debug settings
+let DEBUG = true;
+let DEBUG_DeepFoundationsApp_STATE = {
+    welcome: false,
+    dataEntryForm: true,
+    resultsSummary: true
+};
+
+let DEBUG_DataEntry_STATE = {
+    layerNames: '"L SP", "MC SP", "L SP", "M CL"',
+    layerBottoms: [13, 25, 28, 45],
+    unitWeights: [100, 110, 125, 110, 110],
+    frictionAngles: [27, 35, 27, 0],
+    cohesions: [0, 0, 0, 600],
+    groundwaterDepth: 4,
+    increment: 1,
+    ignoredDepth: 5,
+    material: "Concrete",
+    pileType: "Drilled Pile",
+    analysisDepths: [10, 15, 20, 30, 35, 40],
+    analysisWidths: [0.5, 1.5],
+    fsCompression: 3,
+    fsTension: 3
+}
 
 ReactDOM.render(<DeepFoundationsApp/>, document.getElementById('NAVFAC-deep-foundations-app'));
-/*
-ReactDOM.render(<ResultsSummaryTable resultsTable={ultCapTables[0]} tableLabel={"Ultimate Capacity in Compression"}/>, document.getElementById('summary'));
-ReactDOM.render(<ResultsSummaryTable resultsTable={ultCapTables[1]} tableLabel={"Ultimate Capacity in Tension"}/>, document.getElementById('summary2'));
-*/
 
-
-
-/*
-DeepFoundation does not distinguish between fsComp and fsTen. This needs to be fixed
-*/
-
-//do next: App appears to be able to properly handle data and process when input correctly. Next, figure out how to display the results in a readable way.
+//todo:
+//Make the data entry form handle data entry properly
+//remove the input for separate factors of safety for compression and tension
+//clean up output (91.000000000000000001 => 91.0)
+//add output for end bearing calc -> this may require additional logic in the backend

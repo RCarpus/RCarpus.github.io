@@ -71,6 +71,9 @@ body {
   text-align: left;
 }
 
+.individual-pile, .general-results, .data-entry-form, .summary-tables-page {
+  page-break-before: always;
+}
 
 
 
