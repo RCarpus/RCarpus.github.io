@@ -764,9 +764,9 @@ class ResultsPile extends React.Component {
         for (let i=0; i<results[0].length; i++) {
             let row = [];
             row.push((<td>{this.state.pile.depths[i]}</td>));
-            row.push((<td>{this.state.pile.limitedEffStressBottom[i]}</td>));
-            row.push((<td>{this.state.pile.limitedEffStressMid[i]}</td>));
-            row.push((<td>{this.state.pile.skinFrictionProfile[i]}</td>));
+            row.push((<td>{Math.round(this.state.pile.limitedEffStressBottom[i])}</td>));
+            row.push((<td>{Math.round(this.state.pile.limitedEffStressMid[i])}</td>));
+            row.push((<td>{Math.round(this.state.pile.skinFrictionProfile[i])}</td>));
             row = (<tr>{row}</tr>);
             pileResultsTable.push(row);
         }
@@ -809,19 +809,19 @@ class ResultsPile extends React.Component {
                     </tr>
                     <tr>
                         <td>End bearing (kips): </td>
-                        <td>{poundsToKips(this.state.pile.endBearing)}</td>
+                        <td>{poundsToKips(this.state.pile.endBearing).toFixed(1)}</td>
                     </tr>
                     <tr>
                         <td>Skin Friction (kips): </td>
-                        <td>{poundsToKips(this.state.pile.totalSkinFriction)}</td>
+                        <td>{poundsToKips(this.state.pile.totalSkinFriction).toFixed(1)}</td>
                     </tr>
                     <tr>
                         <td>Ultimate capacity (kips): </td>
-                        <td>{poundsToKips(this.state.pile.ultimateCapacity)}</td>
+                        <td>{poundsToKips(this.state.pile.ultimateCapacity).toFixed(1)}</td>
                     </tr>
                     <tr>
                         <td>Allowable capacity (kips): </td>
-                        <td>{poundsToKips(this.state.pile.allowableCapacity)}</td>
+                        <td>{poundsToKips(this.state.pile.allowableCapacity).toFixed(1)}</td>
                     </tr>
                 </table>
 
@@ -842,11 +842,19 @@ class ResultsPile extends React.Component {
 class ResultsGeneral extends React.Component {
     constructor(props) {
         super(props);
+        let profile = props.analysisDetails.detailedSoilProfile;
+        //Round effective stress values in report
+        profile[10] = profile[10].map(value => Math.round(value));
+        profile[11] = profile[11].map(value => Math.round(value));
+        //Round contact friction angle
+        profile[5] = profile[5].map(value => value.toFixed(2));
+        //Round adhesion
+        profile[6] = profile[6].map(value => Math.round(value));
         this.state = {
             analysisDetails: props.analysisDetails,
-            profile: props.analysisDetails.detailedSoilProfile,
+            profile: profile,
             fsComp: props.fsComp,
-            fsTen: props.fsTen
+            fsTen: props.fsTen,
 
         };
     }
@@ -944,8 +952,7 @@ class DataEntryForm extends React.Component {
         this.handleIgnoredDepth = this.handleIgnoredDepth.bind(this);
         this.handleAnalysisDepths = this.handleAnalysisDepths.bind(this);
         this.handleAnalysisWidths = this.handleAnalysisWidths.bind(this);
-        this.handleFSCompression = this.handleFSCompression.bind(this);
-        this.handleFSTension = this.handleFSTension.bind(this);
+        this.handleFS = this.handleFS.bind(this);
         this.handleMaterial = this.handleMaterial.bind(this);
         this.handlePileType = this.handlePileType.bind(this);
     }
@@ -963,110 +970,176 @@ class DataEntryForm extends React.Component {
     };
 
     handleLayerNames(event) {
+        /*
+        Splits input into list of comma delineated names. No other validation.
+        */
         this.setState(state => ({
             ...state,
-            layerNames: event.target.value
+            layerNames: event.target.value.split(",")
         }), () => {
-            console.log(`layerNames: ${this.state.layerNames}`);
+            console.log(`layerNames: ${this.state.layerNames}, ${this.state.layerNames.length} items`);
         });
     };
 
     handleLayerBottoms(event) {
+        /*
+        Splits input into list of comma separated values. 
+        Also sets layerBottomsValid to true only if all values are numeric
+        */
+        let bottoms = event.target.value.split(",");
+        let layerBottomsValid = bottoms.every(value => isNaN(value) == false);
         this.setState(state => ({
             ...state,
-            layerBottoms: event.target.value
+            layerBottoms: bottoms,
+            layerBottomsValid: layerBottomsValid
         }), () => {
-            console.log(`layerBottoms: ${this.state.layerBottoms}`);
+            console.log(`layerBottoms: ${this.state.layerBottoms} ${this.state.layerBottoms.length} items, valid: ${layerBottomsValid}`);
         });
     };
 
     handleUnitWeights(event) {
+        /*
+        Splits input into list of comma separated values. 
+        Also sets unitWeightsValid to true only if all values are numeric
+        */
+        let unitWeights = event.target.value.split(",");
+        let unitWeightsValid = unitWeights.every(value => isNaN(value) == false);
         this.setState(state => ({
             ...state,
-            unitWeights: event.target.value
+            unitWeights: unitWeights,
+            unitWeightsValid: unitWeightsValid
         }), () => {
-            console.log(`unitWeights: ${this.state.unitWeights}`);
+            console.log(`unitWeights: ${this.state.unitWeights} ${this.state.unitWeights.length} items, valid: ${this.state.unitWeightsValid}`);
         });
     };
 
     handleFrictionAngles(event) {
+        /*
+        Splits input into list of comma separated values.
+        Also sets frictionAnglesValid to true only if all values are integers from 26 to 40 or 0
+        */
+        let frictionAngles = event.target.value.split(",");
+        let frictionAnglesValid = frictionAngles.every(value => ((Number.isInteger(parseInt(value))) &&
+                                                                (value >= 26) &&
+                                                                (value <= 40)) ||
+                                                                value == "0");
         this.setState(state => ({
             ...state,
-            frictionAngles: event.target.value
+            frictionAngles: frictionAngles,
+            frictionAnglesValid: frictionAnglesValid
         }), () => {
-            console.log(`frictionAngles: ${this.state.frictionAngles}`);
+            console.log(`frictionAngles: ${this.state.frictionAngles} ${this.state.frictionAngles.length} items, valid: ${this.state.frictionAnglesValid}`);
+            console.log(this.state.frictionAngles[0] <= 26);
         });
     };
 
     handleCohesions(event) {
+        /*
+        Splits input into list of comma separated values. 
+        Also sets cohesionsValid to true only if all values are numeric
+        */
+        let cohesions = event.target.value.split(",");
+        let cohesionsValid = cohesions.every(value => isNaN(value) == false);
         this.setState(state => ({
             ...state,
-            cohesions: event.target.value
+            cohesions: cohesions,
+            cohesionsValid: cohesionsValid
         }), () => {
-            console.log(`cohesions: ${this.state.cohesions}`);
+            console.log(`cohesions: ${this.state.cohesions} ${this.state.cohesions.length} items, valid: ${this.state.cohesionsValid}`);
         });
     };
 
     handleGroundwaterDepth(event) {
+        /*
+        Sets groundwaterDepthValid to true only if a number >= 0
+        */
+        let groundwaterDepth = event.target.value;
+        let groundwaterDepthValid = Number.isNaN(groundwaterDepth) == false && groundwaterDepth >= 0;
         this.setState(state => ({
             ...state,
-            groundwaterDepth: event.target.value
+            groundwaterDepth: groundwaterDepth,
+            groundwaterDepthValid: groundwaterDepthValid
         }), () => {
-            console.log(`groundwaterDepth: ${this.state.groundwaterDepth}`);
+            console.log(`groundwaterDepth: ${this.state.groundwaterDepth} valid: ${this.state.groundwaterDepthValid}`);
         });
     };
 
     handleIncrement(event) {
+        /*
+        Sets incrementValid to true only if a number >= 0
+        */
+        let increment = event.target.value;
+        let incrementValid = Number.isNaN(increment) == false && increment >= 0;
         this.setState(state => ({
             ...state,
-            increment: event.target.value
+            increment: increment,
+            incrementValid: incrementValid
         }), () => {
-            console.log(`increment: ${this.state.increment}`);
+            console.log(`increment: ${this.state.increment} valid: ${this.state.incrementValid}`);
         });
     };
 
     handleIgnoredDepth(event) {
+        /*
+        Sets ignoredDepthValid to true only if a number >= 0
+        */
+        let ignoredDepth = event.target.value;
+        let ignoredDepthValid = Number.isNaN(ignoredDepth) == false && ignoredDepth >= 0;
         this.setState(state => ({
             ...state,
-            ignoredDepth: event.target.value
+            ignoredDepth: ignoredDepth,
+            ignoredDepthValid: ignoredDepthValid
         }), () => {
-            console.log(`ignoredDepth: ${this.state.ignoredDepth}`);
+            console.log(`ignoredDepth: ${this.state.ignoredDepth} valid: ${this.state.ignoredDepthValid}`);
         });
     };
 
     handleAnalysisDepths(event) {
+        /*
+        Separates input into comma separated list
+        Sets analysisDepthsValid to true if values are all numbers greater than 0
+        */
+        let analysisDepths = event.target.value.split(",");
+        let analysisDepthsValid = analysisDepths.every(value => Number.isNaN(value) == false &&
+                                                                value > 0);
         this.setState(state => ({
             ...state,
-            analysisDepths: event.target.value
+            analysisDepths: analysisDepths,
+            analysisDepthsValid: analysisDepthsValid
         }), () => {
-            console.log(`analysisDepths: ${this.state.analysisDepths}`);
+            console.log(`analysisDepths: ${this.state.analysisDepths} ${this.state.analysisDepths.length} items, valid: ${this.state.analysisDepthsValid}`);
         });
     };
 
     handleAnalysisWidths(event) {
+        /*
+        Separates input into comma separated list
+        Sets analysisWidthsValid to true if values are all numbers greater than 0
+        */
+        let analysisWidths = event.target.value.split(",");
+        let analysisWidthsValid = analysisWidths.every(value => Number.isNaN(value) == false &&
+                                                                value > 0);
         this.setState(state => ({
             ...state,
-            analysisWidths: event.target.value
+            analysisWidths: analysisWidths,
+            analysisWidthsValid: analysisWidthsValid
         }), () => {
-            console.log(`analysisWidths: ${this.state.analysisWidths}`);
+            console.log(`analysisWidths: ${this.state.analysisWidths} ${this.state.analysisWidths.length} values, valid: ${this.state.analysisWidthsValid}`);
         });
     };
 
-    handleFSCompression(event) {
+    handleFS(event) {
+        /*
+        Sets fsValid to true if fs is a number >= 1
+        */
+        let fs = event.target.value;
+        let fsValid = Number.isNaN(fs) == false && fs >= 1;
         this.setState(state => ({
             ...state,
-            fsCompression: event.target.value
+            fs: fs,
+            fsValid: fsValid
         }), () => {
-            console.log(`fsCompression: ${this.state.fsCompression}`);
-        });
-    };
-
-    handleFSTension(event) {
-        this.setState(state => ({
-            ...state,
-            fsTension: event.target.value
-        }), () => {
-            console.log(`fsTension: ${this.state.fsTension}`);
+            console.log(`fs: ${this.state.fs} valid: ${this.state.fsValid}`);
         });
     };
 
@@ -1179,7 +1252,7 @@ class DataEntryForm extends React.Component {
                 <label for='Steel'>Steel</label>
 
                 {/*Radio buttons for pile type selection */}
-                <p>Material</p>
+                <p>Pile Type</p>
                 <input type='radio' id='driven-single-h-pile' onClick={this.handlePileType} name='pile-type' value='Driven Single H-Pile'></input>
                 <label for='Driven Single H-Pile'>Driven Single H-Pile</label>
 
@@ -1217,19 +1290,10 @@ class DataEntryForm extends React.Component {
 
                 <div class="row">
                     <div class="col-md-4 input-label">
-                        <span><b>Factor of Safety in Compression</b> (Recommended 2)</span>
+                        <span><b>Factor of Safety</b> (Recommended 3)</span>
                     </div>
                     <div class="col-md-3 input-box">
-                        <input id='xxx' onChange={this.handleFSCompression} autoComplete='off' size={TEXT_BOX_SIZE}></input>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-4 input-label">
-                        <span><b>Factor of Safety in Tension</b> (Recommended 3)</span>
-                    </div>
-                    <div class="col-md-3 input-box">
-                        <input id='xxx' onChange={this.handleFSTension} autoComplete='off' size={TEXT_BOX_SIZE}></input>
+                        <input id='xxx' onChange={this.handleFS} autoComplete='off' size={TEXT_BOX_SIZE}></input>
                     </div>
                 </div>
 
@@ -1249,8 +1313,7 @@ class DataEntryForm extends React.Component {
                         this.state.pileType,
                         this.state.analysisDepths,
                         this.state.analysisWidths,
-                        this.state.fsCompression,
-                        this.state.fsTension)}>Analyze pile set</button>
+                        this.state.fs)}>Analyze pile set</button>
                 {/*
                 {this.state.analyzed && <h1>The pile is pretend analyzed.</h1>}
                 */}
@@ -1267,10 +1330,10 @@ function convertParamListsToSoilProfile (depths, descriptions, unitWeights, phis
     /*
     converts 5 lists of soil profile parameters from DeepFoundationsApp state to a soil profile understandable to the DeepFoundation class
     */
-    let parsedDescriptions = descriptions.split(', ');
+    //let parsedDescriptions = descriptions.split(', ');
     let soilProfile = [];
     for (let i=0; i<depths.length; i++) {
-        soilProfile.push([depths[i], parsedDescriptions[i], unitWeights[i], phis[i], cohesions[i]]);
+        soilProfile.push([depths[i], descriptions[i], unitWeights[i], phis[i], cohesions[i]]);
     }
     return soilProfile;
 }
@@ -1307,7 +1370,7 @@ class DeepFoundationsApp extends React.Component {
                 sublayerIncrement, ignoredDepth,
                 material, pileType,
                 analysisDepths, analysisWidths,
-                fsComp, fsTen) {
+                fs) {
         /*
         This method does basically everything... This takes the input from the data entry sheet, does all the calulations, enters all of the pertinent information into the app's state, and then passes along all of that information to the various components that render the results.
 
@@ -1329,8 +1392,7 @@ class DeepFoundationsApp extends React.Component {
             pileType: pileType,
             analysisDepths: analysisDepths,
             analysisWidths: analysisWidths,
-            fsComp: fsComp,
-            fsTen: fsTen
+            fs: fs
         }), () => { //callback function executes after updating state
             console.log("accepted input. Updated State:");
             console.log(this.state);
@@ -1349,7 +1411,7 @@ class DeepFoundationsApp extends React.Component {
                                                 this.state.ignoredDepth,
                                                 this.state.material,
                                                 this.state.pileType,
-                                                this.state.fsComp);
+                                                this.state.fs);
             //analyze all of the piles entered by the user
             let pileAnalyses = foundation.analyzePileGroup(this.state.analysisWidths, this.state.analysisDepths);
             //parse the summary tables for use in the summary table component
@@ -1381,7 +1443,7 @@ class DeepFoundationsApp extends React.Component {
             <div>
                 {/* Welcome message that explains how to use the app */}
                 {this.state.welcome && <div><WelcomeScreen/>
-                <button class='btn btn-primary' id='start' onClick={this.handleStart} onClick={this.acceptInput}>Start</button></div>}
+                <button class='btn btn-primary' id='start' onClick={this.handleStart}>Start</button></div>}
 
                 {this.state.dataEntryForm && <DataEntryForm sendResults={this.acceptInput}/>}
                 {this.state.displayResultsGeneral && <ResultsGeneral analysisDetails={this.state.analysisDetails}
@@ -1409,26 +1471,26 @@ let DEBUG_DeepFoundationsApp_STATE = {
 };
 
 let DEBUG_DataEntry_STATE = {
-    layerNames: '"L SP", "MC SP", "L SP", "M CL"',
-    layerBottoms: [13, 25, 28, 45],
-    unitWeights: [100, 110, 125, 110, 110],
-    frictionAngles: [27, 35, 27, 0],
-    cohesions: [0, 0, 0, 600],
+    layerNames: ["Jeff"],
+    layerBottoms: [20],
+    unitWeights: [110],
+    frictionAngles: [30],
+    cohesions: [0],
     groundwaterDepth: 4,
     increment: 1,
     ignoredDepth: 5,
     material: "Concrete",
     pileType: "Drilled Pile",
-    analysisDepths: [10, 15, 20, 30, 35, 40],
+    analysisDepths: [5, 11],
     analysisWidths: [0.5, 1.5],
-    fsCompression: 3,
-    fsTension: 3
+    fs: 3,
 }
 
 ReactDOM.render(<DeepFoundationsApp/>, document.getElementById('NAVFAC-deep-foundations-app'));
 
 //todo:
-//Make the data entry form handle data entry properly
-//remove the input for separate factors of safety for compression and tension
-//clean up output (91.000000000000000001 => 91.0)
+//Make the data entry form handle data entry properly Progress
+//remove the input for separate factors of safety for compressi on and tension DONE
+//clean up output (91.000000000000000001 => 91.0) DONE
 //add output for end bearing calc -> this may require additional logic in the backend
+//Figure out why program breaks when user enters data manually
