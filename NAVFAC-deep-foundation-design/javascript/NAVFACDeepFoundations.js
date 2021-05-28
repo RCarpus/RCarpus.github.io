@@ -853,8 +853,7 @@ class ResultsGeneral extends React.Component {
         this.state = {
             analysisDetails: props.analysisDetails,
             profile: profile,
-            fsComp: props.fsComp,
-            fsTen: props.fsTen,
+            fs: props.fs
 
         };
     }
@@ -901,12 +900,8 @@ class ResultsGeneral extends React.Component {
                         <td>{this.state.analysisDetails.increment}</td>
                     </tr>
                     <tr>
-                        <td>Factor of safety (compression): </td>
-                        <td>{this.state.fsComp}</td>
-                    </tr>
-                    <tr>
-                        <td>Factor of safety (tension): </td>
-                        <td>{this.state.fsTen}</td>
+                        <td>Factor of safety: </td>
+                        <td>{this.state.fs}</td>
                     </tr>
                 </table>
                 <table>
@@ -1068,7 +1063,7 @@ class DataEntryForm extends React.Component {
         /*
         Sets incrementValid to true only if a number >= 0
         */
-        let increment = event.target.value;
+        let increment = parseFloat(event.target.value);
         let incrementValid = Number.isNaN(increment) == false && increment >= 0;
         this.setState(state => ({
             ...state,
@@ -1314,10 +1309,6 @@ class DataEntryForm extends React.Component {
                         this.state.analysisDepths,
                         this.state.analysisWidths,
                         this.state.fs)}>Analyze pile set</button>
-                {/*
-                {this.state.analyzed && <h1>The pile is pretend analyzed.</h1>}
-                */}
-
             </div>
         )
     }
@@ -1447,8 +1438,7 @@ class DeepFoundationsApp extends React.Component {
 
                 {this.state.dataEntryForm && <DataEntryForm sendResults={this.acceptInput}/>}
                 {this.state.displayResultsGeneral && <ResultsGeneral analysisDetails={this.state.analysisDetails}
-                                                                    fsComp={this.state.fsComp}
-                                                                    fsTen={this.state.fsTen}/>}
+                                                                    fs={this.state.fs}/>}
                 {this.state.displaySummaryTables && <SummaryTablesPage ultCompTable={this.state.ultCompTable}
                                                                         ultTenTable={this.state.ultTenTable}
                                                                         allCompTable={this.state.allCompTable}
@@ -1463,7 +1453,7 @@ class DeepFoundationsApp extends React.Component {
 
 
 //debug settings
-let DEBUG = true;
+let DEBUG = false;
 let DEBUG_DeepFoundationsApp_STATE = {
     welcome: false,
     dataEntryForm: true,
@@ -1490,7 +1480,5 @@ ReactDOM.render(<DeepFoundationsApp/>, document.getElementById('NAVFAC-deep-foun
 
 //todo:
 //Make the data entry form handle data entry properly Progress
-//remove the input for separate factors of safety for compressi on and tension DONE
-//clean up output (91.000000000000000001 => 91.0) DONE
 //add output for end bearing calc -> this may require additional logic in the backend
-//Figure out why program breaks when user enters data manually
+//Figure out why program breaks when user enters data manually--problem seems fixed
