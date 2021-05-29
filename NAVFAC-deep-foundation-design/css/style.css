@@ -75,6 +75,9 @@ body {
   page-break-before: always;
 }
 
+.errors {
+  color: red;
+}
 
 
 

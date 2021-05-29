@@ -933,10 +933,11 @@ class DataEntryForm extends React.Component {
         if (DEBUG) this.state = DEBUG_DataEntry_STATE;
         else {
         this.state = {
-            analyzed: false
+            analyzed: false,
+            errors: {}
         };
         };
-        this.handleAnalyze = this.handleAnalyze.bind(this);
+        this.checkForValidInputs = this.checkForValidInputs.bind(this);
         this.handleLayerNames = this.handleLayerNames.bind(this);
         this.handleLayerBottoms = this.handleLayerBottoms.bind(this);
         this.handleUnitWeights = this.handleUnitWeights.bind(this);
@@ -951,17 +952,83 @@ class DataEntryForm extends React.Component {
         this.handleMaterial = this.handleMaterial.bind(this);
         this.handlePileType = this.handlePileType.bind(this);
     }
-
-    /*
-    The handle functions continuously update the state of the DataEntryForm to contain the contents of the input boxes. 
-    Validation is not yet implemented
-    */
     
-    handleAnalyze() {
+    checkForValidInputs() {
+        /*
+        Check to make sure each input is valid on its own.
+        Check to make sure each input works together properly with other inputs
+        I'd like to profusely apologize to my future self if he needs to fix a bug in here or try to refactor. 
+        I know it's ugly, and the chained callback functions in setState are tough to follow. Oops.
+        */
+        let errors = {};
+        //checks individual inputs to first ensure that they are valid
+        //creates an error if an input is invalid
+        if (!this.state.layerBottomsValid) errors.layerBottomsInvalid = "Invalid layer depths input."
+        if (!this.state.unitWeightsValid) errors.unitWeightsInvalid = "Invalid unit weights input."
+        if (!this.state.frictionAnglesValid) errors.frictionAnglesInvalid = "Invalid friction angles input."
+        if (!this.state.cohesionsValid) errors.cohesionsInvalid = "Invalid cohesions input."
+        if (!this.state.groundwaterDepthValid) errors.groundwaterDepthInvalid = "Invalid groundwater depth input."
+        if (!this.state.incrementValid) errors.incrementInvalid = "Invalid increment input."
+        if (!this.state.ignoredDepthValid) errors.ignoredDepthInvalid = "Invalid ignored depth input."
+        if (!this.state.analysisDepthsValid) errors.analysisDepthsInvalid = "Invalid analysis depths input."
+        if (!this.state.analysisWidthsValid) errors.analysisWidthsInvalid = "Invalid analysis widths input."
+        if (!this.state.fsValid) errors.fsInvalid = "Invalid factor of safety input."
         this.setState(state => ({
             ...state,
-            analyzed: true
-        }));
+            errors: errors
+        }), () => {
+            console.log(`Here are the ${Object.keys(this.state.errors).length} errors I found.`);
+            console.log(this.state.errors);
+            //Return without executing analysis if any errors have been found.
+            if (Object.keys(this.state.errors).length > 0) {
+                return;
+            }
+            //If no errors have been found, check for logical errors
+            //First check to make sure that layerNames, layerBottoms unitWeights, frictionAngles, cohesions all have the same number of entries
+            let numLayers = this.state.layerNames.length;
+            if (this.state.unitWeights.length != numLayers ||
+                this.state.frictionAngles.length != numLayers ||
+                this.state.cohesions.length != numLayers ||
+                this.state.layerBottoms.length != numLayers) {
+                    errors.numLayersMismatch = "Layer names, layer bottoms, unit weights, friction angles, and cohesions must all have the same number of entries."
+                };
+            if (Math.max(...this.state.analysisDepths) >= this.state.layerBottoms.slice(-1)) {
+                errors.analysisDepthDeeperThanSoilProfile = "Your analysis depth must not be deeper than your soil profile."
+            }
+
+            //If sublayer increment does not evenly divide into every other depth value give an error
+            let depthsToCheck = [...this.state.layerBottoms, this.state.ignoredDepth, this.state.groundwaterDepth, ...this.state.analysisDepths];
+            for (let i=0; i<depthsToCheck.length; i++) {
+                if (depthsToCheck[i] % this.state.increment != 0) {
+                    errors.badIncrement = "The sublayer increment must evenly divide into each layer depth, analysis depth, ignored depth, and groundwater depth."
+                    break;
+                };
+            }
+            this.setState(state => ({
+                ...state,
+                errors: errors
+            }), () => {
+                //Return without executing analysis if any errors have been found.
+                if (Object.keys(this.state.errors).length > 0) {
+                    return;
+                }
+                //at this point, no error were found, and the entry should lead to a valid analysis
+                this.props.sendResults(
+                    this.state.layerNames,
+                    this.state.layerBottoms,
+                    this.state.unitWeights,
+                    this.state.frictionAngles,
+                    this.state.cohesions,
+                    this.state.groundwaterDepth,
+                    this.state.increment,
+                    this.state.ignoredDepth,
+                    this.state.material,
+                    this.state.pileType,
+                    this.state.analysisDepths,
+                    this.state.analysisWidths,
+                    this.state.fs);
+            })         
+        });
     };
 
     handleLayerNames(event) {
@@ -1034,7 +1101,7 @@ class DataEntryForm extends React.Component {
         Also sets cohesionsValid to true only if all values are numeric
         */
         let cohesions = event.target.value.split(",");
-        let cohesionsValid = cohesions.every(value => isNaN(value) == false);
+        let cohesionsValid = cohesions.every(value => isNaN(value) == false && value >= 0);
         this.setState(state => ({
             ...state,
             cohesions: cohesions,
@@ -1157,6 +1224,7 @@ class DataEntryForm extends React.Component {
     }
 
     render() {
+        let errors = Object.values(this.state.errors).map(error => (<p>{error}</p>))
         return(
             <div id="data-entry-form">
                 <h1>Data entry form</h1>
@@ -1292,23 +1360,10 @@ class DataEntryForm extends React.Component {
                     </div>
                 </div>
 
-                {/* I spent a million years figuring this out. Need to use an arrow function
-                to pass parameters back to the parent element.  */}
                 <button class='btn btn-primary' id='analyze' 
-                    onClick={()=>this.props.sendResults(
-                        this.state.layerNames,
-                        this.state.layerBottoms,
-                        this.state.unitWeights,
-                        this.state.frictionAngles,
-                        this.state.cohesions,
-                        this.state.groundwaterDepth,
-                        this.state.increment,
-                        this.state.ignoredDepth,
-                        this.state.material,
-                        this.state.pileType,
-                        this.state.analysisDepths,
-                        this.state.analysisWidths,
-                        this.state.fs)}>Analyze pile set</button>
+                    onClick={this.checkForValidInputs}>Analyze pile set</button>
+
+                {Object.keys(this.state.errors).length > 0 && <div class="errors"> {errors}</div>}
             </div>
         )
     }
@@ -1453,7 +1508,7 @@ class DeepFoundationsApp extends React.Component {
 
 
 //debug settings
-let DEBUG = false;
+let DEBUG = true;
 let DEBUG_DeepFoundationsApp_STATE = {
     welcome: false,
     dataEntryForm: true,
@@ -1462,23 +1517,35 @@ let DEBUG_DeepFoundationsApp_STATE = {
 
 let DEBUG_DataEntry_STATE = {
     layerNames: ["Jeff"],
+    layerNamesValid: true,
     layerBottoms: [20],
+    layerBottomsValid: true,
     unitWeights: [110],
+    unitWeightsValid: true,
     frictionAngles: [30],
+    frictionAnglesValid: true,
     cohesions: [0],
+    cohesionsValid: true,
     groundwaterDepth: 4,
-    increment: 1,
-    ignoredDepth: 5,
+    groundwaterDepthValid: true,
+    increment: .5,
+    incrementValid: true,
+    ignoredDepth: 10,
+    ignoredDepthValid: true,
     material: "Concrete",
     pileType: "Drilled Pile",
-    analysisDepths: [5, 11],
+    analysisDepths: [5, 19],
+    analysisDepthsValid: true,
     analysisWidths: [0.5, 1.5],
+    analysisWidthsValid: true,
     fs: 3,
+    fsValid: true,
+    errors: {}
 }
 
 ReactDOM.render(<DeepFoundationsApp/>, document.getElementById('NAVFAC-deep-foundations-app'));
 
 //todo:
-//Make the data entry form handle data entry properly Progress
+//Make the data entry form handle data entry properly Done
 //add output for end bearing calc -> this may require additional logic in the backend
-//Figure out why program breaks when user enters data manually--problem seems fixed
+//Figure out why sometimes the Kc and Kt values don't get calculated - haven't been able to reliably replicate issue.
