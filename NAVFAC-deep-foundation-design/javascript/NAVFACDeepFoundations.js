@@ -430,21 +430,33 @@ class DeepFoundation {
         //Create a list of effective stresses at the bottom of each sublayer
         let limitedEffStressBottom = this.limitEffStressTo20B(this.detailedSoilProfile[10], width, depth).limitedEffStress;
         limitedEffStressBottom = limitedEffStressBottom.slice(0,depths.length);
-        //a boolean indicated if the effective stress was limited due to D>=20B
+        //a boolean indicating if the effective stress was limited due to D>=20B
         let effectiveStressIsLimited = this.limitEffStressTo20B(this.detailedSoilProfile[10], width, depth).isLimited;
         //A list of incremental skin friction values for each sublayer
         let skinFrictionProfile = this.skinFrictionProfile(width, depth, compression);
         //Get the index for the sublayer the pile bears on
-        let endBearingIndex = (depth / this.increment - 1).toFixed();
-        //console.log(`endBearingIndex: ${endBearingIndex}`);
+        //This is the layer beneath the last layer that gives skin friction
+        let endBearingIndex = (depth / this.increment).toFixed();
+        console.log(`endBearingIndex: ${endBearingIndex}`);
         let endBearing;
-        //console.log(`granEndBearing params: ${limitedEffStressBottom[endBearingIndex]} ${this.detailedSoilProfile[9][parseInt(endBearingIndex)+1]} ${width}`);
-        //console.log(this.detailedSoilProfile[9][parseInt(endBearingIndex)+1]);
+        //We need the effective stress at the bottom of the last layer that gives skin friction
+        console.log(`End bearing params: stress: ${limitedEffStressBottom[endBearingIndex - 1]} Nq:${this.detailedSoilProfile[9][parseInt(endBearingIndex)]} width:${width} Nc:${this.cToNc(depth, width)}`);
         //Calculate the end bearing if compression pile, treats with either cohesive or granular formulation, end bearing is 0 in tension
-        if (compression) {
-            endBearing = (this.detailedSoilProfile[3][parseInt(endBearingIndex)+1] == 0) ?
-                            this.cohesiveEndBearing(this.detailedSoilProfile[4][parseInt(endBearingIndex)+1], width, depth) :
-                            this.granEndBearing(limitedEffStressBottom[endBearingIndex], this.detailedSoilProfile[9][parseInt(endBearingIndex)+1], width);
+        let Nc = "N/A";
+        let endBearingFormula = "N/A";
+        let area = this.area(width);
+        if (compression && this.detailedSoilProfile[3][parseInt(endBearingIndex)] == 0) {
+            //phi is 0 and we are using cohesive end bearing
+            endBearing = this.cohesiveEndBearing(this.detailedSoilProfile[4][parseInt(endBearingIndex)], width, depth);
+            Nc = this.cToNc(depth, width);
+            endBearingFormula = "cohesive => (c)(Nc)(A)";
+        }
+        else if (compression) {
+            //phi is not 0 and we are using granular end bearing
+            endBearing = this.granEndBearing(limitedEffStressBottom[endBearingIndex-1], this.detailedSoilProfile[9][parseInt(endBearingIndex)], width);
+            endBearingFormula = "granular => (Pt)(Nq)(A)";
+         
+
         } else {
             endBearing = 0;
         }
@@ -469,7 +481,10 @@ class DeepFoundation {
             groundwaterDepth: this.groundwaterDepth,
             ignoredDepth: this.ignoredDepth,
             material: this.material,
-            pileType: this.pileType
+            pileType: this.pileType,
+            Nc: Nc,
+            endBearingFormula: endBearingFormula,
+            area: area
        }
     }
 
@@ -784,6 +799,10 @@ class ResultsPile extends React.Component {
                         <td>{this.state.pile.depth}</td>
                     </tr>
                     <tr>
+                        <td>Area (sf): </td>
+                        <td>{this.state.pile.area.toFixed(3)}</td>
+                    </tr>
+                    <tr>
                         <td>Evaluated in: </td>
                         <td>{this.state.pile.compression ? "Compression" : "Tension"}</td>
                     </tr>
@@ -806,6 +825,14 @@ class ResultsPile extends React.Component {
                     <tr>
                         <td>Effective stress limited to 20B: </td>
                         <td>{this.state.pile.effectiveStressIsLimited? "Yes" : "No"}</td>
+                    </tr>
+                    <tr>
+                        <td>End bearing formula: </td>
+                        <td>{this.state.pile.endBearingFormula}</td>
+                    </tr>
+                    <tr>
+                        <td>Nc: </td>
+                        <td>{this.state.pile.Nc}</td>
                     </tr>
                     <tr>
                         <td>End bearing (kips): </td>
@@ -1516,15 +1543,15 @@ let DEBUG_DeepFoundationsApp_STATE = {
 };
 
 let DEBUG_DataEntry_STATE = {
-    layerNames: ["Jeff"],
+    layerNames: ["Jeff", "Kathryn"],
     layerNamesValid: true,
-    layerBottoms: [20],
+    layerBottoms: [20, 50],
     layerBottomsValid: true,
-    unitWeights: [110],
+    unitWeights: [110, 125],
     unitWeightsValid: true,
-    frictionAngles: [30],
+    frictionAngles: [0, 35],
     frictionAnglesValid: true,
-    cohesions: [0],
+    cohesions: [1500, 0],
     cohesionsValid: true,
     groundwaterDepth: 4,
     groundwaterDepthValid: true,
@@ -1534,9 +1561,9 @@ let DEBUG_DataEntry_STATE = {
     ignoredDepthValid: true,
     material: "Concrete",
     pileType: "Drilled Pile",
-    analysisDepths: [5, 19],
+    analysisDepths: [19.5, 20],
     analysisDepthsValid: true,
-    analysisWidths: [0.5, 1.5],
+    analysisWidths: [0.5],
     analysisWidthsValid: true,
     fs: 3,
     fsValid: true,
@@ -1546,6 +1573,7 @@ let DEBUG_DataEntry_STATE = {
 ReactDOM.render(<DeepFoundationsApp/>, document.getElementById('NAVFAC-deep-foundations-app'));
 
 //todo:
-//Make the data entry form handle data entry properly Done
-//add output for end bearing calc -> this may require additional logic in the backend
+//add output for end bearing calc -> this may require additional logic in the backend done
 //Figure out why sometimes the Kc and Kt values don't get calculated - haven't been able to reliably replicate issue.
+//modifiy widths handler to accept H-Pile dimensions
+//modify capacity calculations to add pile weight to tension pile and remove a portion from compression pile
