@@ -22,9 +22,9 @@ Make sure links in site point to style.production.css before publishing.
     /* font sizes */ 
     --body-font-size: 16px;
     --nav-item-size: 25px;
-    --nav-item-size-mobile: 15px;
+    --nav-item-size-mobile: 17px;
     --h1-size: 30px;
-    --h1-size-mobile: 22px;
+    --h1-size-mobile: 24px;
     --h2-size: 25px;
     --citations-size: 12px;
 
@@ -215,21 +215,29 @@ textarea {
 }
 
 /* Responsive CSS */
-  @media all and (max-width: 500px) {
+  @media all and (max-width: 850px) {
     .grid {
       grid-template-columns: 1fr;
     }
     .main-content__portrait {
         float: none;    
     }
+    h1 {
+      font-size: var(--h1-size-mobile);
+    } 
+    .navigation-list__item {
+      font-size: var(--nav-item-size-mobile);
+      padding: 2px;
+  }
+
 
   }
-  @media all and (min-width: 500px) and (max-width: 750px){
+  @media all and (min-width: 850px) and (max-width: 1200px){
     .grid {
       grid-template-columns: 1fr 1fr;
     }
   }
-  @media all and (max-width: 750px) {
+  @media all and (max-width: 1200px) {
     .grid {
         grid-gap: 10px;
       }
@@ -237,50 +245,9 @@ textarea {
         grid-column: auto / auto;
         grid-row: auto / auto;
       }
-      h1 {
-        font-size: var(--h1-size-mobile);
-      } 
-      .navigation-list__item {
-          font-size: var(--nav-item-size-mobile);
-          padding: 2px;
-      }
       .main-content__portrait {
           height: 200px;
       }
       
   }
 
-  /*Animations*/
-  @keyframes snowflake-shine {
-      from {
-          transform-origin: 0%;
-          transform: translate(-15px);
-          fill: blue;
-      }
-      to {
-        transform-origin: 0%;
-          transform: translate(15px);
-          fill: yellow;
-
-      }
-  }
-
-  @keyframes enlarge {
-    to {
-        transform: rotate(10deg);
-    }
-  }
-
-  #snowflake {
-      animation: 1s snowflake-shine alternate infinite
-  }
-
-  #animation {
-      display: block;
-      margin: 15px;
-      /*animation: 1s enlarge alternate infinite*/
-  }
-
-  .citations {
-      font-size: var(--citations-size);
-  }
