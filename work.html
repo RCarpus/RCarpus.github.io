@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta charset="utf-8">
+    <title>Ryan Carpus - Projects</title>
+    <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css"
+        integrity="sha512-oHDEc8Xed4hiW6CxD7qjbnI+B07vDdX7hEPTvn9pSZO1bcRqHp8mj9pyr+8RVC2GmtEfI2Bi9Ke9Ass0as+zpg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,400;0,600;1,400&display=swap"
+        rel="stylesheet">
+    <!--stylesheets. Make sure styles.css is active while editing, and style.production.css before publishing-->
+    <!--
+        <link rel="stylesheet" type="text/css" href="css/styles.css">    
+        -->
+    <link rel="stylesheet" type="text/css" href="css/style.production.css">
+</head>
+
+<body>
+    <header class="page-header">
+        <img class="page-header__item" src="img/logo.png" alt="">
+        <nav class="page-header__item">
+            <ul role="menubar" class="navigation-list">
+                <li role="presentation">
+                    <a href="index.html" role="menuitem" class="navigation-list__item">Home</a>
+                </li>
+                <li role="presentation">
+                    <a href="about.html" role="menuitem" class="navigation-list__item">About Me</a>
+                </li>
+                <li role="presentation">
+                    <a href="work.html" role="menuitem"
+                        class="navigation-list__item navigation-list__item--active">Projects</a>
+                </li>
+                <li role="presentation">
+                    <a href="contact.html" role="menuitem" class="navigation-list__item">Contact</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <section>
+        <h1 id="my-projects-header">My Projects</h1>
+        <div class="grid">
+            <div class="grid__item">
+                <h2 class="grid___item__title">MyFlix</h2>
+                <h3>Languages/Libraries: Mongo, Express, React with Redux, Node</h3>
+                <p>
+                    <a class="grid__item__link" href="https://rcarpus-myflix.netlify.app/" target="_blank">Live site</a>
+                    <a class="gridd__item__link" href="https://github.com/RCarpus/movie-client" target="_blank">Client
+                        App Github link</a>
+                    <a class="gridd__item__link" href="https://github.com/RCarpus/movie-api" target="_blank">API Github
+                        link</a>
+                </p>
+                <p class="grid__item__description">
+                    MyFlix is a full-stack application built using the MERN (Mongo, Express, React, Node) stack. Users
+                    of the app are able to register an account, view a database of movies, view and modify a list of
+                    favorite movies, update their personal information, and delete their accounts. Application state is
+                    handled using react-redux to promote one-directional flow of data and to promote scalability. On the
+                    server side, data is stored and retrieved in a Mongo database using Mongo DB Atlus. Logins are
+                    handled using basic html authentication, and subsequent requests are authenticated with a JSON web
+                    token. </p>
+            </div>
+            <div class="grid__item">
+                <h2 class="grid___item__title">Simple Pokedex</h2>
+                <h3>Languages/libraries: JavaScript, Bootstrap</h3>
+                <p>
+                    <a class="grid__item__link" href="https://rcarpus.github.io/pokedex-app/" target="_blank">view in
+                        browser</a>
+                    <a class="grid__item__link" href="https://github.com/RCarpus/pokedex-app/tree/gh-pages"
+                        target="_blank">Github link</a>
+                </p>
+                <p class="grid__item__description">
+                    This app fetches data from the pokeAPI <a href="https://pokeapi.co/"
+                        target="_blank">https://pokeapi.co/</a> and displays a list of Pokemon that have been fetched.
+                    This Pokedex fetches data for the first 151 Pokemon (Generation 1). When the name of a pokemon is
+                    clicked, some additional details for the pokemon, including height, type, and a picture will be
+                    fetched from the API and displayed in a modal on the screen. The user can navigate back and forth
+                    through the different pokemon using the left and right arrow keys on a keyboard. The modal can be
+                    exited by pressing escape, clicking outside the model box, or clicking the close button on the
+                    modal.
+                </p>
+            </div>
+            <div class="grid__item">
+                <h2 class="grid___item__title">Terzaghi Bearing Capacity Calculator</h2>
+                <h3>Languages/libraries: JavaScript, React</h3>
+                <p>
+                    <a class="grid__item__link" href="projects/Therzaghi-bearing-capacity/html/terzaghi.html"
+                        target="_blank">view in browser</a>
+                    <a class="grid__item__link"
+                        href="https://github.com/RCarpus/portfolio-website/tree/main/projects/Therzaghi-bearing-capacity"
+                        target="_blank">Github link</a>
+                </p>
+                <p class="grid__item__description">
+                    The Terzaghi Bearing Capacity calculator is a tool used to compute the Terzaghi bearing capacity for
+                    a given soil and foundation type. This common calculation used in geotechnical engineering is
+                    straightforward to calculate once the design parameters are known, but is prone to calculator errors
+                    because of the amount of variables and items to lookup. This tool eliminates those errors and allows
+                    for quick and low effort sensitivity analysis.
+                </p>
+            </div>
+            <div class="grid__item">
+                <h2 class="grid___item__title">Math Practice App</h2>
+                <h3>Languages/libraries: JavaScript, React</h3>
+                <p>
+                    <a class="grid__item__link" href="projects/math-practice/html/math-practice-app.html"
+                        target="_blank">view in browser</a>
+                    <a class="grid__item__link"
+                        href="https://github.com/RCarpus/portfolio-website/tree/main/projects/math-practice"
+                        target="_blank">Github link</a>
+                </p>
+                <p class="grid__item__description">
+                    My Math Practice App is a single-page web application built using JavaScript with React, and
+                    Bootstrap to help with format and styling. The application allows the user to generate a random
+                    problem set of basic arithmetic problems using various parameters to customize the difficulty level.
+                    After generating the problem set, the user submits their answers and receives a percentage grade,
+                    with each problem indicated as correct or incorrect.
+                </p>
+            </div>
+
+            <div class="grid__item">
+                <h2 class="grid___item__title">QC Proposal Builder</h2>
+                <h3>Languages/libraries: Python, docx, openpyxl</h3>
+                <p><a class="grid__item__link"
+                        href="https://github.com/RCarpus/Personal-Projects/tree/master/QC%20Proposal%20Builder"
+                        target="_blank">Github link</a></p>
+                <p class="grid__item__description">
+                    My QC Proposal Builder is an example of a practical tool that I used in my engineering practice. The
+                    end result is a faster and less error-prone method of creating routine documents at work. The
+                    build_qc_proposal.py script pulls data from the config.py file to create a proposal for quality
+                    control engineering services tailored to a specific job, built using standardized text blocks. The
+                    user modifies the client and project information in the config.py file and builds the budget using
+                    the estimate_sheet.xlsx file. The build_qc_proposal.py script uses the qc_propsal_template.docx file
+                    as a starting point containing the company logo and page formatting, adding in the standard text
+                    blocks, budget information, and unique client and project information to build the document and send
+                    to a new output file.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <footer class="page-footer">
+        <p id="page-footer__heading">Find me on</p>
+        <div class="social-media">
+            <a class="social-media__icon" href="http://github.com/rcarpus" target="_blank">
+                <img src="img/github_icon.svg" alt="Github">
+            </a>
+            <a class="social-media__icon" href="https://www.linkedin.com/in/ryan-carpus-687234141/" target="_blank">
+                <img src="img/linkedin_icon.svg" alt="LinkedIn">
+            </a>
+        </div>
+    </footer>
+    <!--Use to debug accessibility <script src="js/tota11y.min.js"></script> -->
+</body>
+
+</html>
