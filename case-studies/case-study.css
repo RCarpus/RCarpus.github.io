@@ -1,4 +1,11 @@
-
+/*
+to convert to style.production.css, first use the PostCSS variables playground
+https://madlittlemods.github.io/postcss-css-variables/playground/
+then use the Autoprefixer CSS online tool
+https://autoprefixer.github.io/
+Paste output into style.production.css. 
+Make sure links in site point to style.production.css before publishing.
+*/
 
 :root {
   --the-challenge-color: orange;
@@ -44,6 +51,7 @@
   font-size: 26px;
   line-height: 1.5em;
   padding-left: 20px;
+  width: 100%;
 }
 
 #the-challenge {
