@@ -1,0 +1,137 @@
+
+
+:root {
+  --the-challenge-color: orange;
+  --the-process-color: yellow;
+  --the-goal-color: rgb(0, 173, 0);
+  --meet-app-color: #00d3e2b4;
+
+}
+
+.case-study {
+  max-width: 1000px;
+  margin: auto;
+  padding: 25px;
+  background-color: white;
+  height: 100%;
+  border: solid black 2px;
+  border-radius: 15px;
+}
+
+.case-study__hero-image {
+  display: block;
+  width: 80%;
+  height: auto;
+  margin: auto;
+  border: solid rgba(0, 0, 0, 0.301) 1px;
+}
+
+.case-study__links {
+}
+
+.case-study__links__link {
+  background-color: var(--meet-app-color);
+  display: inline-block;
+  width: 150px;
+  text-align: center;
+  margin-top: 15px;
+  border: solid black 2px;
+  border-radius: 10px;
+  text-decoration: none;
+}
+
+.intro-header {
+  font-size: 26px;
+  line-height: 1.5em;
+  padding-left: 20px;
+}
+
+#the-challenge {
+  color: var(--the-challenge-color);
+  background-image: linear-gradient(to right, black , var(--the-challenge-color));
+}
+
+#the-process {
+  color: var(--the-process-color);
+  background-image: linear-gradient(to right, black , var(--the-process-color));
+}
+
+#the-goal {
+  color: var(--the-goal-color);
+  background-image: linear-gradient(to right, black , var(--the-goal-color));
+}
+
+h3 {
+  font-size: 24px;
+  background-image: linear-gradient(to right, white , var(--meet-app-color));
+}
+.case-study__floating-img-container {
+}
+
+h4 {
+  font-size: 22px;
+  background-image: linear-gradient(to right, white , var(--meet-app-color));
+  line-height: .4em;
+}
+
+.float-left {
+  float: left;
+  margin-right: 30px;
+}
+
+.float-right {
+  float: right;
+  margin-left: 30px;
+}
+
+#typo-img {
+}
+
+#integration-test-img {
+  width: 60%;
+}
+
+#taskbar-img, #topic-search-mockup-img {
+  display: block;
+  max-width: 80%;
+  height: auto;
+  margin: auto;
+}
+
+#topic-search-mockup-img {
+  border: solid black 1px;
+}
+
+.case-study__inline-p {
+  display: inline;
+}
+
+@media only screen and (max-width: 475px) {
+  h4 {
+    line-height: 1em;
+  }
+}
+
+@media only screen and (max-width: 750px) {
+  .float-right, .float-left {
+    float: none;
+    display: block;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  #typo-img, #integration-test-img, #taskbar-img, #topic-search-mockup-img {
+    width: 100%;
+    height: auto;
+  }
+
+
+  body {
+    margin: 0;
+  }
+
+  .case-study {
+    border: none;
+    border-radius: 0;
+  }
+}
