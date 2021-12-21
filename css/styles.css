@@ -18,6 +18,10 @@ Make sure links in site point to style.production.css before publishing.
     --active-link-color: #fff;
     --button-text-color: #fff;
     --border-bottom-color: rgba(0,0,0,0.3);
+    --meet-app-color: #00d3e2b4;
+    --the-challenge-color: orange;
+    --the-process-color: yellow;
+    --the-goal-color: rgb(0, 173, 0);
 
     /* font sizes */ 
     --body-font-size: 16px;
@@ -184,6 +188,57 @@ textarea {
 }
 /*end grid fallback*/
 
+.grid__item__case-study-img-link :hover {
+  border: solid black 2px;
+}
+
+.grid__item__case-study-button {
+  width: 80%;
+  background-color: red;
+}
+
+.intro-header {
+  width: 50%;
+  min-width: 200px;
+  font-size: 20px;
+  line-height: .5em;
+  padding-left: 20px;
+}
+
+.the-challenge {
+  background-image: linear-gradient(to right, var(--project-tile-background-color) , var(--the-challenge-color));
+}
+
+.the-process {
+  background-image: linear-gradient(to right, var(--project-tile-background-color) , var(--the-process-color));
+}
+
+.the-goal {
+  background-image: linear-gradient(to right, var(--project-tile-background-color) , var(--the-goal-color));
+}
+
+.grid__item__case-study-text-link {
+  display: block;
+  font-size: 20px;
+  width: 80%;
+  margin: auto;
+  text-align: center;
+  text-decoration: none;
+  border: solid black 2px;
+  padding: 5px;
+  border-radius: 10px;
+}
+
+.meet-app {
+  background-color: var(--meet-app-color);
+  color: black;
+}
+
+.grid__item__img {
+  width: 100%;
+  height: auto;
+}
+
 .contact-info {
     line-height: 1.3em;
 }
@@ -195,7 +250,7 @@ textarea {
 @supports (display: grid) {
     .grid {
         display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr;
         grid-gap: 20px;
         margin: 15px;
     }
@@ -208,17 +263,10 @@ textarea {
         padding: 1em;
     }
 
-    .grid__item:last-child {
-        grid-column: 3 / 3;
-        grid-row: 1 / 3;
-    }
 }
 
 /* Responsive CSS */
   @media all and (max-width: 850px) {
-    .grid {
-      grid-template-columns: 1fr;
-    }
     .main-content__portrait {
         float: none;    
     }
@@ -232,18 +280,17 @@ textarea {
 
 
   }
-  @media all and (min-width: 850px) and (max-width: 1200px){
+
+  @media all and (max-width: 1000px) {
     .grid {
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr;
     }
   }
+
+  
   @media all and (max-width: 1200px) {
     .grid {
         grid-gap: 10px;
-      }
-      .grid__item:last-child {
-        grid-column: auto / auto;
-        grid-row: auto / auto;
       }
       .main-content__portrait {
           height: 200px;
