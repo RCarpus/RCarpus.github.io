@@ -1,0 +1,154 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v8.3.6,
+* Autoprefixer: v10.3.1
+* Browsers: last 4 version
+*/
+
+/*
+to convert to style.production.css, first use the PostCSS variables playground
+https://madlittlemods.github.io/postcss-css-variables/playground/
+then use the Autoprefixer CSS online tool
+https://autoprefixer.github.io/
+Paste output into style.production.css. 
+Make sure links in site point to style.production.css before publishing.
+*/
+
+.case-study {
+  max-width: 1000px;
+  margin: auto;
+  padding: 25px;
+  background-color: white;
+  height: 100%;
+  border: solid black 2px;
+  border-radius: 15px;
+}
+
+.case-study__hero-image {
+  display: block;
+  width: 80%;
+  height: auto;
+  margin: auto;
+  border: solid rgba(0, 0, 0, 0.301) 1px;
+}
+
+.case-study__links {
+}
+
+.case-study__links__link {
+  background-color: #00d3e2b4;
+  display: inline-block;
+  width: 150px;
+  text-align: center;
+  margin-top: 15px;
+  border: solid black 2px;
+  border-radius: 10px;
+  text-decoration: none;
+}
+
+.intro-header {
+  font-size: 26px;
+  line-height: 1.5em;
+  padding-left: 20px;
+  width: 100%;
+}
+
+#the-challenge {
+  color: orange;
+  background-image: -webkit-gradient(linear, left top, right top, from(black) , to(orange));
+  background-image: -o-linear-gradient(left, black , orange);
+  background-image: linear-gradient(to right, black , orange);
+}
+
+#the-process {
+  color: yellow;
+  background-image: -webkit-gradient(linear, left top, right top, from(black) , to(yellow));
+  background-image: -o-linear-gradient(left, black , yellow);
+  background-image: linear-gradient(to right, black , yellow);
+}
+
+#the-goal {
+  color: rgb(0, 173, 0);
+  background-image: -webkit-gradient(linear, left top, right top, from(black) , to(rgb(0, 173, 0)));
+  background-image: -o-linear-gradient(left, black , rgb(0, 173, 0));
+  background-image: linear-gradient(to right, black , rgb(0, 173, 0));
+}
+
+h3 {
+  font-size: 24px;
+  background-image: -webkit-gradient(linear, left top, right top, from(white) , to(#00d3e2b4));
+  background-image: -o-linear-gradient(left, white , #00d3e2b4);
+  background-image: linear-gradient(to right, white , #00d3e2b4);
+}
+.case-study__floating-img-container {
+}
+
+h4 {
+  font-size: 22px;
+  background-image: -webkit-gradient(linear, left top, right top, from(white) , to(#00d3e2b4));
+  background-image: -o-linear-gradient(left, white , #00d3e2b4);
+  background-image: linear-gradient(to right, white , #00d3e2b4);
+  line-height: .4em;
+}
+
+.float-left {
+  float: left;
+  margin-right: 30px;
+}
+
+.float-right {
+  float: right;
+  margin-left: 30px;
+}
+
+#typo-img {
+}
+
+#integration-test-img {
+  width: 60%;
+}
+
+#taskbar-img, #topic-search-mockup-img {
+  display: block;
+  max-width: 80%;
+  height: auto;
+  margin: auto;
+}
+
+#topic-search-mockup-img {
+  border: solid black 1px;
+}
+
+.case-study__inline-p {
+  display: inline;
+}
+
+@media only screen and (max-width: 475px) {
+  h4 {
+    line-height: 1em;
+  }
+}
+
+@media only screen and (max-width: 750px) {
+  .float-right, .float-left {
+    float: none;
+    display: block;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  #typo-img, #integration-test-img, #taskbar-img, #topic-search-mockup-img {
+    width: 100%;
+    height: auto;
+  }
+
+
+  body {
+    margin: 0;
+  }
+
+  .case-study {
+    border: none;
+    border-radius: 0;
+  }
+}

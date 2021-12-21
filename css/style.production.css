@@ -249,6 +249,63 @@ textarea {
 }
 /*end grid fallback*/
 
+.grid__item__case-study-img-link :hover {
+border: solid black 2px;
+}
+
+.grid__item__case-study-button {
+width: 80%;
+background-color: red;
+}
+
+.intro-header {
+width: 50%;
+min-width: 200px;
+font-size: 20px;
+line-height: .5em;
+padding-left: 20px;
+}
+
+.the-challenge {
+background-image: -webkit-gradient(linear, left top, right top, from(#d3d3d3) , to(orange));
+background-image: -o-linear-gradient(left, #d3d3d3 , orange);
+background-image: linear-gradient(to right, #d3d3d3 , orange);
+}
+
+.the-process {
+background-image: -webkit-gradient(linear, left top, right top, from(#d3d3d3) , to(yellow));
+background-image: -o-linear-gradient(left, #d3d3d3 , yellow);
+background-image: linear-gradient(to right, #d3d3d3 , yellow);
+}
+
+.the-goal {
+background-image: -webkit-gradient(linear, left top, right top, from(#d3d3d3) , to(rgb(0, 173, 0)));
+background-image: -o-linear-gradient(left, #d3d3d3 , rgb(0, 173, 0));
+background-image: linear-gradient(to right, #d3d3d3 , rgb(0, 173, 0));
+}
+
+.grid__item__case-study-text-link {
+display: block;
+font-size: 20px;
+width: 80%;
+margin: auto;
+text-align: center;
+text-decoration: none;
+border: solid black 2px;
+padding: 5px;
+border-radius: 10px;
+}
+
+.meet-app {
+background-color: #00d3e2b4;
+color: black;
+}
+
+.grid__item__img {
+width: 100%;
+height: auto;
+}
+
 .contact-info {
   line-height: 1.3em;
 }
@@ -261,8 +318,8 @@ textarea {
   .grid {
       display: -ms-grid;
       display: grid;
-      -ms-grid-columns: 1fr 20px 1fr 20px 1fr;
-      grid-template-columns: 1fr 1fr 1fr;
+      -ms-grid-columns: 1fr 20px 1fr;
+      grid-template-columns: 1fr 1fr;
       grid-gap: 20px;
       margin: 15px;
   }
@@ -275,21 +332,10 @@ textarea {
       padding: 1em;
   }
 
-  .grid__item:last-child {
-      -ms-grid-column: 3;
-      grid-column: 3 / 3;
-      -ms-grid-row: 1;
-      -ms-grid-row-span: 2;
-      grid-row: 1 / 3;
-  }
 }
 
 /* Responsive CSS */
 @media all and (max-width: 850px) {
-  .grid {
-    -ms-grid-columns: 1fr;
-    grid-template-columns: 1fr;
-  }
   .main-content__portrait {
       float: none;    
   }
@@ -303,19 +349,18 @@ textarea {
 
 
 }
-@media all and (min-width: 850px) and (max-width: 1200px){
+
+@media all and (max-width: 1000px) {
   .grid {
-    -ms-grid-columns: 1fr 20px 1fr;
-    grid-template-columns: 1fr 1fr;
+    -ms-grid-columns: 1fr;
+    grid-template-columns: 1fr;
   }
 }
+
+
 @media all and (max-width: 1200px) {
   .grid {
       grid-gap: 10px;
-    }
-    .grid__item:last-child {
-      grid-column: auto / auto;
-      grid-row: auto / auto;
     }
     .main-content__portrait {
         height: 200px;
