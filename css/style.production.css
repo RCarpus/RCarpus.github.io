@@ -305,6 +305,10 @@ color: black;
 background-color: #afafaf;
 }
 
+.terzaghi-bearing-capacity {
+background-color: #ffbb00;
+}
+
 .grid__item__img {
 width: 100%;
 height: auto;
