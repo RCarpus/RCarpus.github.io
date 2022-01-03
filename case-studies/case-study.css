@@ -12,6 +12,7 @@ Make sure links in site point to style.production.css before publishing.
   --the-process-color: yellow;
   --the-goal-color: rgb(0, 173, 0);
   --meet-app-color: #00d3e2b4;
+  --simple-pokedex-color: #afafaf;
 
 }
 
@@ -92,14 +93,12 @@ h4 {
   margin-left: 30px;
 }
 
-#typo-img {
-}
-
 #integration-test-img {
   width: 60%;
 }
 
-#taskbar-img, #topic-search-mockup-img {
+#taskbar-img, #topic-search-mockup-img, 
+  #pokeball-img, #caniuse-arrow-functions-img, #modal-img {
   display: block;
   max-width: 80%;
   height: auto;
@@ -108,6 +107,10 @@ h4 {
 
 #topic-search-mockup-img {
   border: solid black 1px;
+}
+
+#list-img {
+  width: 300px;
 }
 
 .case-study__inline-p {
@@ -128,7 +131,7 @@ h4 {
     margin-right: 0;
   }
 
-  #typo-img, #integration-test-img, #taskbar-img, #topic-search-mockup-img {
+  #typo-img, #integration-test-img, #taskbar-img, #topic-search-mockup-img, #modal-img {
     width: 100%;
     height: auto;
   }
@@ -142,4 +145,12 @@ h4 {
     border: none;
     border-radius: 0;
   }
+}
+
+.simple-pokedex-link {
+  background-color: var(--simple-pokedex-color);
+}
+
+.simple-pokedex-h3, .simple-pokedex-h4 {
+  background-image: linear-gradient(to right, white , var(--simple-pokedex-color));
 }
