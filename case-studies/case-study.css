@@ -13,6 +13,7 @@ Make sure links in site point to style.production.css before publishing.
   --the-goal-color: rgb(0, 173, 0);
   --meet-app-color: #00d3e2b4;
   --simple-pokedex-color: #afafaf;
+  --bearing-capacity-color: #ffbb00;
 
 }
 
@@ -74,7 +75,14 @@ h3 {
   font-size: 24px;
   background-image: linear-gradient(to right, white , var(--meet-app-color));
 }
-.case-study__floating-img-container {
+
+.image-caption {
+  max-width: 350px;
+}
+
+.image-caption-centered {
+  max-width: 350px;
+  margin: auto;
 }
 
 h4 {
@@ -98,7 +106,8 @@ h4 {
 }
 
 #taskbar-img, #topic-search-mockup-img, 
-  #pokeball-img, #caniuse-arrow-functions-img, #modal-img {
+  #pokeball-img, #caniuse-arrow-functions-img, #modal-img,
+  #excavation-img {
   display: block;
   max-width: 80%;
   height: auto;
@@ -113,6 +122,10 @@ h4 {
   width: 300px;
 }
 
+#terzaghi-portrait {
+  max-width: 300px;
+}
+
 .case-study__inline-p {
   display: inline;
 }
@@ -120,6 +133,10 @@ h4 {
 @media only screen and (max-width: 475px) {
   h4 {
     line-height: 1em;
+  }
+  
+  #terzaghi-portrait, #bearing-capacity-invalid-input-img {
+    max-width: 250px;
   }
 }
 
@@ -131,7 +148,7 @@ h4 {
     margin-right: 0;
   }
 
-  #typo-img, #integration-test-img, #taskbar-img, #topic-search-mockup-img, #modal-img {
+  #typo-img, #integration-test-img, #taskbar-img, #topic-search-mockup-img, #modal-img, #excavation-img {
     width: 100%;
     height: auto;
   }
@@ -147,10 +164,20 @@ h4 {
   }
 }
 
+/* styles specific to the pokedex app page */
 .simple-pokedex-link {
   background-color: var(--simple-pokedex-color);
 }
 
 .simple-pokedex-h3, .simple-pokedex-h4 {
   background-image: linear-gradient(to right, white , var(--simple-pokedex-color));
+}
+
+/* styles specific to the bearing capacity calculator page */
+.bearing-capacity-link {
+  background-color: var(--bearing-capacity-color);
+}
+
+.bearing-capacity-h3, .bearing-capacity-h4 {
+  background-image: linear-gradient(to right, white , var(--bearing-capacity-color));
 }
