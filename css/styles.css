@@ -19,6 +19,7 @@ Make sure links in site point to style.production.css before publishing.
     --button-text-color: #fff;
     --border-bottom-color: rgba(0,0,0,0.3);
     --meet-app-color: #00d3e2b4;
+    --simple-pokedex-color: #afafaf;
     --the-challenge-color: orange;
     --the-process-color: yellow;
     --the-goal-color: rgb(0, 173, 0);
@@ -232,6 +233,10 @@ textarea {
 .meet-app {
   background-color: var(--meet-app-color);
   color: black;
+}
+
+.simple-pokedex {
+  background-color: var(--simple-pokedex-color);
 }
 
 .grid__item__img {

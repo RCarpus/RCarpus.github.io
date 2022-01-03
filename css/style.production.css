@@ -301,6 +301,10 @@ background-color: #00d3e2b4;
 color: black;
 }
 
+.simple-pokedex {
+background-color: #afafaf;
+}
+
 .grid__item__img {
 width: 100%;
 height: auto;
