@@ -21,6 +21,7 @@ Make sure links in site point to style.production.css before publishing.
     --meet-app-color: #00d3e2b4;
     --simple-pokedex-color: #afafaf;
     --terzaghi-bearing-capacity-color: #ffbb00;
+    --myflix-color: #ffa500;
     --the-challenge-color: orange;
     --the-process-color: yellow;
     --the-goal-color: rgb(0, 173, 0);
@@ -242,6 +243,10 @@ textarea {
 
 .terzaghi-bearing-capacity {
   background-color: var(--terzaghi-bearing-capacity-color);
+}
+
+.myflix {
+  background-color: var(--myflix-color);
 }
 
 .grid__item__img {
