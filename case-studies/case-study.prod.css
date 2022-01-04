@@ -102,6 +102,11 @@ h3 {
   line-height: .4em;
 }
 
+h4 {
+  font-size: 20px;
+  line-height: .4em;
+}
+
 .float-left {
   float: left;
   margin-right: 30px;
@@ -118,7 +123,8 @@ h3 {
 
 #taskbar-img, #topic-search-mockup-img, 
   #pokeball-img, #caniuse-arrow-functions-img, #modal-img,
-  #excavation-img {
+  #excavation-img,
+  #myflix-profile-img, #react-img, #redux-img{
   display: block;
   max-width: 80%;
   height: auto;
@@ -135,6 +141,22 @@ h3 {
 
 #terzaghi-portrait {
   max-width: 300px;
+}
+
+#mongo-img, #heroku-img, #netlify-img {
+  max-width: 300px;
+}
+
+#myflix-docs-img {
+  width: 100%;
+}
+
+#react-img, #redux-img {
+  width: 150px;
+}
+
+#myflix-favorite-movie-img {
+  max-width: 450px;
 }
 
 .case-study__inline-p {
@@ -207,4 +229,27 @@ h3 {
   background-image: -webkit-gradient(linear, left top, right top, from(white) , to(#ffbb00));
   background-image: -o-linear-gradient(left, white , #ffbb00);
   background-image: linear-gradient(to right, white , #ffbb00);
+}
+
+/* styles specific to the MyFlix app page */
+.myflix-link {
+  background-color: orange;
+}
+
+.myflix-h2 {
+  background-image: -webkit-gradient(linear, left top, right top, from(white) , to(orange));
+  background-image: -o-linear-gradient(left, white , orange);
+  background-image: linear-gradient(to right, white , orange);
+}
+
+.myflix-h3 {
+  background-image: -webkit-gradient(linear, left top, right top, from(white) , to(orange));
+  background-image: -o-linear-gradient(left, white , orange);
+  background-image: linear-gradient(to right, white , orange);
+}
+
+.myflix-h4 {
+  background-image: -webkit-gradient(linear, left top, right top, from(white) , to(orange));
+  background-image: -o-linear-gradient(left, white , orange);
+  background-image: linear-gradient(to right, white , orange);
 }

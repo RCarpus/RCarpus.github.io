@@ -14,6 +14,7 @@ Make sure links in site point to style.production.css before publishing.
   --meet-app-color: #00d3e2b4;
   --simple-pokedex-color: #afafaf;
   --bearing-capacity-color: #ffbb00;
+  --myflix-color: orange;
 
 }
 
@@ -95,6 +96,11 @@ h3 {
   line-height: .4em;
 }
 
+h4 {
+  font-size: 20px;
+  line-height: .4em;
+}
+
 .float-left {
   float: left;
   margin-right: 30px;
@@ -111,7 +117,8 @@ h3 {
 
 #taskbar-img, #topic-search-mockup-img, 
   #pokeball-img, #caniuse-arrow-functions-img, #modal-img,
-  #excavation-img {
+  #excavation-img,
+  #myflix-profile-img, #react-img, #redux-img{
   display: block;
   max-width: 80%;
   height: auto;
@@ -128,6 +135,22 @@ h3 {
 
 #terzaghi-portrait {
   max-width: 300px;
+}
+
+#mongo-img, #heroku-img, #netlify-img {
+  max-width: 300px;
+}
+
+#myflix-docs-img {
+  width: 100%;
+}
+
+#react-img, #redux-img {
+  width: 150px;
+}
+
+#myflix-favorite-movie-img {
+  max-width: 450px;
 }
 
 .case-study__inline-p {
@@ -184,4 +207,13 @@ h3 {
 
 .bearing-capacity-h3, .bearing-capacity-h4 {
   background-image: linear-gradient(to right, white , var(--bearing-capacity-color));
+}
+
+/* styles specific to the MyFlix app page */
+.myflix-link {
+  background-color: var(--myflix-color);
+}
+
+.myflix-h2, .myflix-h3, .myflix-h4 {
+  background-image: linear-gradient(to right, white , var(--myflix-color));
 }
