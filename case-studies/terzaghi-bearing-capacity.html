@@ -43,124 +43,140 @@
     </nav>
   </header>
 
-  <div class="case-study">
-    <img class="case-study__hero-image" src="../img/bearing-capacity/bearing_capacity_calculator.png" alt="A screenshot of the Terzaghi bearing capacity calculator in action"/>
-    <div class="case-study__links">
-      <a class="case-study__links__link bearing-capacity-link"
-        href="https://rcarpus.github.io/terzaghi-bearing-capacity/" target="_blank">Use the calculator</a>
-      <a class="case-study__links__link bearing-capacity-link"
-        href="https://github.com/RCarpus/terzaghi-bearing-capacity" target="_blank">GitHub Repository</a>
-    </div>
+  <main role="main">
+    <div class="case-study">
+      <h1>Terzaghi Bearing Capacity Calculator</h1>
+      <img class="case-study__hero-image" src="../img/bearing-capacity/bearing_capacity_calculator.png"
+        alt="A screenshot of the Terzaghi bearing capacity calculator in action" />
+      <div class="case-study__links">
+        <a class="case-study__links__link bearing-capacity-link"
+          href="https://rcarpus.github.io/terzaghi-bearing-capacity/" target="_blank">Use the calculator</a>
+        <a class="case-study__links__link bearing-capacity-link"
+          href="https://github.com/RCarpus/terzaghi-bearing-capacity" target="_blank">GitHub Repository</a>
+      </div>
 
-    <h4 class="intro-header" id="the-challenge">The challenge</h4>
-    <p>
-      To create a web-based calculator to easily compute the Terzaghi bearing capacity of any soil type for the design
-      of shallow foundations. This is a common calculation used in geotechnical engineering and is straightforward to
-      calculate once the design parameters are known, but prone to calculator errors due to the large number of
-      variables and items to lookup. This app was designed to reduce calculation errors easily introduced by performing
-      the work by hand. </p>
-    <h4 class="intro-header" id="the-process">
-      The process
-    </h4>
-    <p>
-      The process used to build the calculator was to create a JavaScript class called TerzaghiBearingCapacity with all
-      the relevant design parameters and that has a function to calculate the bearing capacity using all of the design
-      parameters. The user interface, built with React, works with a TerzaghiBearingCapacity class instance to calculate
-      the bearing capacity for the soil type inputted by the user. </p>
-    <h4 class="intro-header" id="the-goal">
-      The goal
-    </h4>
-    <p>
-      A web calculator that quickly and accurately calculates the Terzaghi bearing capacity and allows for fast,
-      low-effort sensitivity analysis.
-    </p>
+      <h2 class="intro-header" id="the-challenge">The challenge</h2>
+      <p>
+        To create a web-based calculator to easily compute the Terzaghi bearing capacity of any soil type for the design
+        of shallow foundations. This is a common calculation used in geotechnical engineering and is straightforward to
+        calculate once the design parameters are known, but prone to calculator errors due to the large number of
+        variables and items to lookup. This app was designed to reduce calculation errors easily introduced by
+        performing
+        the work by hand. </p>
+      <h2 class="intro-header" id="the-process">
+        The process
+      </h2>
+      <p>
+        The process used to build the calculator was to create a JavaScript class called TerzaghiBearingCapacity with
+        all
+        the relevant design parameters and that has a function to calculate the bearing capacity using all of the design
+        parameters. The user interface, built with React, works with a TerzaghiBearingCapacity class instance to
+        calculate
+        the bearing capacity for the soil type inputted by the user. </p>
+      <h2 class="intro-header" id="the-goal">
+        The goal
+      </h2>
+      <p>
+        A web calculator that quickly and accurately calculates the Terzaghi bearing capacity and allows for fast,
+        low-effort sensitivity analysis.
+      </p>
 
-    <h3 class="bearing-capacity-h3">My development process</h3>
-    <h4 class="bearing-capacity-h4">Designing the TerzaghiBearingCapacity class</h4>
-    <div class="case-study__floating-img-container">
-      <div class="float-left with-caption">
-        <img src="../img/bearing-capacity/terzaghi-portrait.jpg" id="terzaghi-portrait" class="image-with-caption" alt="A photo of Karl von Terzaghi"/>
-        <p class="image-caption"><em>Karl von Terzaghi, known as the father of soil mechanics, 1883-1963 (source: wikipedia.org)</em></p>
+      <h2 class="bearing-capacity-h3">My development process</h2>
+      <h3 class="bearing-capacity-h4">Designing the TerzaghiBearingCapacity class</h3>
+      <div class="case-study__floating-img-container">
+        <div class="float-left with-caption">
+          <img src="../img/bearing-capacity/terzaghi-portrait.jpg" id="terzaghi-portrait" class="image-with-caption"
+            alt="A photo of Karl von Terzaghi" />
+          <p class="image-caption"><em>Karl von Terzaghi, known as the father of soil mechanics, 1883-1963 (source:
+              wikipedia.org)</em></p>
+        </div>
+
+        <p>
+          I visualize the design problem as object with several different properties and things that it can do, so I
+          decided to model it in an object-oriented manner using a JavaScript class. The constructor for a class
+          instance
+          requires all of the relevant design parameters to be passed in as arguments. Within the constructor, the class
+          also includes methods to calculate the bearing capacity using the inputted parameters and a few helper
+          functions. The results are stored as parameters that can be displayed to the user.
+        </p>
+        <p>
+          Because the calculator does not require a lot of processing power, and there is no sensitive data being passed
+          around, I decided to simplify the class by not including setters or getters for the parameters and not making
+          any methods private to the class. Each time the user runs a calculation, the app will create a new instance of
+          the TerzaghiBearingCapacity class using the updated parameters. This is not an optimized approach, but because
+          of the small size of the project and the unlikeliness to scale up, users of the app are unlikely to notice any
+          performance issues while using the calculator. There is also no data validation implemented within the class
+          itself. Again, because there is no sensitive information being handled, I decided it would be sufficient to
+          handle data validation within the user interface.
+        </p>
+      </div>
+
+
+      <h3 class="bearing-capacity-h4">Building the user interface</h3>
+      <div class="float-right">
+        <img src="../img/bearing-capacity/bearing-invalid-input.png" id="bearing-capacity-invalid-input-img"
+          alt="A screenshot showing an error message when the user types something invalid into the input box" />
       </div>
 
       <p>
-        I visualize the design problem as object with several different properties and things that it can do, so I
-        decided to model it in an object-oriented manner using a JavaScript class. The constructor for a class instance
-        requires all of the relevant design parameters to be passed in as arguments. Within the constructor, the class
-        also includes methods to calculate the bearing capacity using the inputted parameters and a few helper
-        functions. The results are stored as parameters that can be displayed to the user.
+        Because this is a small app with only one view, I could have built this using vanilla JavaScript and the
+        built-in
+        DOM manipulation API. However, I wanted some additional practice creating apps with React, so I decided to use
+        React for the user interface. Because this app was built outside the Node.js environment, I couldn’t import
+        React
+        like I typically would for a react project. Instead, for this project, I added React with a CDN link inside my
+        HTML. The result isn’t optimized, but again, it works well enough for this small-scale project.
       </p>
       <p>
-        Because the calculator does not require a lot of processing power, and there is no sensitive data being passed
-        around, I decided to simplify the class by not including setters or getters for the parameters and not making
-        any methods private to the class. Each time the user runs a calculation, the app will create a new instance of
-        the TerzaghiBearingCapacity class using the updated parameters. This is not an optimized approach, but because
-        of the small size of the project and the unlikeliness to scale up, users of the app are unlikely to notice any
-        performance issues while using the calculator. There is also no data validation implemented within the class
-        itself. Again, because there is no sensitive information being handled, I decided it would be sufficient to
-        handle data validation within the user interface.
+        I chose to render the user interface in a single React component rather than breaking the view into smaller,
+        single-function components. In this case, I see some advantages to this design choice. For one, I don’t need to
+        scroll around on the page to find the different components. Secondly, because this is a small app, I can see
+        everything my app does at a glance within a single render function. There is one disadvantage, however. My input
+        box for the different design parameters could easily be made to be instances of a child component with passed-in
+        parameters to customize each input. My single-component design choice led to some repeated code that could have
+        been avoided.
       </p>
+
+      <p>
+        The interface works by saving the user’s inputs into the app state and plugging them into the constructor of a
+        TerzaghiBearingCapacity class instance when the user clicks the “calculate” button. After a successful
+        calculation, the equation used and the resulting bearing capacity is displayed to the user. The app uses
+        real-time
+        validation techniques to check that the values entered are valid and displays an error next to the input box if
+        the value is invalid. This gives the user a chance to fix their input before clicking the “Calculate” button,
+        hopefully providing a better user experience.
+      </p>
+
+      <h2 class="bearing-capacity-h3">Retrospective</h2>
+      <p>
+        The goal of this app was to create a web-based calculator to easily compute the Terzaghi bearing capacity of any
+        soil type for the design of shallow foundations. I achieved what I set out to do with this app, but admittedly,
+        some of the design choices I made would make this app difficult to maintain or scale up. </p>
+      <p>
+        If I were to start over with this app, I would do so in a Node.js environment so I would have access to more
+        libraries and the ability to split my React code into multiple files. I would also create at least one
+        additional
+        component for the input fields, which would make it easier to add additional inputs if desired at some point, or
+        to modify all the inputs simultaneously. Another good thing to implement would be test suites to ensure that my
+        calculated results line up with other validated calculators available for the same task. While I was a working
+        as
+        a staff geotechnical engineer, I trusted and used this app for my calculations, but I wouldn’t expect (or even
+        tolerate) another engineer blindly using this code for their work without first reviewing the code themselves to
+        make sure the logic is sound.
+      </p>
+      <p>
+        Overall, this was a good practice project that provided me with good utility in my work and gave me some extra
+        experience with React. I would now feel comfortable creating more complex calculation projects using a similar
+        methodology, perhaps even for design processes that don’t yet have free solutions available for them on the web!
+      </p>
+      <div class="with-caption">
+        <img src="../img/bearing-capacity/foundation-excavation.jpg" id="excavation-img"
+          alt="A photo of a shallow foundation excavation" />
+        <p class="image-caption-centered"><em>A shallow foundation excavation <br>(source: build-my-own-home.com)</em>
+        </p>
+      </div>
     </div>
-
-
-    <h4 class="bearing-capacity-h4">Building the user interface</h4>
-    <div class="float-right">
-      <img src="../img/bearing-capacity/bearing-invalid-input.png" id="bearing-capacity-invalid-input-img" 
-        alt="A screenshot showing an error message when the user types something invalid into the input box" />
-    </div>
-
-    <p>
-      Because this is a small app with only one view, I could have built this using vanilla JavaScript and the built-in
-      DOM manipulation API. However, I wanted some additional practice creating apps with React, so I decided to use
-      React for the user interface. Because this app was built outside the Node.js environment, I couldn’t import React
-      like I typically would for a react project. Instead, for this project, I added React with a CDN link inside my
-      HTML. The result isn’t optimized, but again, it works well enough for this small-scale project.
-    </p>
-    <p>
-      I chose to render the user interface in a single React component rather than breaking the view into smaller,
-      single-function components. In this case, I see some advantages to this design choice. For one, I don’t need to
-      scroll around on the page to find the different components. Secondly, because this is a small app, I can see
-      everything my app does at a glance within a single render function. There is one disadvantage, however. My input
-      box for the different design parameters could easily be made to be instances of a child component with passed-in
-      parameters to customize each input. My single-component design choice led to some repeated code that could have
-      been avoided.
-    </p>
-
-    <p>
-      The interface works by saving the user’s inputs into the app state and plugging them into the constructor of a
-      TerzaghiBearingCapacity class instance when the user clicks the “calculate” button. After a successful
-      calculation, the equation used and the resulting bearing capacity is displayed to the user. The app uses real-time
-      validation techniques to check that the values entered are valid and displays an error next to the input box if
-      the value is invalid. This gives the user a chance to fix their input before clicking the “Calculate” button,
-      hopefully providing a better user experience.
-    </p>
-
-    <h3 class="bearing-capacity-h3">Retrospective</h3>
-    <p>
-      The goal of this app was to create a web-based calculator to easily compute the Terzaghi bearing capacity of any
-      soil type for the design of shallow foundations. I achieved what I set out to do with this app, but admittedly,
-      some of the design choices I made would make this app difficult to maintain or scale up. </p>
-    <p>
-      If I were to start over with this app, I would do so in a Node.js environment so I would have access to more
-      libraries and the ability to split my React code into multiple files. I would also create at least one additional
-      component for the input fields, which would make it easier to add additional inputs if desired at some point, or
-      to modify all the inputs simultaneously. Another good thing to implement would be test suites to ensure that my
-      calculated results line up with other validated calculators available for the same task. While I was a working as
-      a staff geotechnical engineer, I trusted and used this app for my calculations, but I wouldn’t expect (or even
-      tolerate) another engineer blindly using this code for their work without first reviewing the code themselves to
-      make sure the logic is sound.
-    </p>
-    <p>
-      Overall, this was a good practice project that provided me with good utility in my work and gave me some extra
-      experience with React. I would now feel comfortable creating more complex calculation projects using a similar
-      methodology, perhaps even for design processes that don’t yet have free solutions available for them on the web!
-    </p>
-    <div class="with-caption">
-      <img src="../img/bearing-capacity/foundation-excavation.jpg" id="excavation-img" alt="A photo of a shallow foundation excavation"/>
-      <p class="image-caption-centered"><em>A shallow foundation excavation <br>(source: build-my-own-home.com)</em></p>
-    </div>
-    
-  </div>
+  </main>
 
 </body>
 

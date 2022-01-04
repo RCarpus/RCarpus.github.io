@@ -43,120 +43,137 @@
     </nav>
   </header>
 
-  <div class="case-study">
-    <img class="case-study__hero-image" src="../img/pokedex/pokedex-hero.png" alt="A screenshot of the Pokédex in action"/>
-    <div class="case-study__links">
-      <a class="case-study__links__link simple-pokedex-link" href="https://rcarpus.github.io/pokedex-app/"
-        target="_blank">Use the Pokédex</a>
-      <a class="case-study__links__link simple-pokedex-link" href="https://github.com/RCarpus/pokedex-app"
-        target="_blank">GitHub Repository</a>
-    </div>
+  <main role="main">
+    <div class="case-study">
+      <h1>Simple Pokédex</h1>
+      <img class="case-study__hero-image" src="../img/pokedex/pokedex-hero.png"
+        alt="A screenshot of the Pokédex in action" />
+      <div class="case-study__links">
+        <a class="case-study__links__link simple-pokedex-link" href="https://rcarpus.github.io/pokedex-app/"
+          target="_blank">Use the Pokédex</a>
+        <a class="case-study__links__link simple-pokedex-link" href="https://github.com/RCarpus/pokedex-app"
+          target="_blank">GitHub Repository</a>
+      </div>
 
-    <h4 class="intro-header" id="the-challenge">The challenge</h4>
-    <p>
-      To build a small web application that loads data about Pokémon from an external API called the pokéAPI,  enables
-      the user to view details about a selected Pokémon, and works on all modern browsers. This application was built in
-      one week as a part of CareerFoundry’s web development immersion course.
-    </p>
-    <h4 class="intro-header" id="the-process">
-      The process
-    </h4>
-    <p>
-      The process used was to set up the page format in HTML, make an ajax fetch request to the pokéAPI to load some
-      basic Pokémon data, then add a list of the fetched Pokémon names to the DOM using JavaScript. Then, I created an
-      additional fetch request that triggers when the user clicks on a Pokémon name to get and display additional
-      details in a pop-up modal.
-    </p>
-    <h4 class="intro-header" id="the-goal">
-      The goal
-    </h4>
-    <p>
-      A web app that provides users with Pokédex data about 151 Pokémon. The app displays nicely on all screen sizes,
-      and on desktop, users can use the left and right arrow keys to scroll through the Pokémon list.
-    </p>
-
-    <h3 class="simple-pokedex-h3" class="simple-pokedex-h3">My development process</h3>
-    <h4 class="simple-pokedex-h4">Fetching and Displaying Pokémon names</h4>
-    <div class="case-study__floating-img-container">
-      <img src="../img/pokedex/list.png" id="list-img" class="float-left" alt="A screenshot of the list of Pokémon"/>
-      <p class="case-study__inline-p">
-        Finding an efficient way to display the Pokémon names was important to make the app code readable and scalable.
-        I
-        didn’t want to have to hard-code over 100 names into my HTML file! To make this work, I created a container div
+      <h2 class="intro-header" id="the-challenge">The challenge</h2>
+      <p>
+        To build a small web application that loads data about Pokémon from an external API called the pokéAPI, enables
+        the user to view details about a selected Pokémon, and works on all modern browsers. This application was built
         in
-        my HTML. After making an initial fetch request to the pokéAPI, I used JavaScript’s DOM manipulation API to
-        write the returned list of Pokémon names into an unordered list. This also returned URLs for each individual
-        Pokémon to fetch additional details, which I used in my modal implementation. With this technique, I could
-        manipulate the fetch request to the pokéAPI to return any number of Pokémon, and my list would still display
-        properly.
+        one week as a part of CareerFoundry’s web development immersion course.
       </p>
+      <h2 class="intro-header" id="the-process">
+        The process
+      </h2>
+      <p>
+        The process used was to set up the page format in HTML, make an ajax fetch request to the pokéAPI to load some
+        basic Pokémon data, then add a list of the fetched Pokémon names to the DOM using JavaScript. Then, I created an
+        additional fetch request that triggers when the user clicks on a Pokémon name to get and display additional
+        details in a pop-up modal.
+      </p>
+      <h2 class="intro-header" id="the-goal">
+        The goal
+      </h2>
+      <p>
+        A web app that provides users with Pokédex data about 151 Pokémon. The app displays nicely on all screen sizes,
+        and on desktop, users can use the left and right arrow keys to scroll through the Pokémon list.
+      </p>
+
+      <h2 class="simple-pokedex-h3" class="simple-pokedex-h3">My development process</h2>
+      <h3 class="simple-pokedex-h4">Fetching and Displaying Pokémon names</h3>
+      <div class="case-study__floating-img-container">
+        <img src="../img/pokedex/list.png" id="list-img" class="float-left" alt="A screenshot of the list of Pokémon" />
+        <p class="case-study__inline-p">
+          Finding an efficient way to display the Pokémon names was important to make the app code readable and
+          scalable.
+          I
+          didn’t want to have to hard-code over 100 names into my HTML file! To make this work, I created a container
+          div
+          in
+          my HTML. After making an initial fetch request to the pokéAPI, I used JavaScript’s DOM manipulation API to
+          write the returned list of Pokémon names into an unordered list. This also returned URLs for each individual
+          Pokémon to fetch additional details, which I used in my modal implementation. With this technique, I could
+          manipulate the fetch request to the pokéAPI to return any number of Pokémon, and my list would still display
+          properly.
+        </p>
+      </div>
+
+
+      <h3 class="simple-pokedex-h4">Displaying the Details Modal</h3>
+      <p>
+        After clicking on the name of a Pokémon, I wanted the user to see a modal showing a picture and some additional
+        details about the Pokémon. To simplify the implementation of the modal, I added Bootstrap to the project and
+        used
+        the customizable Bootstrap modal that would trigger whenever a user clicks on a Pokémon name. To populate the
+        modal with additional details, I made an additional fetch request using the details URL provided for each
+        Pokémon
+        in the initial fetch request. The additional details I chose to include were the Pokémon’s type, height, weight,
+        and sprite image.
+      </p>
+      <img src="../img/pokedex/modal.png" id="modal-img" alt="A screenshot of the details modal" />
+
+      <h3 class="simple-pokedex-h4">Implementing Keyboard Controls</h3>
+      <p>
+        With the modal implementation complete, my app did everything it needed to do, but I wanted users to be able to
+        quickly transition between details for different Pokémon. With the default modal implementation, a user would
+        need
+        to exit the modal and click on a different name to see a different Pokémon’s details. This makes for a clunky
+        experience when a user is trying to compare two adjacent Pokémon, a common behavior when someone is interested
+        in
+        a Pokémon’s evolution chain. To facilitate this, I determined that left and right keyboard inputs would be an
+        easy
+        and intuitive way to browse through the Pokémon. </p>
+      <p>
+        To make keyboard inputs work, I needed to figure out how to tell my app which Pokémon to load next when clicking
+        left or right on the keyboard. I determined that adding an ID to each Pokémon and adding it as a class to each
+        list item could work. However, because a CSS class name cannot start with a digit, each list item got an
+        ‘ID-[num]’ class that would need to be parsed before being used as an index in my JavaScript. The basic logic is
+        that that when a user clicks a Pokémon, the app stores the ID in memory. When a user clicks left or right on the
+        keyboard, the modal closes, the app looks for the Pokémon with the ID one above or below the previous Pokémon,
+        and
+        proceeds to load that Pokémon’s modal. The result is a very smooth desktop experience that encourages the user
+        to
+        explore the details of many different Pokémon. </p>
+
+      <h3 class="simple-pokedex-h4">Cross-Browser Compatibility</h3>
+      <p>
+        Because this app needed to work on all modern browsers, including Internet Explorer 10, and I did not use a
+        bundling framework such as Parcel to compile my code into something readable for all browsers, it was up to me
+        to
+        write code that could be properly interpreted by all browsers. I tested the app on my machine with Chrome,
+        Firefox, Edge, and Internet Explorer. Additionally, I used an online service to test on Safari. The only browser
+        that did not run the app properly was Internet Explorer.
+      </p>
+      <p>
+        After digging into my code and referencing caniuse.com to find out what Internet Explorer is not capable of, I
+        was
+        able to quickly fix the problem by converting my JavaScript arrow functions to functions that used regular
+        function syntax. This problem (and the fix) highlighted the need to pay close attention to what browsers I am
+        building for to hopefully prevent these sorts of problems from occurring in the first place.
+      </p>
+      <img src="../img/pokedex/caniuse-arrow-functions.png" id="caniuse-arrow-functions-img"
+        alt="A screenshot of the search results for 'arrow functions' on caniuse.com">
+
+
+      <h2 class="simple-pokedex-h3" class="simple-pokedex-h3">Retrospective</h2>
+      <p>
+        The intent of this app was to build a small web application that loads data about Pokémon from an external API
+        called the pokéAPI and enables the user to view details about a selected Pokémon and works on all modern
+        browsers.
+        This required me to think carefully about how I would format and load my data in an efficient way and to pay
+        attention to the needs of the browsers that I was building for. </p>
+      <p>
+        This project does well what it was designed to do, but a few additional features could really improve the
+        overall
+        user experience. For example, the ability to load more Pokémon other than the first 151 and to search for
+        Pokémon
+        by name or type would help users to find the information they really wanted. This app could also be useful as a
+        downloadable Progressive Web App where the user could have Pokémon data stored on their device and viewable even
+        while offline. </p>
+      <img src="../img/pokedex/pokeball.jpg" id="pokeball-img" alt="An image of a pokéball" />
     </div>
 
-
-    <h4 class="simple-pokedex-h4">Displaying the Details Modal</h4>
-    <p>
-      After clicking on the name of a Pokémon, I wanted the user to see a modal showing a picture and some additional
-      details about the Pokémon. To simplify the implementation of the modal, I added Bootstrap to the project and used
-      the customizable Bootstrap modal that would trigger whenever a user clicks on a Pokémon name. To populate the
-      modal with additional details, I made an additional fetch request using the details URL provided for each Pokémon
-      in the initial fetch request. The additional details I chose to include were the Pokémon’s type, height, weight,
-      and sprite image.
-    </p>
-    <img src="../img/pokedex/modal.png" id="modal-img" alt="A screenshot of the details modal"/>
-
-    <h4 class="simple-pokedex-h4">Implementing Keyboard Controls</h4>
-    <p>
-      With the modal implementation complete, my app did everything it needed to do, but I wanted users to be able to
-      quickly transition between details for different Pokémon. With the default modal implementation, a user would need
-      to exit the modal and click on a different name to see a different Pokémon’s details. This makes for a clunky
-      experience when a user is trying to compare two adjacent Pokémon, a common behavior when someone is interested in
-      a Pokémon’s evolution chain. To facilitate this, I determined that left and right keyboard inputs would be an easy
-      and intuitive way to browse through the Pokémon. </p>
-    <p>
-      To make keyboard inputs work, I needed to figure out how to tell my app which Pokémon to load next when clicking
-      left or right on the keyboard. I determined that adding an ID to each Pokémon and adding it as a class to each
-      list item could work. However, because a CSS class name cannot start with a digit, each list item got an
-      ‘ID-[num]’ class that would need to be parsed before being used as an index in my JavaScript. The basic logic is
-      that that when a user clicks a Pokémon, the app stores the ID in memory. When a user clicks left or right on the
-      keyboard, the modal closes, the app looks for the Pokémon with the ID one above or below the previous Pokémon, and
-      proceeds to load that Pokémon’s modal. The result is a very smooth desktop experience that encourages the user to
-      explore the details of many different Pokémon. </p>
-
-    <h4 class="simple-pokedex-h4">Cross-Browser Compatibility</h4>
-    <p>
-      Because this app needed to work on all modern browsers, including Internet Explorer 10, and I did not use a
-      bundling framework such as Parcel to compile my code into something readable for all browsers, it was up to me to
-      write code that could be properly interpreted by all browsers. I tested the app on my machine with Chrome,
-      Firefox, Edge, and Internet Explorer. Additionally, I used an online service to test on Safari. The only browser
-      that did not run the app properly was Internet Explorer.
-    </p>
-    <p>
-      After digging into my code and referencing caniuse.com to find out what Internet Explorer is not capable of, I was
-      able to quickly fix the problem by converting my JavaScript arrow functions to functions that used regular
-      function syntax. This problem (and the fix) highlighted the need to pay close attention to what browsers I am
-      building for to hopefully prevent these sorts of problems from occurring in the first place.
-    </p>
-    <img src="../img/pokedex/caniuse-arrow-functions.png" id="caniuse-arrow-functions-img" 
-      alt="A screenshot of the search results for 'arrow functions' on caniuse.com">
-
-
-    <h3 class="simple-pokedex-h3" class="simple-pokedex-h3">Retrospective</h3>
-    <p>
-      The intent of this app was to build a small web application that loads data about Pokémon from an external API
-      called the pokéAPI and enables the user to view details about a selected Pokémon and works on all modern browsers.
-      This required me to think carefully about how I would format and load my data in an efficient way and to pay
-      attention to the needs of the browsers that I was building for. </p>
-    <p>
-      This project does well what it was designed to do, but a few additional features could really improve the overall
-      user experience. For example, the ability to load more Pokémon other than the first 151 and to search for Pokémon
-      by name or type would help users to find the information they really wanted. This app could also be useful as a
-      downloadable Progressive Web App where the user could have Pokémon data stored on their device and viewable even
-      while offline. </p>
-    <img src="../img/pokedex/pokeball.jpg" id="pokeball-img" alt="An image of a pokéball"/>
-
-
-
-  </div>
+  </main>
 
 </body>
 

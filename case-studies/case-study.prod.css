@@ -24,6 +24,10 @@ Make sure links in site point to style.production.css before publishing.
   border-radius: 15px;
 }
 
+h1 {
+  font-size: 32px;
+}
+
 .case-study__hero-image {
   display: block;
   width: 80%;
@@ -74,7 +78,7 @@ Make sure links in site point to style.production.css before publishing.
   background-image: linear-gradient(to right, black , rgb(0, 173, 0));
 }
 
-h3 {
+h2 {
   font-size: 24px;
   background-image: -webkit-gradient(linear, left top, right top, from(white) , to(#00d3e2b4));
   background-image: -o-linear-gradient(left, white , #00d3e2b4);
@@ -90,7 +94,7 @@ h3 {
   margin: auto;
 }
 
-h4 {
+h3 {
   font-size: 22px;
   background-image: -webkit-gradient(linear, left top, right top, from(white) , to(#00d3e2b4));
   background-image: -o-linear-gradient(left, white , #00d3e2b4);
