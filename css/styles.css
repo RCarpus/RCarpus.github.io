@@ -13,7 +13,7 @@ Make sure links in site point to style.production.css before publishing.
     --project-tile-background-color: #d3d3d3;
     --text-color: black;
     --primary-color: #004d80; /*blue*/
-    --secondary-color: #006b85; /*This blue is slightly lighter*/
+    --secondary-color: #00495C; /*This blue is slightly darker*/
     --tirtiary-color: #250700; /*Dark red*/
     --active-link-color: #fff;
     --button-text-color: #fff;

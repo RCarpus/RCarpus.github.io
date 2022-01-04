@@ -42,34 +42,34 @@
     </nav>
   </header>
 
-  <section>
+  <main>
     <h1 id="my-projects-header">My Projects</h1>
     <div class="grid">
 
       <div class="grid__item">
         <h2 class="grid___item__title">Tech Meet App</h2>
-        <a href="./case-studies/meet-app.html" target="_blank" class="grid__item__case-study-img-link">
-          <img class="grid__item__img" src="./img/meet/meet.png" />
+        <a href="./case-studies/meet-app.html" target="_blank" class="grid__item__case-study-img-link" aria-label="link">
+          <img class="grid__item__img" src="./img/meet/meet.png" alt="A screenshot of Meet App in action" />
         </a>
         <p class="grid__item__description">
-        <h4 class="intro-header the-challenge">The challenge</h4>
+        <h3 class="intro-header the-challenge">The challenge</h3>
         <p>
           To create a progressive web application (PWA) with React using a test-driven development (TDD) technique that
           accesses the Google Calendar API to fetch upcoming events. This application was built over two weeks as a part
           of CareerFoundry’s web development immersion course.
         </p>
-        <h4 class="intro-header the-process">
+        <h3 class="intro-header the-process">
           The process
-        </h4>
+        </h3>
         <p>
           My process was to write unit test and integration tests that were directly informed by the user stories, then
           write the necessary code to make the tests pass. Then I wrote acceptance tests to ensure that the required
           features work properly in my application. The resulting codebase is scalable and easier to debug due to the
           test-driven development process.
         </p>
-        <h4 class="intro-header the-goal">
+        <h3 class="intro-header the-goal">
           The goal
-        </h4>
+        </h3>
         <p>
           A responsive web app that provides users with information about upcoming tech events around the world.
           Additionally, data visualizations inform the user about which cities have the most events and what types of
@@ -103,26 +103,27 @@
 
       <div class="grid__item">
         <h2 class="grid___item__title">Simple Pokédex</h2>
-        <a href="./case-studies/simple-pokedex.html" target="_blank" class="grid__item__case-study-img-link">
-          <img class="grid__item__img" src="./img/pokedex/pokedex-hero.png" />
+        <a href="./case-studies/simple-pokedex.html" target="_blank" class="grid__item__case-study-img-link" aria-label="link">
+          <img class="grid__item__img" src="./img/pokedex/pokedex-hero.png"
+            alt="A screenshot of Simple Pokédex in action" />
         </a>
         <p class="grid__item__description">
-        <h4 class="intro-header the-challenge">The challenge</h4>
+        <h3 class="intro-header the-challenge">The challenge</h3>
         <p>
           To build a small web application that loads data about Pokémon from an external API called the pokéAPI,
           enables the user to view details about a selected Pokémon, and works on all modern browsers. This application
           was built in one week as a part of CareerFoundry’s web development immersion course. </p>
-        <h4 class="intro-header the-process">
+        <h3 class="intro-header the-process">
           The process
-        </h4>
+        </h3>
         <p>
           The process used was to set up the page format in HTML, make an ajax fetch request to the pokéAPI to load some
           basic Pokémon data, then add a list of the fetched Pokémon names to the DOM using JavaScript. Then, I created
           an additional fetch request that triggers when the user clicks on a Pokémon name to get and display additional
           details in a pop-up modal. </p>
-        <h4 class="intro-header the-goal">
+        <h3 class="intro-header the-goal">
           The goal
-        </h4>
+        </h3>
         <p>
           A web app that provides users with Pokédex data about 151 Pokémon. The app displays nicely on all screen
           sizes, and on desktop, users can use the left and right arrow keys to scroll through the Pokémon list. </p>
@@ -135,28 +136,29 @@
 
       <div class="grid__item">
         <h2 class="grid___item__title">Terzaghi Bearing Capacity Calculator</h2>
-        <a href="./case-studies/terzaghi-bearing-capacity.html" target="_blank" class="grid__item__case-study-img-link">
-          <img class="grid__item__img" src="./img/bearing-capacity/bearing_capacity_calculator.png" />
+        <a href="./case-studies/terzaghi-bearing-capacity.html" target="_blank" class="grid__item__case-study-img-link" aria-label="link">
+          <img class="grid__item__img" src="./img/bearing-capacity/bearing_capacity_calculator.png"
+            alt="A screenshot of Terzaghi bearing capacity calculator in action" />
         </a>
         <p class="grid__item__description">
-        <h4 class="intro-header the-challenge">The challenge</h4>
+        <h3 class="intro-header the-challenge">The challenge</h3>
         <p>
           To create a web-based calculator to easily compute the Terzaghi bearing capacity of any soil type for the
           design of shallow foundations. This is a common calculation used in geotechnical engineering and is
           straightforward to calculate once the design parameters are known, but prone to calculator errors due to the
           large number of variables and items to lookup. This app was designed to reduce calculation errors easily
           introduced by performing the work by hand. </p>
-        <h4 class="intro-header the-process">
+        <h3 class="intro-header the-process">
           The process
-        </h4>
+        </h3>
         <p>
           The process used to build the calculator was to create a JavaScript class called TerzaghiBearingCapacity with
           all the relevant design parameters and that has a function to calculate the bearing capacity using all of the
           design parameters. The user interface, built with React, works with a TerzaghiBearingCapacity class instance
           to calculate the bearing capacity for the soil type inputted by the user. </p>
-        <h4 class="intro-header the-goal">
+        <h3 class="intro-header the-goal">
           The goal
-        </h4>
+        </h3>
         <p>
           A web calculator that quickly and accurately calculates the Terzaghi bearing capacity and allows for fast,
           low-effort sensitivity analysis.
@@ -187,7 +189,7 @@
 
 
     </div>
-  </section>
+  </main>
 
   <footer class="page-footer">
     <p id="page-footer__heading">Find me on</p>

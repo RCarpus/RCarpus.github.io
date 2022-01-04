@@ -15,7 +15,7 @@ Make sure links in site point to style.production.css before publishing.
 */
 
 :root {
-  /* colors */ /*light gray*/ /*blue*/ /*This blue is slightly lighter*/ /*Dark red*/
+  /* colors */ /*light gray*/ /*blue*/ /*This blue is slightly darker*/ /*Dark red*/
 
   /* font sizes */
 
@@ -104,7 +104,7 @@ p {
 }
 
 a {
-  color: #006b85;
+  color: #00495C;
   -webkit-transition: 0.5s color;
   -o-transition: 0.5s color;
   transition: 0.5s color;
@@ -132,7 +132,7 @@ button {
   border: none;
   font-family: inherit;
   display: inline-block;
-  background-color: #006b85;
+  background-color: #00495C;
   color: #fff;
   text-decoration: none;
   padding: 10px;
@@ -147,7 +147,7 @@ button {
   border: none;
   font-family: inherit;
   display: inline-block;
-  background-color: #006b85;
+  background-color: #00495C;
   color: #fff;
   text-decoration: none;
   padding: 10px;
@@ -162,7 +162,7 @@ button {
   border: none;
   font-family: inherit;
   display: inline-block;
-  background-color: #006b85;
+  background-color: #00495C;
   color: #fff;
   text-decoration: none;
   padding: 10px;
