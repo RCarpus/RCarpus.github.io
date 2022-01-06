@@ -22,6 +22,7 @@ Make sure links in site point to style.production.css before publishing.
     --simple-pokedex-color: #afafaf;
     --terzaghi-bearing-capacity-color: #ffbb00;
     --myflix-color: #ffa500;
+    --lets-talk-color: #B9C6AE;
     --the-challenge-color: orange;
     --the-process-color: yellow;
     --the-goal-color: rgb(0, 173, 0);
@@ -273,6 +274,10 @@ textarea {
 
 .myflix {
   background-color: var(--myflix-color);
+}
+
+.lets-talk {
+  background-color: var(--lets-talk-color);
 }
 
 .grid__item__img {

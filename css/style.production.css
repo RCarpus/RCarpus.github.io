@@ -35,6 +35,9 @@ body {
   /* margin: 15px; */
 }
 
+#logo {
+}
+
 main {
 margin: 15px;
 }
@@ -337,6 +340,10 @@ background-color: #ffbb00;
 
 .myflix {
 background-color: #ffa500;
+}
+
+.lets-talk {
+background-color: #B9C6AE;
 }
 
 .grid__item__img {
