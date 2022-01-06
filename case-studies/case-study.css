@@ -22,12 +22,8 @@ Make sure links in site point to style.production.css before publishing.
 main {
    margin: 0; 
    padding: 0; 
+   margin-top: 5px;
 }
-
-/* p, h2, h3, .case-study__links, img {
-  padding: 0 20px; */
-
-
 
 
 .case-study {
