@@ -14,242 +14,305 @@ Paste output into style.production.css.
 Make sure links in site point to style.production.css before publishing.
 */
 
+main {
+  margin: 0; 
+  padding: 0; 
+}
+
+/* p, h2, h3, .case-study__links, img {
+ padding: 0 20px; */
+
+
+
+
 .case-study {
-  max-width: 1000px;
-  margin: auto;
-  padding: 25px;
-  background-color: white;
-  height: 100%;
-  border: solid black 2px;
-  border-radius: 15px;
+ max-width: 1000px;
+ margin: auto;
+ padding: 20px;
+ background-color: white;
+ height: 100%;
 }
 
 h1 {
-  font-size: 32px;
+ font-size: 32px;
 }
 
 .case-study__hero-image {
-  display: block;
-  width: 80%;
-  height: auto;
-  margin: auto;
-  border: solid rgba(0, 0, 0, 0.301) 1px;
+ display: block;
+ width: 80%;
+ height: auto;
+ margin: auto;
+ border: solid rgba(0, 0, 0, 0.301) 1px;
+ margin-top: -20px;
 }
 
-.case-study__links {
+#lets-chat-hero {
+ width: calc(100% + 40px);
+ margin-left: -20px;
+ margin-top: -20px;
+ margin-right: -20px;
 }
 
 .case-study__links__link {
-  background-color: #00d3e2b4;
-  display: inline-block;
-  width: 150px;
-  text-align: center;
-  margin-top: 15px;
-  border: solid black 2px;
-  border-radius: 10px;
-  text-decoration: none;
-}
-
-.intro-header {
-  font-size: 26px;
-  line-height: 1.5em;
-  padding-left: 20px;
-  width: 100%;
-}
-
-#the-challenge {
-  color: orange;
-  background-image: -webkit-gradient(linear, left top, right top, from(black) , to(orange));
-  background-image: -o-linear-gradient(left, black , orange);
-  background-image: linear-gradient(to right, black , orange);
-}
-
-#the-process {
-  color: yellow;
-  background-image: -webkit-gradient(linear, left top, right top, from(black) , to(yellow));
-  background-image: -o-linear-gradient(left, black , yellow);
-  background-image: linear-gradient(to right, black , yellow);
-}
-
-#the-goal {
-  color: rgb(0, 173, 0);
-  background-image: -webkit-gradient(linear, left top, right top, from(black) , to(rgb(0, 173, 0)));
-  background-image: -o-linear-gradient(left, black , rgb(0, 173, 0));
-  background-image: linear-gradient(to right, black , rgb(0, 173, 0));
+ background-color: #00d3e2b4;
+ display: inline-block;
+ width: 150px;
+ text-align: center;
+ margin-top: 15px;
+ border: solid black 2px;
+ border-radius: 10px;
+ text-decoration: none;
 }
 
 h2 {
-  font-size: 24px;
-  background-image: -webkit-gradient(linear, left top, right top, from(white) , to(#00d3e2b4));
-  background-image: -o-linear-gradient(left, white , #00d3e2b4);
-  background-image: linear-gradient(to right, white , #00d3e2b4);
-}
-
-.image-caption {
-  max-width: 350px;
-}
-
-.image-caption-centered {
-  max-width: 350px;
-  margin: auto;
+ font-size: 24px;
+ background-image: -webkit-gradient(linear, left top, right top, from(white) , to(#00d3e2b4));
+ background-image: -o-linear-gradient(left, white , #00d3e2b4);
+ background-image: linear-gradient(to right, white , #00d3e2b4);
+ margin-left: -20px;
+ margin-right: -20px;
+ padding-left: 20px;
 }
 
 h3 {
-  font-size: 22px;
-  background-image: -webkit-gradient(linear, left top, right top, from(white) , to(#00d3e2b4));
-  background-image: -o-linear-gradient(left, white , #00d3e2b4);
-  background-image: linear-gradient(to right, white , #00d3e2b4);
-  line-height: .4em;
+ font-size: 24px;
+ background-image: -webkit-gradient(linear, left top, right top, from(white) , to(#00d3e2b4));
+ background-image: -o-linear-gradient(left, white , #00d3e2b4);
+ background-image: linear-gradient(to right, white , #00d3e2b4);
+ margin-left: -20px;
+ margin-right: -20px;
+ padding-left: 20px;
 }
 
 h4 {
-  font-size: 20px;
-  line-height: .4em;
+ font-size: 24px;
+ background-image: -webkit-gradient(linear, left top, right top, from(white) , to(#00d3e2b4));
+ background-image: -o-linear-gradient(left, white , #00d3e2b4);
+ background-image: linear-gradient(to right, white , #00d3e2b4);
+ margin-left: -20px;
+ margin-right: -20px;
+ padding-left: 20px;
+}
+
+#the-challenge {
+ color: orange;
+ background-image: -webkit-gradient(linear, left top, right top, from(black) , to(orange));
+ background-image: -o-linear-gradient(left, black , orange);
+ background-image: linear-gradient(to right, black , orange);
+ font-size: 26px;
+ line-height: 1.5em;
+}
+
+#the-process {
+ color: yellow;
+ background-image: -webkit-gradient(linear, left top, right top, from(black) , to(yellow));
+ background-image: -o-linear-gradient(left, black , yellow);
+ background-image: linear-gradient(to right, black , yellow);
+ font-size: 26px;
+ line-height: 1.5em;
+
+}
+
+#the-goal {
+ color: rgb(0, 173, 0);
+ background-image: -webkit-gradient(linear, left top, right top, from(black) , to(rgb(0, 173, 0)));
+ background-image: -o-linear-gradient(left, black , rgb(0, 173, 0));
+ background-image: linear-gradient(to right, black , rgb(0, 173, 0));
+ font-size: 26px;
+ line-height: 1.5em;
+
+}
+
+
+
+.image-caption {
+ max-width: 350px;
+}
+
+.image-caption-centered {
+ max-width: 350px;
+ margin: auto;
+}
+
+h3 {
+ font-size: 22px;
+ background-image: -webkit-gradient(linear, left top, right top, from(white) , to(#00d3e2b4));
+ background-image: -o-linear-gradient(left, white , #00d3e2b4);
+ background-image: linear-gradient(to right, white , #00d3e2b4);
+ line-height: .4em;
+}
+
+h4 {
+ font-size: 20px;
+ line-height: .4em;
 }
 
 .float-left {
-  float: left;
-  margin-right: 30px;
+ float: left;
+ margin-right: 30px;
 }
 
 .float-right {
-  float: right;
-  margin-left: 30px;
+ float: right;
+ margin-left: 30px;
 }
 
 #integration-test-img {
-  width: 60%;
+ width: 60%;
 }
 
 #taskbar-img, #topic-search-mockup-img, 
-  #pokeball-img, #caniuse-arrow-functions-img, #modal-img,
-  #excavation-img,
-  #myflix-profile-img, #react-img, #redux-img{
-  display: block;
-  max-width: 80%;
-  height: auto;
-  margin: auto;
+ #pokeball-img, #caniuse-arrow-functions-img, #modal-img,
+ #excavation-img,
+ #myflix-profile-img, #react-img, #redux-img,
+ #lets-talk-screen-height-img{
+ display: block;
+ max-width: 80%;
+ height: auto;
+ margin: auto;
 }
 
 #topic-search-mockup-img {
-  border: solid black 1px;
+ border: solid black 1px;
 }
 
 #list-img {
-  width: 300px;
+ width: 300px;
 }
 
 #terzaghi-portrait {
-  max-width: 300px;
+ max-width: 300px;
 }
 
-#mongo-img, #heroku-img, #netlify-img {
-  max-width: 300px;
+#mongo-img, #heroku-img, #netlify-img, #firebase-img {
+ max-width: 300px;
 }
 
-#myflix-docs-img {
-  width: 100%;
+#myflix-docs-img, #chat-app-themes-img {
+ width: 100%;
 }
 
 #react-img, #redux-img {
-  width: 150px;
+ width: 150px;
 }
 
 #myflix-favorite-movie-img {
-  max-width: 450px;
+ max-width: 450px;
+}
+
+#lets-talk-screen-design-img {
+ max-width: 300px;
+ max-height: 600px;
+}
+
+#lets-talk-screen-height-img, #lets-talk-location-img {
+ max-height: 500px;
 }
 
 .case-study__inline-p {
-  display: inline;
+ display: inline;
 }
 
 @media only screen and (max-width: 475px) {
-  h4 {
-    line-height: 1em;
-  }
-  
-  #terzaghi-portrait, #bearing-capacity-invalid-input-img {
-    max-width: 250px;
-  }
+ #terzaghi-portrait, #bearing-capacity-invalid-input-img, #lets-talk-screen-design-img {
+   max-width: 280px;
+ }
 }
 
 @media only screen and (max-width: 750px) {
-  .float-right, .float-left {
-    float: none;
-    display: block;
-    margin-left: 0;
-    margin-right: 0;
-  }
+ .case-study__hero-image {
+   width: 100%;
+ }
 
-  #typo-img, #integration-test-img, #taskbar-img, #topic-search-mockup-img, #modal-img, #excavation-img {
-    width: 100%;
-    height: auto;
-  }
+ .float-right, .float-left {
+   float: none;
+   display: block;
+   margin-left: 0;
+   margin-right: 0;
+   max-width: 100%;
+   margin: auto;
+ }
 
+ #typo-img, #integration-test-img, #taskbar-img, #topic-search-mockup-img, #modal-img, #excavation-img {
+   width: 100%;
+   height: auto;
+ }
 
-  body {
-    margin: 0;
-  }
-
-  .case-study {
-    border: none;
-    border-radius: 0;
-  }
+ h2, h3 {
+   line-height: 1em;
+ }
 }
 
 /* styles specific to the pokedex app page */
 .simple-pokedex-link {
-  background-color: #afafaf;
+ background-color: #afafaf;
 }
 
 .simple-pokedex-h3 {
-  background-image: -webkit-gradient(linear, left top, right top, from(white) , to(#afafaf));
-  background-image: -o-linear-gradient(left, white , #afafaf);
-  background-image: linear-gradient(to right, white , #afafaf);
+ background-image: -webkit-gradient(linear, left top, right top, from(white) , to(#afafaf));
+ background-image: -o-linear-gradient(left, white , #afafaf);
+ background-image: linear-gradient(to right, white , #afafaf);
 }
 
 .simple-pokedex-h4 {
-  background-image: -webkit-gradient(linear, left top, right top, from(white) , to(#afafaf));
-  background-image: -o-linear-gradient(left, white , #afafaf);
-  background-image: linear-gradient(to right, white , #afafaf);
+ background-image: -webkit-gradient(linear, left top, right top, from(white) , to(#afafaf));
+ background-image: -o-linear-gradient(left, white , #afafaf);
+ background-image: linear-gradient(to right, white , #afafaf);
 }
 
 /* styles specific to the bearing capacity calculator page */
 .bearing-capacity-link {
-  background-color: #ffbb00;
+ background-color: #ffbb00;
 }
 
 .bearing-capacity-h3 {
-  background-image: -webkit-gradient(linear, left top, right top, from(white) , to(#ffbb00));
-  background-image: -o-linear-gradient(left, white , #ffbb00);
-  background-image: linear-gradient(to right, white , #ffbb00);
+ background-image: -webkit-gradient(linear, left top, right top, from(white) , to(#ffbb00));
+ background-image: -o-linear-gradient(left, white , #ffbb00);
+ background-image: linear-gradient(to right, white , #ffbb00);
 }
 
 .bearing-capacity-h4 {
-  background-image: -webkit-gradient(linear, left top, right top, from(white) , to(#ffbb00));
-  background-image: -o-linear-gradient(left, white , #ffbb00);
-  background-image: linear-gradient(to right, white , #ffbb00);
+ background-image: -webkit-gradient(linear, left top, right top, from(white) , to(#ffbb00));
+ background-image: -o-linear-gradient(left, white , #ffbb00);
+ background-image: linear-gradient(to right, white , #ffbb00);
 }
 
 /* styles specific to the MyFlix app page */
 .myflix-link {
-  background-color: orange;
+ background-color: orange;
 }
 
 .myflix-h2 {
-  background-image: -webkit-gradient(linear, left top, right top, from(white) , to(orange));
-  background-image: -o-linear-gradient(left, white , orange);
-  background-image: linear-gradient(to right, white , orange);
+ background-image: -webkit-gradient(linear, left top, right top, from(white) , to(orange));
+ background-image: -o-linear-gradient(left, white , orange);
+ background-image: linear-gradient(to right, white , orange);
 }
 
 .myflix-h3 {
-  background-image: -webkit-gradient(linear, left top, right top, from(white) , to(orange));
-  background-image: -o-linear-gradient(left, white , orange);
-  background-image: linear-gradient(to right, white , orange);
+ background-image: -webkit-gradient(linear, left top, right top, from(white) , to(orange));
+ background-image: -o-linear-gradient(left, white , orange);
+ background-image: linear-gradient(to right, white , orange);
 }
 
 .myflix-h4 {
-  background-image: -webkit-gradient(linear, left top, right top, from(white) , to(orange));
-  background-image: -o-linear-gradient(left, white , orange);
-  background-image: linear-gradient(to right, white , orange);
+ background-image: -webkit-gradient(linear, left top, right top, from(white) , to(orange));
+ background-image: -o-linear-gradient(left, white , orange);
+ background-image: linear-gradient(to right, white , orange);
+}
+
+/* styles specific to the Let's Talk page */
+.lets-talk-link {
+ background-color: #b9c6ae;
+}
+
+.lets-talk-h2 {
+ background-image: -webkit-gradient(linear, left top, right top, from(white) , to(#b9c6ae));
+ background-image: -o-linear-gradient(left, white , #b9c6ae);
+ background-image: linear-gradient(to right, white , #b9c6ae);
+}
+
+.lets-talk-h3 {
+ background-image: -webkit-gradient(linear, left top, right top, from(white) , to(#b9c6ae));
+ background-image: -o-linear-gradient(left, white , #b9c6ae);
+ background-image: linear-gradient(to right, white , #b9c6ae);
 }

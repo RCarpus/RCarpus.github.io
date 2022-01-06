@@ -15,17 +15,27 @@ Make sure links in site point to style.production.css before publishing.
   --simple-pokedex-color: #afafaf;
   --bearing-capacity-color: #ffbb00;
   --myflix-color: orange;
+  --lets-talk-color: #b9c6ae;
 
 }
+
+main {
+   margin: 0; 
+   padding: 0; 
+}
+
+/* p, h2, h3, .case-study__links, img {
+  padding: 0 20px; */
+
+
+
 
 .case-study {
   max-width: 1000px;
   margin: auto;
-  padding: 25px;
+  padding: 20px;
   background-color: white;
   height: 100%;
-  border: solid black 2px;
-  border-radius: 15px;
 }
 
 h1 {
@@ -38,9 +48,14 @@ h1 {
   height: auto;
   margin: auto;
   border: solid rgba(0, 0, 0, 0.301) 1px;
+  margin-top: -20px;
 }
 
-.case-study__links {
+#lets-chat-hero {
+  width: calc(100% + 40px);
+  margin-left: -20px;
+  margin-top: -20px;
+  margin-right: -20px;
 }
 
 .case-study__links__link {
@@ -54,32 +69,38 @@ h1 {
   text-decoration: none;
 }
 
-.intro-header {
-  font-size: 26px;
-  line-height: 1.5em;
+h2, h3, h4 {
+  font-size: 24px;
+  background-image: linear-gradient(to right, white , var(--meet-app-color));
+  margin-left: -20px;
+  margin-right: -20px;
   padding-left: 20px;
-  width: 100%;
 }
 
 #the-challenge {
   color: var(--the-challenge-color);
   background-image: linear-gradient(to right, black , var(--the-challenge-color));
+  font-size: 26px;
+  line-height: 1.5em;
 }
 
 #the-process {
   color: var(--the-process-color);
   background-image: linear-gradient(to right, black , var(--the-process-color));
+  font-size: 26px;
+  line-height: 1.5em;
+
 }
 
 #the-goal {
   color: var(--the-goal-color);
   background-image: linear-gradient(to right, black , var(--the-goal-color));
+  font-size: 26px;
+  line-height: 1.5em;
+
 }
 
-h2 {
-  font-size: 24px;
-  background-image: linear-gradient(to right, white , var(--meet-app-color));
-}
+
 
 .image-caption {
   max-width: 350px;
@@ -118,7 +139,8 @@ h4 {
 #taskbar-img, #topic-search-mockup-img, 
   #pokeball-img, #caniuse-arrow-functions-img, #modal-img,
   #excavation-img,
-  #myflix-profile-img, #react-img, #redux-img{
+  #myflix-profile-img, #react-img, #redux-img,
+  #lets-talk-screen-height-img{
   display: block;
   max-width: 80%;
   height: auto;
@@ -137,11 +159,11 @@ h4 {
   max-width: 300px;
 }
 
-#mongo-img, #heroku-img, #netlify-img {
+#mongo-img, #heroku-img, #netlify-img, #firebase-img {
   max-width: 300px;
 }
 
-#myflix-docs-img {
+#myflix-docs-img, #chat-app-themes-img {
   width: 100%;
 }
 
@@ -153,26 +175,37 @@ h4 {
   max-width: 450px;
 }
 
+#lets-talk-screen-design-img {
+  max-width: 300px;
+  max-height: 600px;
+}
+
+#lets-talk-screen-height-img, #lets-talk-location-img {
+  max-height: 500px;
+}
+
 .case-study__inline-p {
   display: inline;
 }
 
 @media only screen and (max-width: 475px) {
-  h4 {
-    line-height: 1em;
-  }
-  
-  #terzaghi-portrait, #bearing-capacity-invalid-input-img {
-    max-width: 250px;
+  #terzaghi-portrait, #bearing-capacity-invalid-input-img, #lets-talk-screen-design-img {
+    max-width: 280px;
   }
 }
 
 @media only screen and (max-width: 750px) {
+  .case-study__hero-image {
+    width: 100%;
+  }
+
   .float-right, .float-left {
     float: none;
     display: block;
     margin-left: 0;
     margin-right: 0;
+    max-width: 100%;
+    margin: auto;
   }
 
   #typo-img, #integration-test-img, #taskbar-img, #topic-search-mockup-img, #modal-img, #excavation-img {
@@ -180,14 +213,8 @@ h4 {
     height: auto;
   }
 
-
-  body {
-    margin: 0;
-  }
-
-  .case-study {
-    border: none;
-    border-radius: 0;
+  h2, h3 {
+    line-height: 1em;
   }
 }
 
@@ -216,4 +243,13 @@ h4 {
 
 .myflix-h2, .myflix-h3, .myflix-h4 {
   background-image: linear-gradient(to right, white , var(--myflix-color));
+}
+
+/* styles specific to the Let's Talk page */
+.lets-talk-link {
+  background-color: var(--lets-talk-color);
+}
+
+.lets-talk-h2, .lets-talk-h3 {
+  background-image: linear-gradient(to right, white , var(--lets-talk-color));
 }
