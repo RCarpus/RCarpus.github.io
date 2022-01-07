@@ -39,7 +39,8 @@ body {
 }
 
 main {
-margin: 15px;
+margin: 0px;
+padding: 0;
 }
 
 .page-header {
@@ -224,6 +225,7 @@ td {
 background-color: #d3d3d3;
 width: 300px;
 padding: 15px;
+margin-top: 10px;
 }
 
 .align-right {
@@ -396,7 +398,22 @@ height: auto;
   .grid {
     -ms-grid-columns: 1fr;
     grid-template-columns: 1fr;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 6px;
   }
+  .grid__item {
+    margin: 0;
+  }
+  .main-content {
+    margin: 10px;
+  }
+
+  .contact-card {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
 }
 
 
