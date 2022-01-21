@@ -348,6 +348,11 @@ background-color: #ffa500;
 background-color: #B9C6AE;
 }
 
+.supersonic {
+background-color: #3B7A00;
+color: white;
+}
+
 .grid__item__img {
 width: 100%;
 height: auto;

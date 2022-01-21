@@ -16,6 +16,7 @@ Make sure links in site point to style.production.css before publishing.
   --bearing-capacity-color: #ffbb00;
   --myflix-color: orange;
   --lets-talk-color: #b9c6ae;
+  --supersonic-color: #3B7A00;
 
 }
 
@@ -47,7 +48,7 @@ h1 {
   margin-top: -20px;
 }
 
-#lets-chat-hero {
+#lets-chat-hero, #supersonic-hero {
   width: calc(100% + 40px);
   margin-left: -20px;
   margin-top: -20px;
@@ -136,7 +137,8 @@ h4 {
   #pokeball-img, #caniuse-arrow-functions-img, #modal-img,
   #excavation-img,
   #myflix-profile-img, #react-img, #redux-img,
-  #lets-talk-screen-height-img{
+  #lets-talk-screen-height-img,
+  #supersonic-home-page-img {
   display: block;
   max-width: 80%;
   height: auto;
@@ -159,7 +161,8 @@ h4 {
   max-width: 300px;
 }
 
-#myflix-docs-img, #chat-app-themes-img {
+#myflix-docs-img, #chat-app-themes-img,
+#supersonic-design-img {
   width: 100%;
 }
 
@@ -167,7 +170,8 @@ h4 {
   width: 150px;
 }
 
-#myflix-favorite-movie-img {
+#myflix-favorite-movie-img,
+#supersonic-dev-process {
   max-width: 450px;
 }
 
@@ -180,9 +184,28 @@ h4 {
   max-height: 500px;
 }
 
+#supersonic-data-model-original-img,
+#supersonic-data-model-final-img {
+  max-width: 475px;
+}
+
+#supersonic-data-model-final-img {
+  display: block;
+  margin: auto;
+}
+
+#supersonic-home-page-img {
+  border: solid black 1px;
+}
+
+#supersonic-api-doc-img {
+  max-width: 600px;
+}
+
 .case-study__inline-p {
   display: inline;
 }
+
 
 @media only screen and (max-width: 475px) {
   #terzaghi-portrait, #bearing-capacity-invalid-input-img, #lets-talk-screen-design-img {
@@ -248,4 +271,18 @@ h4 {
 
 .lets-talk-h2, .lets-talk-h3 {
   background-image: linear-gradient(to right, white , var(--lets-talk-color));
+}
+
+/* styles specific to the Supersonic page */
+.supersonic-link {
+  background-color: var(--supersonic-color);
+  color: white;
+}
+
+.supersonic-link:visited {
+  color: white;
+}
+
+.supersonic-h2, .supersonic-h3, .supersonic-h4 {
+  background-image: linear-gradient(to right, white , var(--supersonic-color));
 }

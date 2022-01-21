@@ -23,6 +23,7 @@ Make sure links in site point to style.production.css before publishing.
     --terzaghi-bearing-capacity-color: #ffbb00;
     --myflix-color: #ffa500;
     --lets-talk-color: #B9C6AE;
+    --supersonic-color: #3B7A00;
     --the-challenge-color: orange;
     --the-process-color: yellow;
     --the-goal-color: rgb(0, 173, 0);
@@ -280,6 +281,11 @@ textarea {
 
 .lets-talk {
   background-color: var(--lets-talk-color);
+}
+
+.supersonic {
+  background-color: var(--supersonic-color);
+  color: white;
 }
 
 .grid__item__img {

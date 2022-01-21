@@ -42,7 +42,7 @@ h1 {
  margin-top: -20px;
 }
 
-#lets-chat-hero {
+#lets-chat-hero, #supersonic-hero {
  width: calc(100% + 40px);
  margin-left: -20px;
  margin-top: -20px;
@@ -161,7 +161,8 @@ h4 {
  #pokeball-img, #caniuse-arrow-functions-img, #modal-img,
  #excavation-img,
  #myflix-profile-img, #react-img, #redux-img,
- #lets-talk-screen-height-img{
+ #lets-talk-screen-height-img,
+ #supersonic-home-page-img {
  display: block;
  max-width: 80%;
  height: auto;
@@ -184,7 +185,8 @@ h4 {
  max-width: 300px;
 }
 
-#myflix-docs-img, #chat-app-themes-img {
+#myflix-docs-img, #chat-app-themes-img,
+#supersonic-design-img {
  width: 100%;
 }
 
@@ -192,7 +194,8 @@ h4 {
  width: 150px;
 }
 
-#myflix-favorite-movie-img {
+#myflix-favorite-movie-img,
+#supersonic-dev-process {
  max-width: 450px;
 }
 
@@ -205,9 +208,28 @@ h4 {
  max-height: 500px;
 }
 
+#supersonic-data-model-original-img,
+#supersonic-data-model-final-img {
+ max-width: 475px;
+}
+
+#supersonic-data-model-final-img {
+ display: block;
+ margin: auto;
+}
+
+#supersonic-home-page-img {
+ border: solid black 1px;
+}
+
+#supersonic-api-doc-img {
+ max-width: 600px;
+}
+
 .case-study__inline-p {
  display: inline;
 }
+
 
 @media only screen and (max-width: 475px) {
  #terzaghi-portrait, #bearing-capacity-invalid-input-img, #lets-talk-screen-design-img {
@@ -311,4 +333,32 @@ h4 {
  background-image: -webkit-gradient(linear, left top, right top, from(white) , to(#b9c6ae));
  background-image: -o-linear-gradient(left, white , #b9c6ae);
  background-image: linear-gradient(to right, white , #b9c6ae);
+}
+
+/* styles specific to the Supersonic page */
+.supersonic-link {
+ background-color: #3B7A00;
+ color: white;
+}
+
+.supersonic-link:visited {
+ color: white;
+}
+
+.supersonic-h2 {
+ background-image: -webkit-gradient(linear, left top, right top, from(white) , to(#3B7A00));
+ background-image: -o-linear-gradient(left, white , #3B7A00);
+ background-image: linear-gradient(to right, white , #3B7A00);
+}
+
+.supersonic-h3 {
+ background-image: -webkit-gradient(linear, left top, right top, from(white) , to(#3B7A00));
+ background-image: -o-linear-gradient(left, white , #3B7A00);
+ background-image: linear-gradient(to right, white , #3B7A00);
+}
+
+.supersonic-h4 {
+ background-image: -webkit-gradient(linear, left top, right top, from(white) , to(#3B7A00));
+ background-image: -o-linear-gradient(left, white , #3B7A00);
+ background-image: linear-gradient(to right, white , #3B7A00);
 }
