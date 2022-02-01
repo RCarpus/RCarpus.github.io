@@ -42,7 +42,7 @@ h1 {
  margin-top: -20px;
 }
 
-#lets-chat-hero, #supersonic-hero {
+#lets-chat-hero, #supersonic-hero, #myflix-angular-hero {
  width: calc(100% + 40px);
  margin-left: -20px;
  margin-top: -20px;
@@ -181,12 +181,14 @@ h4 {
  max-width: 300px;
 }
 
-#mongo-img, #heroku-img, #netlify-img, #firebase-img {
+#mongo-img, #heroku-img, #netlify-img, #firebase-img,
+#angular-login-img {
  max-width: 300px;
 }
 
 #myflix-docs-img, #chat-app-themes-img,
-#supersonic-design-img {
+#supersonic-design-img,
+#angular-vs-react-img {
  width: 100%;
 }
 
@@ -226,6 +228,12 @@ h4 {
  max-width: 600px;
 }
 
+#ng-generate-img {
+ display: block;
+ max-width: 99%;
+ margin: auto;
+}
+
 .case-study__inline-p {
  display: inline;
 }
@@ -251,7 +259,8 @@ h4 {
    margin: auto;
  }
 
- #typo-img, #integration-test-img, #taskbar-img, #topic-search-mockup-img, #modal-img, #excavation-img {
+ #typo-img, #integration-test-img, #taskbar-img, #topic-search-mockup-img, #modal-img, #excavation-img,
+ #supersonic-api-doc-img {
    width: 100%;
    height: auto;
  }

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta charset="utf-8">
+  <title>Projects | MyFlix - Angular</title>
+  <link rel="icon" type="image/png" href="../favicon-32x32.png" sizes="32x32" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css"
+    integrity="sha512-oHDEc8Xed4hiW6CxD7qjbnI+B07vDdX7hEPTvn9pSZO1bcRqHp8mj9pyr+8RVC2GmtEfI2Bi9Ke9Ass0as+zpg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,400;0,600;1,400&display=swap"
+    rel="stylesheet">
+  <!-- stylesheets. Make sure styles.css is active while editing, and style.production.css before publishing-->
+
+  <link rel="stylesheet" type="text/css" href="../css/style.production.css">
+  <link rel="stylesheet" type="text/css" href="case-study.prod.css">
+</head>
+
+<body>
+  <header class="page-header">
+    <img class="page-header__item" src="../img/logo.png" alt="" id="logo">
+    <h1 id="page-title" class="page-header__item">MyFlix - Angular</h1>
+
+    <nav class="page-header__item">
+      <ul role="menubar" class="navigation-list">
+        <li role="presentation">
+          <a href="../index.html" role="menuitem" class="navigation-list__item">Home</a>
+        </li>
+        <li role="presentation">
+          <a href="../about.html" role="menuitem" class="navigation-list__item">About Me</a>
+        </li>
+        <li role="presentation">
+          <a href="../work.html" role="menuitem"
+            class="navigation-list__item navigation-list__item--active">Projects</a>
+        </li>
+        <li role="presentation">
+          <a href="../contact.html" role="menuitem" class="navigation-list__item">Contact</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <div class="case-study">
+      <img class="case-study__hero-image" src="../img/myflix-angular/movies-view.png" alt="" id="myflix-angular-hero" />
+      <div class="case-study__links">
+        <a class="case-study__links__link myflix-link" href="https://github.com/RCarpus/myFlix-Angular-client"
+          target="_blank">GitHub
+          Repository</a>
+        <a class="case-study__links__link myflix-link" href="https://rcarpus.github.io/myFlix-Angular-client/"
+          target="_blank">Live Site</a>
+      </div>
+
+      <h2 id="the-challenge">The challenge</h2>
+      <p>
+        To create an alternate front-end for my previous MyFlix CRUD application (built with React) using Angular. This application was built over three weeks as a part of CareerFoundry’s web development immersion course.
+      </p>
+      <h2 id="the-process">
+        The process
+      </h2>
+      <p>
+        I built a client-side application using Angular that consumes my previously constructed REST API to create, update, read, and delete user data. The application has the same functionality as my previously built application using React.
+      </p>
+      <h2 id="the-goal">
+        The goal
+      </h2>
+      <p>
+        A responsive front-end web application demonstrating my Angular skills. Users can view information about movies stored in the database and update their personal information.
+      </p>
+
+      <h2 class="myflix-h2">My development process</h2>
+      <h3 class="myflix-h3">Tech Stack</h3>
+      <p>
+        My API was created using Express.js and using mongoDB for its database. You can read more about the API 
+        <a href="./myflix.html" target="_blank">here.</a>
+      </p>
+      <p>
+        Choosing a front-end framework is an important consideration not to be taken lightly for a “real” web application. Here, however, the purpose of this project was to learn Angular, so I used Angular. Insightful design choice, right?
+      </p>
+
+      <h3 class="myflix-h3">Angular CLI</h3>
+      <p>
+        One thing I found intimidating at first but quickly learned to love was the Angular CLI. When I found out I’d need to use the command line to generate my components, I was nervous it would be a tedious or possibly confusing task. I was dead wrong. The Angular CLI is not a crutch, but a blessing. The CLI commands to generate components/services/whatever else do a ton of heavy lifting for you—generating template files, appropriately naming files, and connecting the files to the appropriate module so that it’s immediately ready to use. It’s like having a personal assistant organize my files for me! This is definitely a strong point for Angular.
+      </p>
+      <img src="../img/myflix-angular/ng-generate-code.png" alt="Screenshot of creating a component using the command line" id="ng-generate-img" />
+
+      <h3 class="myflix-h3">Material Design</h3>
+      <img src="../img/myflix-angular/myflix-angular-login.svg" alt="screenshot of login dialog" id="angular-login-img" class="float-right" />
+      <p>
+        The other thing I found very cool about Angular was using Google’s Material Design components within my project. With Material Design, I was able to import fully functional UI components quickly and easily into my application to speed up development and apply sleek, consistent styling to my components. There are plenty of features I didn’t explore with Material Design, but next time I work on an Angular project, I’ll be sure to look into what other cool components are waiting for me on the shelf.
+      </p>
+
+      <h2 class="myflix-h2">Retrospective</h2>
+      <p>
+        The goal of this little project was to create an alternate front-end for my previous MyFlix application using Angular. Using a previous project as a model was a pretty cool way to get a clear view of the differences in development between React and Angular apps. Now, after a few short weeks of working with Angular, I’m ready to give my definitive take on the classic debate—Angular or React? 
+      </p>
+      <p>
+        The answer is basically both. Unless you live in Nebraska, in which case you are better off sticking with Angular. What the heck, Nebraska?
+      </p>
+      <img src="../img/myflix-angular/react-vs-angular.png" alt="Google trends for Angular and React" id="angular-vs-react-img" />
+
+
+  </main>
+
+</body>
+
+</html>
