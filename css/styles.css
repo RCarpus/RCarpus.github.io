@@ -111,6 +111,18 @@ main {
     border-radius: 50%;
 }
 
+.centered-button-container {
+  max-width: 500px;
+  display: block;
+  margin: auto;
+  margin-top: 2em;
+}
+
+.centered-button {
+  width: 100%;
+  text-align: center;
+}
+
 .navigation-list__item--active {
     border-style: groove;
     border-radius: 5px;
@@ -174,7 +186,7 @@ td {
 
 .contact-card {
   background-color: var(--project-tile-background-color);
-  width: 300px;
+  max-width: 500px;
   padding: 15px;
   margin-top: 10px;
 }
