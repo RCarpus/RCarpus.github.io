@@ -17,7 +17,7 @@ Make sure links in site point to style.production.css before publishing.
   --myflix-color: orange;
   --lets-talk-color: #b9c6ae;
   --supersonic-color: #3B7A00;
-
+  --navfac-color: #c6b7a4;
 }
 
 main {
@@ -48,7 +48,8 @@ h1 {
   margin-top: -20px;
 }
 
-#lets-chat-hero, #supersonic-hero, #myflix-angular-hero {
+#lets-chat-hero, #supersonic-hero, #myflix-angular-hero,
+#navfac-hero {
   width: calc(100% + 40px);
   margin-left: -20px;
   margin-top: -20px;
@@ -138,7 +139,9 @@ h4 {
   #excavation-img,
   #myflix-profile-img, #react-img, #redux-img,
   #lets-talk-screen-height-img,
-  #supersonic-home-page-img {
+  #supersonic-home-page-img,
+  #navfac-function-web,
+  #navfac-class-web {
   display: block;
   max-width: 80%;
   height: auto;
@@ -164,7 +167,8 @@ h4 {
 
 #myflix-docs-img, #chat-app-themes-img,
 #supersonic-design-img,
-#angular-vs-react-img {
+#angular-vs-react-img,
+#print-preview {
   width: 100%;
 }
 
@@ -173,7 +177,8 @@ h4 {
 }
 
 #myflix-favorite-movie-img,
-#supersonic-dev-process {
+#supersonic-dev-process,
+#navfac-responsive {
   max-width: 450px;
 }
 
@@ -236,7 +241,10 @@ h4 {
   }
 
   #typo-img, #integration-test-img, #taskbar-img, #topic-search-mockup-img, #modal-img, #excavation-img,
-  #supersonic-api-doc-img {
+  #supersonic-api-doc-img,
+  #navfac-class-web,
+  #navfac-function-web,
+  #print-preview {
     width: 100%;
     height: auto;
   }
@@ -294,4 +302,19 @@ h4 {
 
 .supersonic-h2, .supersonic-h3, .supersonic-h4 {
   background-image: linear-gradient(to right, white , var(--supersonic-color));
+}
+
+/* styles specific to the NAVFAC page */
+
+.navfac-h2, .navfac-h3, .navfac-h4 {
+  background-image: linear-gradient(to right, white , var(--navfac-color));
+}
+
+.navfac-link {
+  background-color: var(--navfac-color);
+  color: black;
+}
+
+.navfac-link:visited {
+  color: black;
 }
