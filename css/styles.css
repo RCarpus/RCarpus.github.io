@@ -25,6 +25,7 @@ Make sure links in site point to style.production.css before publishing.
     --lets-talk-color: #B9C6AE;
     --supersonic-color: #3B7A00;
     --navfac-color: #c6b7a4;
+    --mct2d-color: #34bebd;
     --the-challenge-color: orange;
     --the-process-color: yellow;
     --the-goal-color: rgb(0, 173, 0);
@@ -304,6 +305,11 @@ textarea {
 .navfac {
   background-color: var(--navfac-color);
   color: black;
+}
+
+.mct2d {
+  background-color: var(--mct2d-color);
+  color: white;
 }
 
 .grid__item__img {

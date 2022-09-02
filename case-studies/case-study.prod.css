@@ -1,7 +1,7 @@
 /*
 * Prefixed by https://autoprefixer.github.io
-* PostCSS: v8.3.6,
-* Autoprefixer: v10.3.1
+* PostCSS: v8.4.14,
+* Autoprefixer: v10.4.7
 * Browsers: last 4 version
 */
 
@@ -19,7 +19,6 @@ main {
   padding: 0; 
   margin-top: 5px;
 }
-
 
 .case-study {
  max-width: 1000px;
@@ -189,6 +188,7 @@ h4 {
  max-width: 300px;
 }
 
+.full-width,
 #myflix-docs-img, #chat-app-themes-img,
 #supersonic-design-img,
 #angular-vs-react-img,
@@ -209,6 +209,10 @@ h4 {
 #lets-talk-screen-design-img {
  max-width: 300px;
  max-height: 600px;
+}
+
+#nested-content {
+ max-width: 100%;
 }
 
 #lets-talk-screen-height-img, #lets-talk-location-img {
@@ -406,5 +410,31 @@ h4 {
 }
 
 .navfac-link:visited {
+ color: black;
+}
+
+/* styles specific to the mct2d page */
+.mct2d-h2 {
+ background-image: -webkit-gradient(linear, left top, right top, from(white), to(#34bebd));
+ background-image: -o-linear-gradient(left, white, #34bebd);
+ background-image: linear-gradient(to right, white, #34bebd);
+}
+.mct2d-h3 {
+ background-image: -webkit-gradient(linear, left top, right top, from(white), to(#34bebd));
+ background-image: -o-linear-gradient(left, white, #34bebd);
+ background-image: linear-gradient(to right, white, #34bebd);
+}
+.mct2d-h4 {
+ background-image: -webkit-gradient(linear, left top, right top, from(white), to(#34bebd));
+ background-image: -o-linear-gradient(left, white, #34bebd);
+ background-image: linear-gradient(to right, white, #34bebd);
+}
+
+.mct2d-link {
+ background-color: #34bebd;
+ color: black;
+}
+
+.mct2d-link:visited {
  color: black;
 }
