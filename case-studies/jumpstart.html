@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta charset="utf-8">
+  <title>Projects | Healthy Eating Jumpstart</title>
+  <link rel="icon" type="image/png" href="../favicon-32x32.png" sizes="32x32" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css"
+    integrity="sha512-oHDEc8Xed4hiW6CxD7qjbnI+B07vDdX7hEPTvn9pSZO1bcRqHp8mj9pyr+8RVC2GmtEfI2Bi9Ke9Ass0as+zpg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,400;0,600;1,400&display=swap"
+    rel="stylesheet">
+  <!-- stylesheets. Make sure styles.css is active while editing, and style.production.css before publishing-->
+
+  <link rel="stylesheet" type="text/css" href="../css/style.production.css">
+  <link rel="stylesheet" type="text/css" href="case-study.prod.css">
+
+</head>
+
+<body>
+  <header class="page-header">
+    <img class="page-header__item" src="../img/logo.png" alt="" id="logo">
+    <h1 id="page-title" class="page-header__item">Healthy Eating Jumpstart</h1>
+
+    <nav class="page-header__item">
+      <ul role="menubar" class="navigation-list">
+        <li role="presentation">
+          <a href="../index.html" role="menuitem" class="navigation-list__item">Home</a>
+        </li>
+        <li role="presentation">
+          <a href="../work.html" role="menuitem"
+            class="navigation-list__item navigation-list__item--active">Projects</a>
+        </li>
+        <li role="presentation">
+          <a href="../contact.html" role="menuitem" class="navigation-list__item">Contact</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <main role="main">
+    <div class="case-study">
+      <img class="case-study__hero-image" src="../img/jumpstart/home_page.png"
+        alt="A screenshot of the MCT2D home page" />
+      <div class="case-study__links">
+        <a class="case-study__links__link jumpstart-link" href="https://jumpstart.mct2d.org" target="_blank">Visit the
+          Site</a>
+      </div>
+
+      <h2 id="the-challenge">The challenge</h2>
+      <p>
+        Healthy Eating Jumpstart is a collaborative program between two Michigan Medicine CQIs, Healthy Behavior
+        Optimization for Michigan (HBOM) and Michigan Collaborative for Type 2 Diabetes (MCT2D). The program offers
+        food assistance resources for Type 2 Diabetes patients with food insecurity. The purpose of this website is
+        to provide low carb eating resources for participants in the Healthy Eat Jumpstart Program that also appeal
+        to health care providers or anybody interested in low carb dieting. </p>
+      <h2 id="the-process">
+        The process
+      </h2>
+      <p>
+        Using Next.JS, I built an interactive, mobile-responsive website based on Figma designs created by the design
+        team. The website uses HBOM’s WordPress API to fetch low-carb recipes. Additional resources are drawn from
+        Contentful, the headless CMS used for MCT2D’s website. The website was initially built over a span of two weeks
+        and continues to receive periodic content updates.</p>
+      <h2 id="the-goal">
+        The goal
+      </h2>
+      <p>
+        An interactive, mobile responsive, and website that allows users to find and share content about low carb diets.
+        The Healthy Eating Jumpstart Program was <a
+          href='https://www.mct2d.org/news/jumpstart-grocery-delivery-program-for-type-2-diabetes-highlighted-at-white'>
+          highlighted by the White House at the 2022 White House Conference for
+          Hunger, Nutrition, and Growth.</a>
+      </p>
+
+      <h2 class="jumpstart-h3">My development process</h2>
+      <p>
+        This project has two major components which were handled simultaneously and iteratively:
+      </p>
+      <ul>
+        <li>
+          The design, done by the design team (Figma)
+        </li>
+        <li>
+          The website code (Next.JS)
+        </li>
+      </ul>
+      <p>
+        The website design was done by an expert designer in Figma and handed off to me for implementation. The Figma
+        designs only included a standard desktop view, so adapting a mobile-friendly design was my responsibility.
+      </p>
+
+      <h3 class="jumpstart-h3">Feature Highlights</h3>
+      <h4 class="jumpstart-h4">Low Carb Meal Plan</h4>
+      <img src="../img/jumpstart/meal_plan.png" id="meal-plan" class="full-width"
+        alt="A screenshot of the meal planning feature of the Jumpstart website" />
+      <p>
+        One of the most asked-for features for the Jumpstart website was the ability to create and save personalized
+        low-carb meal plans. Using the recipe data loaded in from HBOM’s WordPress, I built out a meal plan page that
+        lets users filter recipes based on various categories and add them to a multi-day meal plan that they can print
+        or save as a PDF. Users can also click on a recipe to view more details.
+      </p>
+      <p>
+        To compliment the meal plan feature, we partnered with a tech startup called Basketful to include a button on
+        each recipe page that allows users to add the necessary ingredients for that recipe directly to their Shipt
+        cart. This makes it very easy for members in the program to use their food assistance resources for low-carb
+        foods.
+      </p>
+
+      <h4 class="jumpstart-h4">Shopping List</h4>
+      <img src="../img/jumpstart/shopping_list.png" id="meal-plan" class="full-width"
+      alt="A screenshot of the meal planning feature of the Jumpstart website" />
+      <p>
+        A big part of the design philosophy behind the Jumpstart website was to make learning about low carb eating fun.
+        To that end, we included this interactive low-carb pantry that lets you hover over different food types to learn
+        what kind of things you can buy that are low-carb.
+      </p>
+
+      <h2 class="jumpstart-h3">Retrospective</h2>
+      <p>
+        The goal of this project was to create an interactive, mobile responsive, website that allows users to find and
+        share content about low carb diets. This website has become a great repository of low-carb diet info that is
+        useful for patients and medical professionals alike, including an aggregated list of external resources as well
+        as blog posts curated by members of our team. I look forward to continuing to support the Healthy Eating
+        Jumpstart Program and enable people to make positive changes in their lives. </p>
+
+    </div>
+  </main>
+
+</body>
+
+</html>

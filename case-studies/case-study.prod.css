@@ -438,3 +438,29 @@ h4 {
 .mct2d-link:visited {
  color: black;
 }
+
+/* styles specific to the Jumpstart page */
+.jumpstart-h2 {
+ background-image: -webkit-gradient(linear, left top, right top, from(white), to(#A6B73B));
+ background-image: -o-linear-gradient(left, white, #A6B73B);
+ background-image: linear-gradient(to right, white, #A6B73B);
+}
+.jumpstart-h3 {
+ background-image: -webkit-gradient(linear, left top, right top, from(white), to(#A6B73B));
+ background-image: -o-linear-gradient(left, white, #A6B73B);
+ background-image: linear-gradient(to right, white, #A6B73B);
+}
+.jumpstart-h4 {
+ background-image: -webkit-gradient(linear, left top, right top, from(white), to(#A6B73B));
+ background-image: -o-linear-gradient(left, white, #A6B73B);
+ background-image: linear-gradient(to right, white, #A6B73B);
+}
+
+.jumpstart-link {
+ background-color: #A6B73B;
+ color: black;
+}
+
+.jumpstart-link:visited {
+ color: black;
+}

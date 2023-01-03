@@ -19,6 +19,7 @@ Make sure links in site point to style.production.css before publishing.
   --supersonic-color: #3B7A00;
   --navfac-color: #c6b7a4;
   --mct2d-color: #34bebd;
+  --jumpstart-color: #A6B73B;
 }
 
 main {
@@ -335,5 +336,19 @@ h4 {
 }
 
 .mct2d-link:visited {
+  color: black;
+}
+
+/* styles specific to the Jumpstart page */
+.jumpstart-h2, .jumpstart-h3, .jumpstart-h4 {
+  background-image: linear-gradient(to right, white, var(--jumpstart-color));
+}
+
+.jumpstart-link {
+  background-color: var(--jumpstart-color);
+  color: black;
+}
+
+.jumpstart-link:visited {
   color: black;
 }

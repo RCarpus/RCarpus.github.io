@@ -23,9 +23,13 @@ Make sure links in site point to style.production.css before publishing.
 
 * {
   -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+          box-sizing: border-box;;
+
 }
 
+p {
+color: black !important;
+}
 
 body {
   background-color: #ddd;
@@ -373,6 +377,11 @@ color: black;
 .mct2d {
 background-color: #34bebd;
 color: white;
+}
+
+.jumpstart {
+background-color: #A6B73B;
+color: black;
 }
 
 .grid__item__img {

@@ -26,6 +26,7 @@ Make sure links in site point to style.production.css before publishing.
     --supersonic-color: #3B7A00;
     --navfac-color: #c6b7a4;
     --mct2d-color: #34bebd;
+    --jumpstart-color: #A6B73B;
     --the-challenge-color: orange;
     --the-process-color: yellow;
     --the-goal-color: rgb(0, 173, 0);
@@ -42,9 +43,13 @@ Make sure links in site point to style.production.css before publishing.
 }   
 
 * {
-    box-sizing: border-box;
+    box-sizing: border-box;;
+
 }
 
+p {
+  color: var(--text-color) !important;
+}
 
 body {
     background-color: var(--body-background-color);
@@ -310,6 +315,11 @@ textarea {
 .mct2d {
   background-color: var(--mct2d-color);
   color: white;
+}
+
+.jumpstart {
+  background-color: var(--jumpstart-color);
+  color: black;
 }
 
 .grid__item__img {

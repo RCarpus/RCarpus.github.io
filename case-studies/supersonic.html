@@ -50,9 +50,18 @@
           Repository</a>
         <a class="case-study__links__link supersonic-link" href="https://supersonic-ear-training.netlify.app"
           target="_blank">Live Site</a>
-          <a class="case-study__links__link supersonic-link" href="https://youtu.be/Q3PNUu8PMho" target="_blank">Video Demonstration</a>
+        <a class="case-study__links__link supersonic-link" href="https://youtu.be/Q3PNUu8PMho" target="_blank">Video
+          Demonstration</a>
       </div>
 
+      <style>
+        .warning {
+          font-size: 2rem;
+          line-height: 3rem;
+        }
+      </style>
+      <p class="warning"><b>NOTE:</b> Following the removal of the Heroku Free Tier, this application is currently
+        broken until I upgrade to a paid plan or find a different back-end provider.</p>
       <h2 id="the-challenge">The challenge</h2>
       <p>
         There are many ear training apps available for musicians to learn to hear the difference between different
@@ -163,7 +172,8 @@
       </p>
 
       <h4 class="supersonic-h4">Back-End First Pass</h4>
-      <img class="float-right" src="../img/supersonic/api_doc_screen.png" id="supersonic-api-doc-img" alt="A screenshot of the API documentation for Supersonic" />
+      <img class="float-right" src="../img/supersonic/api_doc_screen.png" id="supersonic-api-doc-img"
+        alt="A screenshot of the API documentation for Supersonic" />
       <p>
         I started by setting up a simple server with Express, connected it to my Mongo database, and created the
         endpoints I thought I would need for my app to do everything it needed to do. This included functions to create
