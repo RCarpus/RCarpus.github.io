@@ -15,7 +15,7 @@ Make sure links in site point to style.production.css before publishing.
     --primary-color: #004d80; /*blue*/
     --secondary-color: #00495C; /*This blue is slightly darker*/
     --tirtiary-color: #250700; /*Dark red*/
-    --active-link-color: #fff;
+    --active-link-color: #0c0b0b;
     --button-text-color: #fff;
     --border-bottom-color: rgba(0,0,0,0.3);
     --meet-app-color: #00d3e2b4;
